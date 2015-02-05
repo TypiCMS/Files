@@ -41,7 +41,7 @@ col-xs-12
         {{ Form::open(array('route' => 'admin.files.store', 'files' => true, 'class' => 'dropzone', 'id' => 'dropzone')) }}
 
             {{ BootForm::hidden('gallery_id', Input::get('gallery_id', 0)) }}
-            @foreach (Config::get('app.locales') as $locale)
+            @foreach (Config::get('translatable.locales') as $locale)
                 {{ BootForm::hidden($locale.'[description]') }}
                 {{ BootForm::hidden($locale.'[alt_attribute]', '') }}
                 {{ BootForm::hidden($locale.'[keywords]') }}
