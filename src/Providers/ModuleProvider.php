@@ -34,8 +34,13 @@ class ModuleProvider extends ServiceProvider
 
         // Add dirs
         View::addLocation(__DIR__ . '/../Views');
-        Lang::addNamespace('files', __DIR__ . '/../lang');
-        Config::addNamespace('files', __DIR__ . '/../config');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'files');
+        $this->publishes([
+            __DIR__ . '/../config/' => config_path('typicms/files'),
+        ], 'config');
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations'),
+        ], 'migrations');
 
         // Observers
         File::observe(new FileObserver);
@@ -67,10 +72,5 @@ class ModuleProvider extends ServiceProvider
                 $app->make('TypiCMS\Modules\Files\Repositories\FileInterface')
             );
         });
-
-        $app->before(function ($request, $response) {
-            require __DIR__ . '/../breadcrumbs.php';
-        });
-
     }
 }
