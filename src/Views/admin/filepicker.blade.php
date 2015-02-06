@@ -1,5 +1,5 @@
 @section('js')
-    {{ HTML::script(asset('js/admin/list.js')) }}
+    <script src="{{ asset('js/admin/list.js') }}"></script>
     <script>
         function selectAndClose(image) {
             var TinyMCEWindow = top.tinymce.activeEditor.windowManager;
@@ -17,8 +17,6 @@
 @stop
 @section('mainClass')
 col-xs-12
-@stop
-@section('breadcrumbs')
 @stop
 
 @section('h1')
@@ -40,11 +38,11 @@ col-xs-12
 
         {{ Form::open(array('route' => 'admin.files.store', 'files' => true, 'class' => 'dropzone', 'id' => 'dropzone')) }}
 
-            {{ BootForm::hidden('gallery_id', Input::get('gallery_id', 0)) }}
+            {!! BootForm::hidden('gallery_id', Input::get('gallery_id', 0)) !!}
             @foreach (Config::get('translatable.locales') as $locale)
-                {{ BootForm::hidden($locale.'[description]') }}
-                {{ BootForm::hidden($locale.'[alt_attribute]', '') }}
-                {{ BootForm::hidden($locale.'[keywords]') }}
+                {!! BootForm::hidden($locale.'[description]') !!}
+                {!! BootForm::hidden($locale.'[alt_attribute]', '') !!}
+                {!! BootForm::hidden($locale.'[keywords]') !!}
             @endforeach
 
             <div class="dropzone-previews clearfix sortable sortable-thumbnails">

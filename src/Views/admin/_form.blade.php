@@ -1,6 +1,6 @@
 @section('js')
-    {{ HTML::script(asset('//tinymce.cachefly.net/4.1/tinymce.min.js')) }}
-    {{ HTML::script(asset('js/admin/form.js')) }}
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="{{ asset('js/admin/form.js') }}"></script>
 @stop
 
 
@@ -8,7 +8,7 @@
 
 <div class="row">
 
-    {{ BootForm::hidden('id'); }}
+    {!! BootForm::hidden('id') !!}
 
     <div class="col-sm-6">
 
@@ -41,18 +41,18 @@
 
     <div class="col-sm-6">
 
-        {{ BootForm::hidden('folder_id', $model->folder_id ?: 0) }}
-        {{ BootForm::hidden('gallery_id', $model->gallery_id ?: 0) }}
-        {{ BootForm::hidden('user_id', $model->user_id ?: 0) }}
-        {{ BootForm::hidden('type') }}
-        {{ BootForm::hidden('position', $model->position ?: 0) }}
-        {{ BootForm::hidden('path') }}
-        {{ BootForm::hidden('filename') }}
-        {{ BootForm::hidden('extension') }}
-        {{ BootForm::hidden('mimetype') }}
-        {{ BootForm::hidden('width') }}
-        {{ BootForm::hidden('height') }}
-        {{ BootForm::hidden('download_count', $model->download_count ?: 0) }}
+        {!! BootForm::hidden('folder_id', $model->folder_id ?: 0) !!}
+        {!! BootForm::hidden('gallery_id', $model->gallery_id ?: 0) !!}
+        {!! BootForm::hidden('user_id', $model->user_id ?: 0) !!}
+        {!! BootForm::hidden('type') !!}
+        {!! BootForm::hidden('position', $model->position ?: 0) !!}
+        {!! BootForm::hidden('path') !!}
+        {!! BootForm::hidden('filename') !!}
+        {!! BootForm::hidden('extension') !!}
+        {!! BootForm::hidden('mimetype') !!}
+        {!! BootForm::hidden('width') !!}
+        {!! BootForm::hidden('height') !!}
+        {!! BootForm::hidden('download_count', $model->download_count ?: 0) !!}
 
         @include('core::admin._image-fieldset', ['field' => 'filename'])
 

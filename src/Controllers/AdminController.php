@@ -38,7 +38,7 @@ class AdminController extends AdminSimpleController
 
         $models = Paginator::make($data->items, $data->totalItems, $itemsPerPage);
 
-        return view('files.admin.' . $view)
+        return view('files::admin.' . $view)
             ->withModels($models);
     }
 }

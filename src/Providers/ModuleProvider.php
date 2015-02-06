@@ -1,28 +1,19 @@
 <?php
 namespace TypiCMS\Modules\Files\Providers;
 
-use Lang;
-use View;
 use Config;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-
-// Model
+use Illuminate\Support\ServiceProvider;
+use Lang;
 use TypiCMS\Modules\Files\Models\File;
-
-// Repo
-use TypiCMS\Modules\Files\Repositories\EloquentFile;
-
-// Cache
 use TypiCMS\Modules\Files\Repositories\CacheDecorator;
-use TypiCMS\Services\Cache\LaravelCache;
-
-// Form
+use TypiCMS\Modules\Files\Repositories\EloquentFile;
 use TypiCMS\Modules\Files\Services\Form\FileForm;
 use TypiCMS\Modules\Files\Services\Form\FileFormLaravelValidator;
-
-// Observers
 use TypiCMS\Observers\FileObserver;
+use TypiCMS\Services\Cache\LaravelCache;
+use View;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -33,7 +24,7 @@ class ModuleProvider extends ServiceProvider
         require __DIR__ . '/../routes.php';
 
         // Add dirs
-        View::addLocation(__DIR__ . '/../Views');
+        View::addNamespace('files', __DIR__ . '/../views/');
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'files');
         $this->publishes([
             __DIR__ . '/../config/' => config_path('typicms/files'),
@@ -41,6 +32,11 @@ class ModuleProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../migrations/' => base_path('/database/migrations'),
         ], 'migrations');
+
+        AliasLoader::getInstance()->alias(
+            'Files',
+            'TypiCMS\Modules\Files\Facades\Facade'
+        );
 
         // Observers
         File::observe(new FileObserver);
