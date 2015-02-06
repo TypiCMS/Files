@@ -17,9 +17,6 @@ Route::group(
     }
 );
 
-Route::group(array('prefix'=>'api'), function() {
-    Route::resource(
-        'files',
-        'TypiCMS\Modules\Files\Controllers\ApiController'
-    );
+Route::group(['prefix'=>'api'], function() {
+    Route::resource('files', 'ApiController');
 });

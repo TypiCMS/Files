@@ -49,7 +49,7 @@ col-xs-12
             @foreach ($models as $key => $model)
                 <div class="thumbnail" id="item_{{ $model->id }}">
                     {{ $model->present()->checkbox }}
-                    {{ $model->present()->thumb }}
+                    {!! $model->present()->thumb !!}
                     <div class="caption">
                         <a href="#" class="btn btn-default btn-xs btn-block btn-insert" onclick="selectAndClose('/{{ $model->path }}{{ $model->filename }}')">@lang('files::global.Insert')</a>
                         <small>{{ $model->filename }}</small>
