@@ -1,9 +1,8 @@
 <?php
 namespace TypiCMS\Modules\Files\Controllers;
 
-use Config;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Input;
-use Paginator;
 use TypiCMS\Controllers\AdminSimpleController;
 use TypiCMS\Modules\Files\Repositories\FileInterface;
 use TypiCMS\Modules\Files\Services\Form\FileForm;
@@ -32,11 +31,11 @@ class AdminController extends AdminSimpleController
             return parent::index();
         }
 
-        $itemsPerPage = Config::get('files::admin.itemsPerPage');
+        $perPage = config('typicms.files.per_page');
 
-        $data = $this->repository->byPageFrom($page, $itemsPerPage, $gallery_id, array('translations'), true, $type);
+        $data = $this->repository->byPageFrom($page, $perPage, $gallery_id, ['translations'], true, $type);
 
-        $models = Paginator::make($data->items, $data->totalItems, $itemsPerPage);
+        $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
 
         return view('files::admin.' . $view)
             ->with(compact('models'));

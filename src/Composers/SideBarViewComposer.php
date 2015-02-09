@@ -1,7 +1,6 @@
 <?php
 namespace TypiCMS\Modules\Files\Composers;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\View\View;
 
 class SidebarViewComposer
@@ -9,7 +8,7 @@ class SidebarViewComposer
     public function compose(View $view)
     {
         $view->menus['media']->put('files', [
-            'weight' => Config::get('files::admin.weight'),
+            'weight' => config('typicms.files.sidebar.weight'),
             'request' => $view->prefix . '/files*',
             'route' => 'admin.files.index',
             'icon-class' => 'icon fa fa-fw fa-file-photo-o',

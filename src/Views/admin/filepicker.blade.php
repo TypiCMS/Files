@@ -20,7 +20,7 @@ col-xs-12
 @stop
 
 @section('h1')
-    <span id="nb_elements">{{ $models->getTotal() }}</span> @choice('files::global.files', $models->getTotal())
+    <span id="nb_elements">{{ $models->total() }}</span> @choice('files::global.files', $models->total())
 @stop
 
 @section('titleLeftButton')
@@ -63,6 +63,6 @@ col-xs-12
 
     </div>
 
-    {{ $models->appends(Input::except('page'))->links() }}
+    {!! $models->appends(Input::except('page'))->render() !!}
 
 @stop
