@@ -1,13 +1,4 @@
-@section('js')
-    <script src="{{ asset('js/admin/list.js') }}"></script>
-    <script>
-        function selectAndClose(image) {
-            var TinyMCEWindow = top.tinymce.activeEditor.windowManager;
-            TinyMCEWindow.getParams().oninsert(image);
-            TinyMCEWindow.close();
-        }
-    </script>
-@stop
+@extends('core::admin.master')
 
 @section('bodyClass')
 @stop
@@ -18,51 +9,18 @@
 @section('mainClass')
 col-xs-12
 @stop
+@section('breadcrumbs')
+@stop
 
 @section('h1')
     <span id="nb_elements">{{ $models->total() }}</span> @choice('files::global.files', $models->total())
 @stop
 
 @section('titleLeftButton')
-    <a id="uploaderAddButtonContainer" href="{{ route('admin.files.create') }}"><i id="uploaderAddButton" class="fa fa-plus-circle"></i><span class="sr-only">{{ ucfirst(trans('files::global.New')) }}</span></a>
 @stop
 
 @section('main')
 
-    <div class="list-form" lang="{{ Config::get('app.locale') }}">
-
-        @section('btn-locales')
-        @stop
-
-        @include('admin._buttons-list')
-
-        {{ Form::open(array('route' => 'admin.files.store', 'files' => true, 'class' => 'dropzone', 'id' => 'dropzone')) }}
-
-            {!! BootForm::hidden('gallery_id', Input::get('gallery_id', 0)) !!}
-            @foreach (Config::get('translatable.locales') as $locale)
-                {!! BootForm::hidden($locale.'[description]') !!}
-                {!! BootForm::hidden($locale.'[alt_attribute]', '') !!}
-                {!! BootForm::hidden($locale.'[keywords]') !!}
-            @endforeach
-
-            <div class="dropzone-previews clearfix sortable sortable-thumbnails">
-            @foreach ($models as $key => $model)
-                <div class="thumbnail" id="item_{{ $model->id }}">
-                    {{ $model->present()->checkbox }}
-                    {!! $model->present()->thumb !!}
-                    <div class="caption">
-                        <a href="#" class="btn btn-default btn-xs btn-block btn-insert" onclick="selectAndClose('/{{ $model->path }}{{ $model->filename }}')">@lang('files::global.Insert')</a>
-                        <small>{{ $model->filename }}</small>
-                    </div>
-                </div>
-            @endforeach
-            </div>
-            <div class="dz-message">@lang('files::global.Drop files to upload')</div>
-
-        {{ Form::close() }}
-
-    </div>
-
-    {!! $models->appends(Input::except('page'))->render() !!}
+    @include('files::admin.thumbnails')
 
 @stop

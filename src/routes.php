@@ -7,7 +7,7 @@ Route::bind('files', function ($value) {
 
 Route::group(
     array(
-        'namespace' => 'TypiCMS\Modules\Files\Controllers',
+        'namespace' => 'TypiCMS\Modules\Files\Http\Controllers',
         'prefix'    => 'admin',
     ),
     function () {

@@ -1,8 +1,8 @@
 <?php
-namespace TypiCMS\Modules\Files\Controllers;
+namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Input;
-use TypiCMS\Controllers\BaseApiController;
+use TypiCMS\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
 use Response;
 

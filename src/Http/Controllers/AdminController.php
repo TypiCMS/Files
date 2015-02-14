@@ -1,9 +1,9 @@
 <?php
-namespace TypiCMS\Modules\Files\Controllers;
+namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Input;
-use TypiCMS\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\AdminSimpleController;
 use TypiCMS\Modules\Files\Repositories\FileInterface;
 use TypiCMS\Modules\Files\Services\Form\FileForm;
 use View;
