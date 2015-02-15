@@ -4,17 +4,16 @@ namespace TypiCMS\Modules\Files\Http\Controllers;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Input;
 use TypiCMS\Http\Controllers\AdminSimpleController;
+use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Repositories\FileInterface;
-use TypiCMS\Modules\Files\Services\Form\FileForm;
 use View;
 
 class AdminController extends AdminSimpleController
 {
 
-    public function __construct(FileInterface $file, FileForm $fileform)
+    public function __construct(FileInterface $file)
     {
-        parent::__construct($file, $fileform);
-        $this->title['parent'] = trans_choice('files::global.files', 2);
+        parent::__construct($file);
     }
 
     /**
@@ -39,5 +38,30 @@ class AdminController extends AdminSimpleController
 
         return view('files::admin.' . $view)
             ->with(compact('models'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  FormRequest $request
+     * @return Redirect
+     */
+    public function store(FormRequest $request)
+    {
+        $model = $this->repository->create($request->all());
+        return $this->redirect($request, $model);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  $model
+     * @param  FormRequest $request
+     * @return Redirect
+     */
+    public function update($model, FormRequest $request)
+    {
+        $this->repository->update($request->all());
+        return $this->redirect($request, $model);
     }
 }

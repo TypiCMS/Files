@@ -9,8 +9,6 @@ use Lang;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\CacheDecorator;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
-use TypiCMS\Modules\Files\Services\Form\FileForm;
-use TypiCMS\Modules\Files\Services\Form\FileFormLaravelValidator;
 use TypiCMS\Observers\FileObserver;
 use TypiCMS\Services\Cache\LaravelCache;
 use View;
@@ -64,11 +62,5 @@ class ModuleProvider extends ServiceProvider
             return new CacheDecorator($repository, $laravelCache);
         });
 
-        $app->bind('TypiCMS\Modules\Files\Services\Form\FileForm', function (Application $app) {
-            return new FileForm(
-                new FileFormLaravelValidator($app['validator']),
-                $app->make('TypiCMS\Modules\Files\Repositories\FileInterface')
-            );
-        });
     }
 }
