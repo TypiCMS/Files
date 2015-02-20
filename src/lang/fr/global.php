@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'fichiers',
+    'name' => 'Fichiers',
     'files' => 'fichier|fichiers',
     'New'  => 'Nouveau fichier',
     'Edit' => 'Modifier le fichier',
