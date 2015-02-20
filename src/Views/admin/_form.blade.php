@@ -9,18 +9,15 @@
 <div class="row">
 
     {!! BootForm::hidden('id') !!}
-    {!! BootForm::hidden('folder_id')->value($model->folder_id ?: 0) !!}
     {!! BootForm::hidden('gallery_id')->value($model->gallery_id ?: 0) !!}
-    {!! BootForm::hidden('user_id')->value($model->user_id ?: 0) !!}
     {!! BootForm::hidden('type') !!}
     {!! BootForm::hidden('position')->value($model->position ?: 0) !!}
     {!! BootForm::hidden('path') !!}
-    {!! BootForm::hidden('filename') !!}
+    {!! BootForm::hidden('file') !!}
     {!! BootForm::hidden('extension') !!}
     {!! BootForm::hidden('mimetype') !!}
     {!! BootForm::hidden('width') !!}
     {!! BootForm::hidden('height') !!}
-    {!! BootForm::hidden('download_count')->value($model->download_count ?: 0) !!}
 
     <div class="col-sm-6">
 
@@ -33,7 +30,6 @@
             <div class="tab-pane fade @if ($locale == $lang)in active @endif" id="{{ $lang }}">
                 {!! BootForm::text(trans('validation.attributes.alt_attribute'), $lang.'[alt_attribute]') !!}
                 {!! BootForm::textarea(trans('validation.attributes.description'), $lang.'[description]') !!}
-                {!! BootForm::text(trans('validation.attributes.keywords'), $lang.'[keywords]') !!}
             </div>
 
             @endforeach
@@ -44,7 +40,7 @@
 
     <div class="col-sm-6">
 
-        @include('core::admin._image-fieldset', ['field' => 'filename'])
+        @include('core::admin._file-fieldset', ['field' => 'file'])
 
         <table class="table table-condensed">
             <thead>
@@ -58,7 +54,7 @@
                 </tr>
                 <tr>
                     <th>{{ trans('validation.attributes.filename') }}</th>
-                    <td>{{ $model->filename }}</td>
+                    <td>{{ $model->file }}</td>
                 </tr>
                 <tr>
                     <th>{{ trans('validation.attributes.extension') }}</th>

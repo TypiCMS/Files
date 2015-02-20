@@ -21,7 +21,7 @@
                     <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort" translate>Date</th>
                     <th st-sort="type" class="type st-sort" translate>Type</th>
                     <th st-sort="image" class="image st-sort" translate>Image</th>
-                    <th st-sort="filename" class="title st-sort" translate>Filename</th>
+                    <th st-sort="file" class="title st-sort" translate>Filename</th>
                     <th st-sort="alt_attribute" class="selected st-sort">Alt attribute</th>
                     <th st-sort="width" class="width st-sort" translate>Width</th>
                     <th st-sort="height" class="width st-sort" translate>Height</th>
@@ -41,12 +41,12 @@
 
             <tbody>
                 <tr ng-repeat="model in displayedModels">
-                    <td><typi-btn-delete ng-click="delete(model, model.filename)"></typi-btn-delete></td>
+                    <td><typi-btn-delete ng-click="delete(model, model.file)"></typi-btn-delete></td>
                     <td typi-btn-edit></td>
                     <td>{{ model.created_at | dateFromMySQL:'short' }}</td>
                     <td>{{ model.type }}</td>
                     <td typi-thumb-list-item></td>
-                    <td>{{ model.filename }}</td>
+                    <td>{{ model.file }}</td>
                     <td contentEditable highlighter="model.alt_attribute" ng-model="model.alt_attribute" ng-blur="update(model)">
                         {{ model.alt_attribute }}
                     </td>

@@ -17,20 +17,16 @@ class CreateFilesTable extends Migration
 
             $table->increments('id');
 
-            $table->integer('folder_id')->unsigned()->default(0);
             $table->integer('gallery_id')->unsigned()->default(0);
 
-            $table->integer('user_id')->unsigned()->default(0);
-
             $table->enum('type', array('a', 'v', 'd', 'i', 'o'))->nullable();
-            $table->string('filename')->nullable();
+            $table->string('file')->nullable();
             $table->string('path')->nullable();
             $table->string('extension', 8)->nullable();
             $table->string('mimetype', 100)->nullable();
             $table->integer('width')->unsigned()->nullable();
             $table->integer('height')->unsigned()->nullable();
             $table->integer('filesize')->unsigned()->nullable();
-            $table->integer('download_count')->unsigned()->default(0);
 
             $table->integer('position')->unsigned()->default(0);
 
@@ -48,7 +44,6 @@ class CreateFilesTable extends Migration
 
             $table->text('description');
             $table->string('alt_attribute');
-            $table->string('keywords');
 
             $table->timestamps();
 

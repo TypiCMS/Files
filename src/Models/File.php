@@ -18,21 +18,17 @@ class File extends Base
 
     protected $fillable = array(
         'gallery_id',
-        'folder_id',
-        'user_id',
         'type',
         'name',
-        'filename',
+        'file',
         'path',
         'extension',
         'mimetype',
         'width',
         'height',
         'filesize',
-        'download_count',
         'position',
         // Translatable columns
-        'keywords',
         'description',
         'alt_attribute',
     );
@@ -43,7 +39,6 @@ class File extends Base
      * @var array
      */
     public $translatedAttributes = array(
-        'keywords',
         'description',
         'alt_attribute',
     );
@@ -56,7 +51,7 @@ class File extends Base
      * @var array
      */
     public $attachments = array(
-        'filename',
+        'file',
     );
 
     /**
@@ -92,7 +87,7 @@ class File extends Base
      */
     public function getThumbAttribute()
     {
-        return $this->present()->thumbSrc(null, 22, [], 'filename');
+        return $this->present()->thumbSrc(null, 22, [], 'file');
     }
 
     /**
@@ -101,7 +96,7 @@ class File extends Base
      */
     public function getThumbSmAttribute($value)
     {
-        return $this->present()->thumbSrc(130, 130, [], 'filename');
+        return $this->present()->thumbSrc(130, 130, [], 'file');
     }
 
     /**
