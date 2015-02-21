@@ -3,12 +3,12 @@ namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Input;
-use TypiCMS\Http\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Repositories\FileInterface;
 use View;
 
-class AdminController extends AdminSimpleController
+class AdminController extends BaseAdminController
 {
 
     public function __construct(FileInterface $file)
