@@ -4,15 +4,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FilesControllerTest extends TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-    }
 
     public function testAdminIndex()
     {
-        $this->get('admin/files');
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $response = $this->call('GET', 'admin/files');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testStoreSuccess()
