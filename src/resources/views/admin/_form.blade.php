@@ -13,7 +13,6 @@
     {!! BootForm::hidden('type') !!}
     {!! BootForm::hidden('position')->value($model->position ?: 0) !!}
     {!! BootForm::hidden('path') !!}
-    {!! BootForm::hidden('file') !!}
     {!! BootForm::hidden('extension') !!}
     {!! BootForm::hidden('mimetype') !!}
     {!! BootForm::hidden('width') !!}
