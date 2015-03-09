@@ -58,7 +58,7 @@ class ModuleProvider extends ServiceProvider
         /**
          * Sidebar view composer
          */
-        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Files\Composers\SideBarViewComposer');
+        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Files\Composers\SidebarViewComposer');
 
         $app->bind('TypiCMS\Modules\Files\Repositories\FileInterface', function (Application $app) {
             $repository = new EloquentFile(new File);
