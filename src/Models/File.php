@@ -85,7 +85,7 @@ class File extends Base
      * Get thumb attribute from presenter
      * @return string src
      */
-    public function getThumbAttribute()
+    public function getThumbAttribute($value)
     {
         return $this->present()->thumbSrc(null, 22, [], 'file');
     }
