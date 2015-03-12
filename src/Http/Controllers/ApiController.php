@@ -20,9 +20,9 @@ class ApiController extends BaseApiController
     public function index()
     {
         if ($gallery_id = Input::get('gallery_id', 0)) {
-            $models = $this->repository->getAllBy('gallery_id', $gallery_id, [], true);
+            $models = $this->repository->allBy('gallery_id', $gallery_id, [], true);
         } else {
-            $models = $this->repository->getAll([], true);
+            $models = $this->repository->all([], true);
         }
         return Response::json($models, 200);
     }
