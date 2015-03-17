@@ -20,7 +20,7 @@
                     <th class="edit"></th>
                     <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort" translate>Date</th>
                     <th st-sort="type" class="type st-sort" translate>Type</th>
-                    <th st-sort="image" class="image st-sort" translate>Image</th>
+                    <th class="image" translate>Image</th>
                     <th st-sort="file" class="title st-sort" translate>Filename</th>
                     <th st-sort="alt_attribute" class="selected st-sort">Alt attribute</th>
                     <th st-sort="width" class="width st-sort" translate>Width</th>
@@ -29,10 +29,10 @@
                 <tr>
                     <td colspan="5"></td>
                     <td>
-                        <input st-search="'file'" class="form-control input-sm" placeholder="{{ 'Search' | translate }}…" type="text">
+                        <input st-search="file" class="form-control input-sm" placeholder="{{ 'Search' | translate }}…" type="text">
                     </td>
                     <td>
-                        <input st-search="'alt_attribute'" class="form-control input-sm" placeholder="{{ 'Search' | translate }}…" type="text">
+                        <input st-search="alt_attribute" class="form-control input-sm" placeholder="{{ 'Search' | translate }}…" type="text">
                     </td>
                     <td></td>
                     <td></td>
@@ -45,7 +45,10 @@
                     <td typi-btn-edit></td>
                     <td>{{ model.created_at | dateFromMySQL:'short' }}</td>
                     <td>{{ model.type }}</td>
-                    <td typi-thumb-list-item></td>
+                    <td ng-switch="model.type">
+                        <img ng-switch-when="i" ng-src="{{ model.thumb_src }}" alt="{{ model.alt_attribute }}">
+                        <span class="fa fa-fw fa-file-o" ng-switch-default></span>
+                    </td>
                     <td>{{ model.file }}</td>
                     <td contentEditable highlighter="model.alt_attribute" ng-model="model.alt_attribute" ng-blur="update(model)">
                         {{ model.alt_attribute }}

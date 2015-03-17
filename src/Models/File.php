@@ -43,7 +43,7 @@ class File extends Base
         'alt_attribute',
     );
 
-    protected $appends = ['alt_attribute', 'description', 'thumb', 'thumb_sm'];
+    protected $appends = ['alt_attribute', 'description', 'thumb_src', 'thumb_sm'];
 
     /**
      * Columns that are file.
@@ -85,7 +85,7 @@ class File extends Base
      * Get thumb attribute from presenter
      * @return string src
      */
-    public function getThumbAttribute($value)
+    public function getThumbSrcAttribute($value)
     {
         return $this->present()->thumbSrc(null, 22, [], 'file');
     }
