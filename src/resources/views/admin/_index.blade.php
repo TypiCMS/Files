@@ -41,8 +41,10 @@
 
             <tbody>
                 <tr ng-repeat="model in displayedModels">
-                    <td><typi-btn-delete ng-click="delete(model, model.file)"></typi-btn-delete></td>
-                    <td typi-btn-edit></td>
+                    <td typi-btn-delete action="delete(model, model.file)"></td>
+                    <td>
+                        @include('core::admin._button-edit')
+                    </td>
                     <td>@{{ model.created_at | dateFromMySQL:'short' }}</td>
                     <td>@{{ model.type }}</td>
                     <td ng-switch="model.type">
