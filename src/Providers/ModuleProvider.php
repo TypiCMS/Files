@@ -65,7 +65,7 @@ class ModuleProvider extends ServiceProvider
             if (! config('typicms.cache')) {
                 return $repository;
             }
-            $laravelCache = new LaravelCache($app['cache'], ['galleries', 'files'], 10);
+            $laravelCache = new LaravelCache($app['cache'], ['files', 'galleries'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
         });
