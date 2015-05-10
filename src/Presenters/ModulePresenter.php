@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\Files\Presenters;
 
 use Illuminate\Database\Eloquent\Model;
-use Laracasts\Presenter\Presenter;
+use TypiCMS\Modules\Core\Presenters\Presenter;
 
 class ModulePresenter extends Presenter
 {
