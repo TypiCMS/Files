@@ -1,11 +1,10 @@
 <?php
 namespace TypiCMS\Modules\Files\Models;
 
-use Croppa;
 use Dimsav\Translatable\Translatable;
+use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
-use TypiCMS\Presenters\PresentableTrait;
 
 class File extends Base
 {

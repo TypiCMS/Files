@@ -2,14 +2,14 @@
 namespace TypiCMS\Modules\Files\Presenters;
 
 use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Presenters\Presenter;
+use Laracasts\Presenter\Presenter;
 
 class ModulePresenter extends Presenter
 {
 
     /**
      * Get the path of files linked to this model
-     * 
+     *
      * @param  Model  $model
      * @param  string $field file’s field name in model
      * @return string path
@@ -46,7 +46,7 @@ class ModulePresenter extends Presenter
 
     /**
      * Get title
-     * 
+     *
      * @return string
      */
     public function title()
