@@ -1,6 +1,7 @@
 {
     "name": "typicms/files",
     "description": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "Samuel De Backer",
