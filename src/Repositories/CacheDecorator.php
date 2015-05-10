@@ -1,8 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Files\Repositories;
 
-use App;
-use Input;
+use Illuminate\Support\Facades\Input;
 use TypiCMS\Modules\Core\Repositories\CacheAbstractDecorator;
 use TypiCMS\Modules\Core\Services\Cache\CacheInterface;
 
@@ -35,7 +34,7 @@ class CacheDecorator extends CacheAbstractDecorator implements FileInterface
         $type = null
     ) {
         $cacheKey = md5(
-            App::getLocale() .
+            config('app.locale') .
             'byPageFrom' .
             $page .
             $limit .

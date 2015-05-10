@@ -1,17 +1,14 @@
 <?php
 namespace TypiCMS\Modules\Files\Providers;
 
-use Config;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Lang;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\CacheDecorator;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
-use View;
 
 class ModuleProvider extends ServiceProvider
 {
