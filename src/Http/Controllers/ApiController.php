@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Input;
-use TypiCMS\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
 use Response;
 

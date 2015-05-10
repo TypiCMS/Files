@@ -3,7 +3,7 @@ namespace TypiCMS\Modules\Files\Repositories;
 
 use stdClass;
 use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Repositories\RepositoryInterface;
+use TypiCMS\Modules\Core\Repositories\RepositoryInterface;
 
 interface FileInterface extends RepositoryInterface
 {

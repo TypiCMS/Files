@@ -3,7 +3,7 @@ namespace TypiCMS\Modules\Files\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use stdClass;
-use TypiCMS\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
 class EloquentFile extends RepositoriesAbstract implements FileInterface
 {

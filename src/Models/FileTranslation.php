@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Files\Models;
 
-use TypiCMS\Models\BaseTranslation;
+use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class FileTranslation extends BaseTranslation
 {

@@ -3,7 +3,7 @@ namespace TypiCMS\Modules\Files\Models;
 
 use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
-use TypiCMS\Models\Base;
+use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class File extends Base
