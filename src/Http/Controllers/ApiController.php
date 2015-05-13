@@ -1,10 +1,10 @@
 <?php
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Input;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
-use Response;
 
 class ApiController extends BaseApiController
 {
