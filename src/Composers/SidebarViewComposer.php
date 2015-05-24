@@ -17,7 +17,7 @@ class SidebarViewComposer extends BaseSidebarViewComposer
                 $item->route('admin.files.index');
                 $item->append('admin.files.create');
                 $item->authorize(
-                    $this->auth->hasAccess('files.index')
+                    $this->user->hasAccess('files.index')
                 );
             });
         });
