@@ -21,28 +21,27 @@ col-xs-12
 
 @section('main')
 
-<div ng-app="typicms" ng-cloak ng-controller="ListController">
+<div class="container-filepicker" ng-app="typicms" ng-cloak ng-controller="ListController">
 
     <h1>
         <a id="uploaderAddButtonContainer" href="#"><i id="uploaderAddButton" class="fa fa-plus-circle"></i><span class="sr-only">@{{ ucfirst(trans('files::global.New')) }}</span></a>
-        <span>@{{ models.length }} @choice('files::global.files', 2)</span>
+        <span>{{ ucfirst(trans_choice('files::global.files', 2)) }}</span>
     </h1>
 
     <div class="dropzone hidden" drop-zone="" id="dropzone">
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
+
     <div class="row">
         <div class="thumbnail" ng-repeat="model in models" id="item_@{{ model.id }}">
-            <div ng-switch="model.type">
+            <div class="btn-insert" ng-switch="model.type" ng-click="selectAndClose(<?php echo Input::get('CKEditorFuncNum') ?>, '/' + model.path + '/' + model.file)">
                 <img class="img-responsive" ng-switch-when="i" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute }}">
                 <span class="doc fa fa-fw fa-file-o" ng-switch-default></span>
             </div>
-            <div class="caption">
-                <a href="#" class="btn btn-default btn-xs btn-block btn-insert" ng-click="selectAndClose(<?php echo Input::get('CKEditorFuncNum') ?>, '/' + model.path + '/' + model.file)" translate>Insert</a>
-                <small>@{{ model.file }}</small>
-            </div>
         </div>
     </div>
+
+    {!! $models->appends(Input::except('page'))->render() !!}
 
 </div>
 
