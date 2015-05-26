@@ -5,7 +5,7 @@ return array(
     'New'  => 'New file',
     'Edit' => 'Edit file',
     'Back' => 'Back to files',
-    'Drop files to upload (or click)' => 'Drop files to upload (or click).',
+    'Click or drop files to upload' => 'Click or drop files to upload.',
     'Drop files to upload' => 'Drop files to upload.',
     'Insert' => 'Insert',
 );

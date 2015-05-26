@@ -5,7 +5,7 @@ return array(
     'New'  => 'Nouveau fichier',
     'Edit' => 'Modifier le fichier',
     'Back' => 'Retour à la liste des fichiers',
-    'Drop files to upload (or click)' => 'Cliquer ou glisser des fichiers pour les envoyer.',
+    'Click or drop files to upload' => 'Cliquer ou glisser des fichiers pour les envoyer.',
     'Drop files to upload' => 'Glisser des fichiers pour les envoyer.',
     'Insert' => 'Insérer',
 );
