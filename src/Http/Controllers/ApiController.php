@@ -1,10 +1,10 @@
 <?php
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Response;
+use Input;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
+use Response;
 
 class ApiController extends BaseApiController
 {
@@ -25,9 +25,11 @@ class ApiController extends BaseApiController
         $perPage = config('typicms.files.per_page');
         if ($gallery_id = Input::get('gallery_id', 0)) {
             $models = $this->repository->allBy('gallery_id', $gallery_id, [], true);
-        } else {
+        } else if (Input::get('view') == 'filepicker') {
             $models = $this->repository->byPageFrom($page, $perPage, $gallery_id, [], true, $type);
             $models = $models->items;
+        } else {
+            $models = $this->repository->all([], true);
         }
         return Response::json($models, 200);
     }
