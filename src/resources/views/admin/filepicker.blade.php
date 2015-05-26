@@ -29,7 +29,7 @@ col-xs-12
     </h1>
 
     <div class="dropzone hidden" drop-zone="" id="dropzone">
-        <div class="dz-message">Click or drop files to upload.</div>
+        <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
     <div class="row">
         <div class="thumbnail" ng-repeat="model in models" id="item_@{{ model.id }}">
