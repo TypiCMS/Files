@@ -34,11 +34,11 @@ col-xs-12
 
     <div class="row">
         <div class="thumbnail" ng-repeat="model in models" id="item_@{{ model.id }}">
-            <img class="img-responsive" ng-src="@{{ model.thumb_sm }}" alt="">
-            <div class="caption">
-                <a href="#" class="btn btn-default btn-xs btn-block btn-insert" ng-click="selectAndClose(<?php echo Input::get('CKEditorFuncNum') ?>, '/' + model.path + '/' + model.file)" translate>Insert</a>
-                <small>@{{ model.file }}</small>
+            <div ng-switch="model.type">
+                <img class="img-responsive" ng-switch-when="i" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute }}">
+                <span class="doc fa fa-fw fa-file-o" ng-switch-default></span>
             </div>
+            <a href="#" class="btn btn-default btn-xs btn-block btn-insert" ng-click="selectAndClose(<?php echo Input::get('CKEditorFuncNum') ?>, '/' + model.path + '/' + model.file)" translate>Insert</a>
         </div>
     </div>
 
