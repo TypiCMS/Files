@@ -19,10 +19,15 @@ class ApiController extends BaseApiController
      */
     public function index()
     {
+        $gallery_id = Input::get('gallery_id');
+        $type = Input::get('type');
+        $page = Input::get('page');
+        $perPage = config('typicms.files.per_page');
         if ($gallery_id = Input::get('gallery_id', 0)) {
             $models = $this->repository->allBy('gallery_id', $gallery_id, [], true);
         } else {
-            $models = $this->repository->all([], true);
+            $models = $this->repository->byPageFrom($page, $perPage, $gallery_id, [], true, $type);
+            $models = $models->items;
         }
         return Response::json($models, 200);
     }

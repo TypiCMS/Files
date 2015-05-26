@@ -25,7 +25,7 @@ col-xs-12
 
     <h1>
         <a id="uploaderAddButtonContainer" href="#"><i id="uploaderAddButton" class="fa fa-plus-circle"></i><span class="sr-only">@{{ ucfirst(trans('files::global.New')) }}</span></a>
-        <span translate translate-n="models.length" translate-plural="@{{ models.length }} files">@{{ models.length }} file</span>
+        <span>{{ ucfirst(trans_choice('files::global.files', 2)) }}</span>
     </h1>
 
     <div class="dropzone hidden" drop-zone="" id="dropzone">
@@ -41,5 +41,7 @@ col-xs-12
     </div>
 
 </div>
+
+    {!! $models->appends(Input::except('page'))->render() !!}
 
 @stop
