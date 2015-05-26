@@ -15,6 +15,30 @@ class CacheDecorator extends CacheAbstractDecorator implements FileInterface
     }
 
     /**
+     * Get all models
+     *
+     * @param  boolean  $all  Show published or all
+     * @param  array    $with Eager load related models
+     * @return Collection
+     */
+    public function all(array $with = array(), $all = false)
+    {
+        $cacheKey = md5(config('app.locale') . 'all' . implode('.', $with) . $all . implode('.', Input::except('page')));
+
+        if ($this->cache->has($cacheKey)) {
+            return $this->cache->get($cacheKey);
+        }
+
+        // Item not cached, retrieve it
+        $models = $this->repo->all($with, $all);
+
+        // Store in cache for next request
+        $this->cache->put($cacheKey, $models);
+
+        return $models;
+    }
+
+    /**
      * Get paginated models
      *
      * @param  int      $page  Number of models per page
