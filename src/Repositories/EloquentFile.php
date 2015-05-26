@@ -50,7 +50,7 @@ class EloquentFile extends RepositoriesAbstract implements FileInterface
 
         $totalItems = $query->count();
 
-        $query->order()
+        $query->orderBy('id', 'desc')
               ->skip($limit * ($page - 1))
               ->take($limit);
 

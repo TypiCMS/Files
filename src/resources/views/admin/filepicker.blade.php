@@ -12,10 +12,6 @@ col-xs-12
 @section('breadcrumbs')
 @stop
 
-@section('h1')
-    <span id="nb_elements">{{ $models->total() }}</span> @choice('files::global.files', $models->total())
-@stop
-
 @section('titleLeftButton')
 @stop
 
