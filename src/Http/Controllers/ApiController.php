@@ -2,7 +2,6 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Response;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
 
@@ -15,7 +14,7 @@ class ApiController extends BaseApiController
 
     /**
      * Get models
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function index()
     {
@@ -31,6 +30,6 @@ class ApiController extends BaseApiController
         } else {
             $models = $this->repository->all([], true);
         }
-        return Response::json($models, 200);
+        return response()->json($models, 200);
     }
 }
