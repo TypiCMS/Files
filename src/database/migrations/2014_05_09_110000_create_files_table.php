@@ -17,7 +17,7 @@ class CreateFilesTable extends Migration
 
             $table->increments('id');
 
-            $table->integer('gallery_id')->unsigned()->default(0);
+            $table->integer('gallery_id')->unsigned()->nullable();
 
             $table->enum('type', array('a', 'v', 'd', 'i', 'o'))->nullable();
             $table->string('file')->nullable();
@@ -32,12 +32,14 @@ class CreateFilesTable extends Migration
 
             $table->timestamps();
 
+            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
+
         });
 
         Schema::create('file_translations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->integer('file_id')->unsigned();
 
             $table->string('locale')->index();
