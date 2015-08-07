@@ -53,4 +53,17 @@ class ModulePresenter extends Presenter
     {
         return $this->entity->file;
     }
+
+    /**
+     * Format file size
+     *
+     * @return string
+     */
+    function filesize($precision = 0)
+    {
+        $base = log($this->entity->filesize, 1024);
+        $suffixes = array('', 'k', 'MB', 'GB', 'TB');
+
+        return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
+    }
 }
