@@ -8,7 +8,7 @@ class FormRequest extends AbstractFormRequest {
     public function rules()
     {
         $rules = [];
-        if($this->hasFile('file')) {
+        if ($this->hasFile('file')) {
             $rules['file'] = 'mimes:jpeg,gif,png,bmp,tiff,pdf,eps,rtf,txt,md,doc,xls,ppt,docx,xlsx,ppsx,pptx,sldx|max:2000';
         }
         foreach (config('translatable.locales') as $locale) {
