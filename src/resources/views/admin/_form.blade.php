@@ -9,7 +9,9 @@
 <div class="row">
 
     {!! BootForm::hidden('id') !!}
-    {!! BootForm::hidden('gallery_id')->value($model->gallery_id ?: 0) !!}
+    @if($model->gallery_id)
+    {!! BootForm::hidden('gallery_id') !!}
+    @endif
     {!! BootForm::hidden('type') !!}
     {!! BootForm::hidden('position')->value($model->position ?: 0) !!}
     {!! BootForm::hidden('path') !!}
