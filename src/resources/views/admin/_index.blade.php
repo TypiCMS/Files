@@ -9,7 +9,7 @@
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
-    <div class="btn-toolbar" role="toolbar" ng-include="'/views/partials/btnLocales.html'"></div>
+    @include('core::admin._tabs-lang-list')
 
     <div class="table-responsive">
 
