@@ -1,7 +1,8 @@
 <?php
+
 return [
     'per_page' => 50,
-    'order' => [
+    'order'    => [
         'position' => 'asc',
     ],
     'sidebar' => [

@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\Files\Models;
 
 use Dimsav\Translatable\Translatable;
@@ -8,14 +9,13 @@ use TypiCMS\Modules\History\Traits\Historable;
 
 class File extends Base
 {
-
     use Historable;
     use Translatable;
     use PresentableTrait;
 
     protected $presenter = 'TypiCMS\Modules\Files\Presenters\ModulePresenter';
 
-    protected $fillable = array(
+    protected $fillable = [
         'gallery_id',
         'type',
         'name',
@@ -30,17 +30,17 @@ class File extends Base
         // Translatable columns
         'description',
         'alt_attribute',
-    );
+    ];
 
     /**
      * Translatable model configs.
      *
      * @var array
      */
-    public $translatedAttributes = array(
+    public $translatedAttributes = [
         'description',
         'alt_attribute',
-    );
+    ];
 
     protected $appends = ['alt_attribute', 'description', 'thumb_src', 'thumb_sm'];
 
@@ -49,9 +49,9 @@ class File extends Base
      *
      * @var array
      */
-    public $attachments = array(
+    public $attachments = [
         'file',
-    );
+    ];
 
     /**
      * One file belongs to one gallery.
@@ -64,7 +64,7 @@ class File extends Base
     }
 
     /**
-     * Get translated title
+     * Get translated title.
      */
     public function getTitleAttribute($value)
     {
@@ -72,7 +72,8 @@ class File extends Base
     }
 
     /**
-     * Get translated alt attribute
+     * Get translated alt attribute.
+     *
      * @return string alt attribute
      */
     public function getAltAttributeAttribute()
@@ -81,7 +82,8 @@ class File extends Base
     }
 
     /**
-     * Get thumb attribute from presenter
+     * Get thumb attribute from presenter.
+     *
      * @return string src
      */
     public function getThumbSrcAttribute($value)
@@ -90,7 +92,8 @@ class File extends Base
     }
 
     /**
-     * Get thumb attribute from presenter
+     * Get thumb attribute from presenter.
+     *
      * @return string src
      */
     public function getThumbSmAttribute($value)
@@ -99,7 +102,8 @@ class File extends Base
     }
 
     /**
-     * Get translated description
+     * Get translated description.
+     *
      * @return string description
      */
     public function getDescriptionAttribute()

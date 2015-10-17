@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
@@ -14,7 +15,8 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * Get models
+     * Get models.
+     *
      * @return \Illuminate\Support\Facades\Response
      */
     public function index()
@@ -25,25 +27,28 @@ class ApiController extends BaseApiController
         $perPage = config('typicms.files.per_page');
         if ($gallery_id = Input::get('gallery_id', 0)) {
             $models = $this->repository->allBy('gallery_id', $gallery_id, [], true);
-        } else if (Input::get('view') == 'filepicker') {
+        } elseif (Input::get('view') == 'filepicker') {
             $models = $this->repository->byPageFrom($page, $perPage, $gallery_id, [], true, $type);
             $models = $models->items;
         } else {
             $models = $this->repository->all([], true);
         }
+
         return response()->json($models, 200);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  FormRequest $request
+     * @param FormRequest $request
+     *
      * @return Model|false
      */
     public function store(FormRequest $request)
     {
         $model = $this->repository->create(Input::all());
-        $error = $model ? false : true ;
+        $error = $model ? false : true;
+
         return response()->json([
             'error' => $error,
             'model' => $model,
@@ -54,12 +59,14 @@ class ApiController extends BaseApiController
      * Update the specified resource in storage.
      *
      * @param  $model
-     * @param  FormRequest $request
-     * @return boolean
+     * @param FormRequest $request
+     *
+     * @return bool
      */
     public function update($model, FormRequest $request)
     {
-        $error = $this->repository->update($request->all()) ? false : true ;
+        $error = $this->repository->update($request->all()) ? false : true;
+
         return response()->json([
             'error' => $error,
         ], 200);

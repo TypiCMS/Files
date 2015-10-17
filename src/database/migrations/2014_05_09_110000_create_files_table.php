@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateFilesTable extends Migration
 {
@@ -19,7 +19,7 @@ class CreateFilesTable extends Migration
 
             $table->integer('gallery_id')->unsigned()->nullable();
 
-            $table->enum('type', array('a', 'v', 'd', 'i', 'o'))->nullable();
+            $table->enum('type', ['a', 'v', 'd', 'i', 'o'])->nullable();
             $table->string('file')->nullable();
             $table->string('path')->nullable();
             $table->string('extension', 8)->nullable();
@@ -49,11 +49,10 @@ class CreateFilesTable extends Migration
 
             $table->timestamps();
 
-            $table->unique(array('file_id', 'locale'));
+            $table->unique(['file_id', 'locale']);
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
 
         });
-
     }
 
     /**
@@ -66,5 +65,4 @@ class CreateFilesTable extends Migration
         Schema::drop('file_translations');
         Schema::drop('files');
     }
-
 }
