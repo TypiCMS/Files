@@ -1,11 +1,12 @@
 <?php
+
 namespace TypiCMS\Modules\Files\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 
-class RouteServiceProvider extends ServiceProvider {
-
+class RouteServiceProvider extends ServiceProvider
+{
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -18,7 +19,8 @@ class RouteServiceProvider extends ServiceProvider {
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function boot(Router $router)
@@ -31,24 +33,24 @@ class RouteServiceProvider extends ServiceProvider {
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function map(Router $router)
     {
-        $router->group(['namespace' => $this->namespace], function(Router $router) {
-            /**
+        $router->group(['namespace' => $this->namespace], function (Router $router) {
+            /*
              * Admin routes
              */
             $router->resource('admin/files', 'AdminController');
             $router->post('admin/files/sort', ['as' => 'admin.files.sort', 'uses' => 'AdminController@sort']);
             $router->post('admin/files/upload', ['as' => 'admin.files.upload', 'uses' => 'AdminController@upload']);
 
-            /**
+            /*
              * API routes
              */
             $router->resource('api/files', 'ApiController');
         });
     }
-
 }
