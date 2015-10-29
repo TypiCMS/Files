@@ -15,9 +15,9 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * Get models.
+     * List resources.
      *
-     * @return \Illuminate\Support\Facades\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -42,7 +42,7 @@ class ApiController extends BaseApiController
      *
      * @param FormRequest $request
      *
-     * @return Model|false
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(FormRequest $request)
     {
@@ -61,7 +61,7 @@ class ApiController extends BaseApiController
      * @param  $model
      * @param FormRequest $request
      *
-     * @return bool
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($model, FormRequest $request)
     {
