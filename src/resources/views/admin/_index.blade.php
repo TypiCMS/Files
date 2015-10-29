@@ -52,9 +52,7 @@
                         <span class="fa fa-fw fa-file-o" ng-switch-default></span>
                     </td>
                     <td>@{{ model.file }}</td>
-                    <td contentEditable highlighter="model.alt_attribute" ng-model="model.alt_attribute" ng-blur="update(model)">
-                        @{{ model.alt_attribute }}
-                    </td>
+                    <td>@{{ model.alt_attribute }}</td>
                     <td>@{{ model.width }}</td>
                     <td>@{{ model.height }}</td>
                 </tr>
