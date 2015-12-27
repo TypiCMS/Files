@@ -3,7 +3,7 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Repositories\FileInterface;
@@ -22,10 +22,10 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $page = Input::get('page');
-        $type = Input::get('type');
-        $gallery_id = Input::get('gallery_id');
-        $view = Input::get('view');
+        $page = Request::input('page');
+        $type = Request::input('type');
+        $gallery_id = Request::input('gallery_id');
+        $view = Request::input('view');
         if ($view != 'filepicker') {
             return parent::index();
         }

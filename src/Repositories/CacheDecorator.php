@@ -2,7 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Repositories;
 
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Repositories\CacheAbstractDecorator;
 use TypiCMS\Modules\Core\Services\Cache\CacheInterface;
 
@@ -24,7 +24,7 @@ class CacheDecorator extends CacheAbstractDecorator implements FileInterface
      */
     public function all(array $with = [], $all = false)
     {
-        $cacheKey = md5(config('app.locale').'all'.implode('.', $with).$all.implode('.', Input::except('page')));
+        $cacheKey = md5(config('app.locale').'all'.implode('.', $with).$all.implode('.', Request::except('page')));
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
@@ -66,7 +66,7 @@ class CacheDecorator extends CacheAbstractDecorator implements FileInterface
             $limit.
             $gallery_id.
             $all.
-            implode('.', Input::except('page')).
+            implode('.', Request::except('page')).
             $type
         );
 

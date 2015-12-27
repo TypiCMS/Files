@@ -2,7 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
@@ -21,13 +21,13 @@ class ApiController extends BaseApiController
      */
     public function index()
     {
-        $gallery_id = Input::get('gallery_id');
-        $type = Input::get('type');
-        $page = Input::get('page');
+        $gallery_id = Request::input('gallery_id');
+        $type = Request::input('type');
+        $page = Request::input('page');
         $perPage = config('typicms.files.per_page');
-        if ($gallery_id = Input::get('gallery_id', 0)) {
+        if ($gallery_id = Request::input('gallery_id', 0)) {
             $models = $this->repository->allBy('gallery_id', $gallery_id, [], true);
-        } elseif (Input::get('view') == 'filepicker') {
+        } elseif (Request::input('view') == 'filepicker') {
             $models = $this->repository->byPageFrom($page, $perPage, $gallery_id, [], true, $type);
             $models = $models->items;
         } else {
@@ -46,7 +46,7 @@ class ApiController extends BaseApiController
      */
     public function store(FormRequest $request)
     {
-        $model = $this->repository->create(Input::all());
+        $model = $this->repository->create($request->all());
         $error = $model ? false : true;
 
         return response()->json([
