@@ -6,6 +6,7 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\FileInterface;
 
 class AdminController extends BaseAdminController
@@ -18,7 +19,7 @@ class AdminController extends BaseAdminController
     /**
      * List files.
      *
-     * @return response views
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -43,9 +44,9 @@ class AdminController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param FormRequest $request
+     * @param \TypiCMS\Modules\Files\Http\Requests\FormRequest $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(FormRequest $request)
     {
@@ -57,12 +58,12 @@ class AdminController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  $model
-     * @param FormRequest $request
+     * @param \TypiCMS\Modules\Files\Models\File               $model
+     * @param \TypiCMS\Modules\Files\Http\Requests\FormRequest $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($model, FormRequest $request)
+    public function update(File $model, FormRequest $request)
     {
         $this->repository->update($request->all());
 
