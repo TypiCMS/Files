@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Files\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
 
 class ApiController extends BaseApiController
@@ -40,7 +41,7 @@ class ApiController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param FormRequest $request
+     * @param \TypiCMS\Modules\Files\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -58,17 +59,33 @@ class ApiController extends BaseApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  $model
-     * @param FormRequest $request
+     * @param \TypiCMS\Modules\Files\Models\File               $file
+     * @param \TypiCMS\Modules\Files\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($model, FormRequest $request)
+    public function update(File $file, FormRequest $request)
     {
         $error = $this->repository->update($request->all()) ? false : true;
 
         return response()->json([
             'error' => $error,
         ], 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Files\Models\File $file
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(File $file)
+    {
+        $deleted = $this->repository->delete($file);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }

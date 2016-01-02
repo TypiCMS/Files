@@ -84,15 +84,15 @@ class AdminController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param \TypiCMS\Modules\Files\Models\File               $model
+     * @param \TypiCMS\Modules\Files\Models\File               $file
      * @param \TypiCMS\Modules\Files\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(File $model, FormRequest $request)
+    public function update(File $file, FormRequest $request)
     {
         $this->repository->update($request->all());
 
-        return $this->redirect($request, $model);
+        return $this->redirect($request, $file);
     }
 }

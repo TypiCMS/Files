@@ -17,20 +17,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'TypiCMS\Modules\Files\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-
-        $router->model('files', 'TypiCMS\Modules\Files\Models\File');
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -43,14 +29,21 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->resource('admin/files', 'AdminController');
+            $router->get('admin/files', ['as' => 'admin.files.index', 'uses' => 'AdminController@index']);
+            $router->get('admin/files/create', ['as' => 'admin.files.create', 'uses' => 'AdminController@create']);
+            $router->get('admin/files/{file}/edit', ['as' => 'admin.files.edit', 'uses' => 'AdminController@edit']);
+            $router->post('admin/files', ['as' => 'admin.files.store', 'uses' => 'AdminController@store']);
+            $router->put('admin/files/{file}', ['as' => 'admin.files.update', 'uses' => 'AdminController@update']);
             $router->post('admin/files/sort', ['as' => 'admin.files.sort', 'uses' => 'AdminController@sort']);
             $router->post('admin/files/upload', ['as' => 'admin.files.upload', 'uses' => 'AdminController@upload']);
 
             /*
              * API routes
              */
-            $router->resource('api/files', 'ApiController');
+            $router->get('api/files', ['as' => 'api.files.index', 'uses' => 'ApiController@index']);
+            $router->post('api/files', ['as' => 'api.files.store', 'uses' => 'ApiController@store']);
+            $router->put('api/files/{file}', ['as' => 'api.files.update', 'uses' => 'ApiController@update']);
+            $router->delete('api/files/{file}', ['as' => 'api.files.destroy', 'uses' => 'ApiController@destroy']);
         });
     }
 }
