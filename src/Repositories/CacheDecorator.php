@@ -24,7 +24,7 @@ class CacheDecorator extends CacheAbstractDecorator implements FileInterface
      */
     public function all(array $with = [], $all = false)
     {
-        $cacheKey = md5(config('app.locale').'all'.implode('.', $with).$all.implode('.', Request::except('page')));
+        $cacheKey = md5(config('app.locale').'all'.serialize($with).$all.serialize(Request::except('page')));
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
@@ -66,7 +66,7 @@ class CacheDecorator extends CacheAbstractDecorator implements FileInterface
             $limit.
             $gallery_id.
             $all.
-            implode('.', Request::except('page')).
+            serialize(Request::except('page')).
             $type
         );
 
