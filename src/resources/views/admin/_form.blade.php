@@ -21,22 +21,8 @@
     {!! BootForm::hidden('height') !!}
 
     <div class="col-sm-6">
-
-        @include('core::admin._tabs-lang')
-
-        <div class="tab-content">
-
-            @foreach ($locales as $lang)
-
-            <div class="tab-pane fade @if ($locale == $lang)in active @endif" id="{{ $lang }}">
-                {!! BootForm::text(trans('validation.attributes.alt_attribute'), $lang.'[alt_attribute]') !!}
-                {!! BootForm::textarea(trans('validation.attributes.description'), $lang.'[description]') !!}
-            </div>
-
-            @endforeach
-
-        </div>
-
+        {!! TranslatableBootForm::text(trans('validation.attributes.alt_attribute'), 'alt_attribute') !!}
+        {!! TranslatableBootForm::textarea(trans('validation.attributes.description'), 'description') !!}
     </div>
 
     <div class="col-sm-6">
