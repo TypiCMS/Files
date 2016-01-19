@@ -1,19 +1,19 @@
 @extends('core::admin.master')
 
 @section('bodyClass')
-@stop
+@endsection
 @section('navbar')
-@stop
+@endsection
 @section('sidebar')
-@stop
+@endsection
 @section('mainClass')
 col-xs-12
-@stop
+@endsection
 @section('breadcrumbs')
-@stop
+@endsection
 
 @section('titleLeftButton')
-@stop
+@endsection
 
 @section('main')
 
@@ -46,4 +46,4 @@ col-xs-12
 
 </div>
 
-@stop
+@endsection
