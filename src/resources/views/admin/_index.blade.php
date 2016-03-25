@@ -51,7 +51,7 @@
                     <td>@{{ model.type }}</td>
                     <td ng-switch="model.type">
                         <img ng-switch-when="i" ng-src="@{{ model.thumb_src }}" alt="@{{ model.alt_attribute }}">
-                        <span class="fa fa-fw fa-file-o" ng-switch-default></span>
+                        <span class="fa fa-fw fa-file-text-o" ng-switch-default></span>
                     </td>
                     <td>@{{ model.file }}</td>
                     <td>@{{ model.alt_attribute }}</td>
