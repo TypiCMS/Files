@@ -29,21 +29,21 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/files', ['as' => 'admin.files.index', 'uses' => 'AdminController@index']);
-            $router->get('admin/files/create', ['as' => 'admin.files.create', 'uses' => 'AdminController@create']);
-            $router->get('admin/files/{file}/edit', ['as' => 'admin.files.edit', 'uses' => 'AdminController@edit']);
-            $router->post('admin/files', ['as' => 'admin.files.store', 'uses' => 'AdminController@store']);
-            $router->put('admin/files/{file}', ['as' => 'admin.files.update', 'uses' => 'AdminController@update']);
-            $router->post('admin/files/sort', ['as' => 'admin.files.sort', 'uses' => 'AdminController@sort']);
-            $router->post('admin/files/upload', ['as' => 'admin.files.upload', 'uses' => 'AdminController@upload']);
+            $router->get('admin/files', 'AdminController@index')->name('admin::index-files');
+            $router->get('admin/files/create', 'AdminController@create')->name('admin::create-files');
+            $router->get('admin/files/{file}/edit', 'AdminController@edit')->name('admin::edit-files');
+            $router->post('admin/files', 'AdminController@store')->name('admin::store-files');
+            $router->put('admin/files/{file}', 'AdminController@update')->name('admin::update-files');
+            $router->post('admin/files/sort', 'AdminController@sort')->name('admin::sort-files');
+            $router->post('admin/files/upload', 'AdminController@upload')->name('admin::upload-files');
 
             /*
              * API routes
              */
-            $router->get('api/files', ['as' => 'api.files.index', 'uses' => 'ApiController@index']);
-            $router->post('api/files', ['as' => 'api.files.store', 'uses' => 'ApiController@store']);
-            $router->put('api/files/{file}', ['as' => 'api.files.update', 'uses' => 'ApiController@update']);
-            $router->delete('api/files/{file}', ['as' => 'api.files.destroy', 'uses' => 'ApiController@destroy']);
+            $router->get('api/files', 'ApiController@index')->name('api::index-files');
+            $router->post('api/files', 'ApiController@store')->name('api::store-files');
+            $router->put('api/files/{file}', 'ApiController@update')->name('api::update-files');
+            $router->delete('api/files/{file}', 'ApiController@destroy')->name('api::destroy-files');
         });
     }
 }
