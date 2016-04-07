@@ -16,7 +16,7 @@ class SidebarViewComposer
                 $item->icon = config('typicms.files.sidebar.icon', 'icon fa fa-fw fa-file-photo-o');
                 $item->weight = config('typicms.files.sidebar.weight');
                 $item->route('admin::index-files');
-                $item->append('admin::create-files');
+                $item->append('admin::create-file');
                 $item->authorize(
                     Gate::allows('index-files')
                 );

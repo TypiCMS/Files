@@ -30,10 +30,10 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->get('admin/files', 'AdminController@index')->name('admin::index-files');
-            $router->get('admin/files/create', 'AdminController@create')->name('admin::create-files');
-            $router->get('admin/files/{file}/edit', 'AdminController@edit')->name('admin::edit-files');
-            $router->post('admin/files', 'AdminController@store')->name('admin::store-files');
-            $router->put('admin/files/{file}', 'AdminController@update')->name('admin::update-files');
+            $router->get('admin/files/create', 'AdminController@create')->name('admin::create-file');
+            $router->get('admin/files/{file}/edit', 'AdminController@edit')->name('admin::edit-file');
+            $router->post('admin/files', 'AdminController@store')->name('admin::store-file');
+            $router->put('admin/files/{file}', 'AdminController@update')->name('admin::update-file');
             $router->post('admin/files/sort', 'AdminController@sort')->name('admin::sort-files');
             $router->post('admin/files/upload', 'AdminController@upload')->name('admin::upload-files');
 
@@ -41,9 +41,9 @@ class RouteServiceProvider extends ServiceProvider
              * API routes
              */
             $router->get('api/files', 'ApiController@index')->name('api::index-files');
-            $router->post('api/files', 'ApiController@store')->name('api::store-files');
-            $router->put('api/files/{file}', 'ApiController@update')->name('api::update-files');
-            $router->delete('api/files/{file}', 'ApiController@destroy')->name('api::destroy-files');
+            $router->post('api/files', 'ApiController@store')->name('api::store-file');
+            $router->put('api/files/{file}', 'ApiController@update')->name('api::update-file');
+            $router->delete('api/files/{file}', 'ApiController@destroy')->name('api::destroy-file');
         });
     }
 }

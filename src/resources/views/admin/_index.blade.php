@@ -1,6 +1,9 @@
 <div ng-app="typicms" ng-cloak ng-controller="ListController">
 
-    <a id="uploaderAddButtonContainer" href="#" class="btn-add"><i id="uploaderAddButton" class="fa fa-plus-circle"></i><span class="sr-only">@{{ ucfirst(trans('files::global.New')) }}</span></a>
+    <a id="uploaderAddButtonContainer" href="#" class="btn-add" title="@lang($module.'::global.New')">
+        <i id="uploaderAddButton" class="fa fa-plus-circle"></i><span class="sr-only">@lang($module.'::global.New')</span>
+    </a>
+
     <h1>
         <span>@{{ models.length }} @choice('files::global.files', 2)</span>
     </h1>
