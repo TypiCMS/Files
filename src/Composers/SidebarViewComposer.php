@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Files\Composers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Sidebar\SidebarGroup;
 use Maatwebsite\Sidebar\SidebarItem;
 
@@ -17,7 +18,7 @@ class SidebarViewComposer
                 $item->route('admin::index-files');
                 $item->append('admin::create-files');
                 $item->authorize(
-                    auth()->user()->can('index-files')
+                    Gate::allows('index-files')
                 );
             });
         });
