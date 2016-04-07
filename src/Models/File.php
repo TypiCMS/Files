@@ -64,17 +64,9 @@ class File extends Base
     }
 
     /**
-     * Get translated title.
-     */
-    public function getTitleAttribute($value)
-    {
-        return $value;
-    }
-
-    /**
-     * Get translated alt attribute.
+     * Append alt_attribute attribute from translation table.
      *
-     * @return string alt attribute
+     * @return string
      */
     public function getAltAttributeAttribute()
     {
@@ -82,9 +74,9 @@ class File extends Base
     }
 
     /**
-     * Get thumb attribute from presenter.
+     * Append thumb_src attribute from presenter.
      *
-     * @return string src
+     * @return string
      */
     public function getThumbSrcAttribute($value)
     {
@@ -92,9 +84,9 @@ class File extends Base
     }
 
     /**
-     * Get thumb attribute from presenter.
+     * Append thumb_sm attribute from presenter.
      *
-     * @return string src
+     * @return string
      */
     public function getThumbSmAttribute($value)
     {
@@ -102,9 +94,9 @@ class File extends Base
     }
 
     /**
-     * Get translated description.
+     * Append description attribute from translation table.
      *
-     * @return string description
+     * @return string
      */
     public function getDescriptionAttribute()
     {
