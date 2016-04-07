@@ -78,7 +78,7 @@ class File extends Base
      *
      * @return string
      */
-    public function getThumbSrcAttribute($value)
+    public function getThumbSrcAttribute()
     {
         return $this->present()->thumbSrc(null, 22, [], 'file');
     }
@@ -88,7 +88,7 @@ class File extends Base
      *
      * @return string
      */
-    public function getThumbSmAttribute($value)
+    public function getThumbSmAttribute()
     {
         return $this->present()->thumbSrc(130, 130, [], 'file');
     }
