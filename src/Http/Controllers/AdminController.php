@@ -50,7 +50,7 @@ class AdminController extends BaseAdminController
     {
         $model = $this->repository->getModel();
 
-        return view('core::admin.create')
+        return view('files::admin.create')
             ->with(compact('model'));
     }
 
@@ -63,7 +63,7 @@ class AdminController extends BaseAdminController
      */
     public function edit(File $file)
     {
-        return view('core::admin.edit')
+        return view('files::admin.edit')
             ->with(['model' => $file]);
     }
 
