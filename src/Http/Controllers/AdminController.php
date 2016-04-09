@@ -28,14 +28,14 @@ class AdminController extends BaseAdminController
         $gallery_id = Request::input('gallery_id');
         $view = Request::input('view');
         if ($view != 'filepicker') {
-            return parent::index();
+            $view = 'index';
+            $models = $this->repository->all([], true);
+            app('JavaScript')->put('models', $models);
+        } else {
+            $perPage = config('typicms.files.per_page');
+            $data = $this->repository->byPageFrom($page, $perPage, $gallery_id, ['translations'], true, $type);
+            $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
         }
-
-        $perPage = config('typicms.files.per_page');
-
-        $data = $this->repository->byPageFrom($page, $perPage, $gallery_id, ['translations'], true, $type);
-
-        $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
 
         return view('files::admin.'.$view)
             ->with(compact('models'));

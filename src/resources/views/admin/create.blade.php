@@ -9,7 +9,7 @@
         @lang('files::global.New')
     </h1>
 
-    {!! BootForm::open()->action(route('admin::index-file'))->multipart()->role('form') !!}
+    {!! BootForm::open()->action(route('admin::index-files'))->multipart()->role('form') !!}
         @include('files::admin._form')
     {!! BootForm::close() !!}
 
