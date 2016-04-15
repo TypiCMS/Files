@@ -25,20 +25,10 @@ class CreateFilesTable extends Migration
             $table->integer('height')->unsigned()->nullable();
             $table->integer('filesize')->unsigned()->nullable();
             $table->integer('position')->unsigned()->default(0);
+            $table->json('description');
+            $table->json('alt_attribute');
             $table->timestamps();
             $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
-        });
-
-        Schema::create('file_translations', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('file_id')->unsigned();
-            $table->string('locale')->index();
-            $table->text('description');
-            $table->string('alt_attribute');
-            $table->timestamps();
-            $table->unique(['file_id', 'locale']);
-            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
         });
     }
 
@@ -49,7 +39,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('file_translations');
         Schema::drop('files');
     }
 }
