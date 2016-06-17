@@ -34,8 +34,8 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->integer('file_id')->unsigned();
             $table->string('locale')->index();
-            $table->text('description');
-            $table->string('alt_attribute');
+            $table->text('description')->nullable();
+            $table->string('alt_attribute')->nullable();
             $table->timestamps();
             $table->unique(['file_id', 'locale']);
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
