@@ -42,7 +42,7 @@ col-xs-12
         </div>
     </div>
 
-    {!! $models->appends(Request::except('page'))->render() !!}
+    {!! $models->appends(Request::except('page'))->links() !!}
 
 </div>
 
