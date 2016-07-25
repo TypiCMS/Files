@@ -13,6 +13,7 @@
     {!! BootForm::hidden('mimetype') !!}
     {!! BootForm::hidden('width') !!}
     {!! BootForm::hidden('height') !!}
+    {!! BootForm::hidden('redirect_to_gallery')->value(request('redirect_to_gallery')) !!}
 
     <div class="col-sm-6">
         {!! TranslatableBootForm::text(trans('validation.attributes.alt_attribute'), 'alt_attribute') !!}

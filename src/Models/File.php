@@ -54,6 +54,44 @@ class File extends Base
     ];
 
     /**
+     * Get back office’s edit url of model.
+     *
+     * @return string|void
+     */
+    public function editUrl()
+    {
+        $parameters = [$this->id];
+        if (request('redirect_to_gallery')) {
+            $parameters['redirect_to_gallery'] = request('redirect_to_gallery');
+        }
+        try {
+            return route(
+                'admin::edit-'.str_singular($this->getTable()),
+                $parameters
+            );
+        } catch (InvalidArgumentException $e) {
+            Log::error($e->getMessage());
+        }
+    }
+
+    /**
+     * Get back office’s index of models url.
+     *
+     * @return string|void
+     */
+    public function indexUrl()
+    {
+        try {
+            if (request('redirect_to_gallery')) {
+                return route('admin::edit-gallery', [$this->gallery_id, 'tab' => 'tab-files']);
+            }
+            return route('admin::index-'.$this->getTable());
+        } catch (InvalidArgumentException $e) {
+            Log::error($e->getMessage());
+        }
+    }
+
+    /**
      * One file belongs to one gallery.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo

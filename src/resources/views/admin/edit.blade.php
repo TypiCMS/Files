@@ -4,7 +4,7 @@
 
 @section('main')
 
-    @include('core::admin._button-back', ['module' => 'files'])
+    <a class="btn-back" href="{{ request('redirect_to_gallery') ? route('admin::edit-gallery', [$model->gallery_id, 'tab' => 'tab-files']) : route('admin::index-files') }}" title="{{ trans('files::global.Back') }}"><span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ trans('files::global.Back') }}</span></a>
     <h1 class="@if(!$model->present()->title)text-muted @endif">
         {{ $model->present()->title ?: trans('core::global.Untitled') }}
     </h1>
