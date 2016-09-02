@@ -33,7 +33,6 @@ class CreateFilesTable extends Migration
             $table->timestamps();
 
             $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
-
         });
 
         Schema::create('file_translations', function (Blueprint $table) {
@@ -51,7 +50,6 @@ class CreateFilesTable extends Migration
 
             $table->unique(['file_id', 'locale']);
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
-
         });
     }
 
