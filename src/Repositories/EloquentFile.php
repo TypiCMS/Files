@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Repositories;
 
+use TypiCMS\Modules\Core\EloquentRepository;
 use TypiCMS\Modules\Files\Models\File;
 use stdClass;
 
