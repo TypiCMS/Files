@@ -60,6 +60,7 @@ class File extends Base
             if (request('redirect_to_gallery')) {
                 return route('admin::edit-gallery', [$this->gallery_id, 'tab' => 'tab-files']);
             }
+
             return route('admin::index-'.$this->getTable());
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
