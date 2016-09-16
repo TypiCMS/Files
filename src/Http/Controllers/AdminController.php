@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\FileInterface;
+use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(FileInterface $file)
+    public function __construct(EloquentFile $file)
     {
         parent::__construct($file);
     }

@@ -6,9 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Observers\FileObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\CacheDecorator;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
 class ModuleProvider extends ServiceProvider
@@ -55,14 +53,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Files\Composers\SidebarViewComposer');
 
-        $app->bind('TypiCMS\Modules\Files\Repositories\FileInterface', function (Application $app) {
-            $repository = new EloquentFile(new File());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], ['files', 'galleries'], 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('Files', EloquentFile::class);
     }
 }

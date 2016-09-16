@@ -15,7 +15,7 @@ class File extends Base
 
     protected $presenter = 'TypiCMS\Modules\Files\Presenters\ModulePresenter';
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'exit'];
 
     public $translatable = [
         'description',

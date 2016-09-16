@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\FileInterface as Repository;
+use TypiCMS\Modules\Files\Repositories\EloquentFile as Repository;
 
 class ApiController extends BaseApiController
 {

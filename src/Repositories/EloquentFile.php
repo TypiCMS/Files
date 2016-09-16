@@ -2,16 +2,14 @@
 
 namespace TypiCMS\Modules\Files\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
+use TypiCMS\Modules\Files\Models\File;
 use stdClass;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
-class EloquentFile extends RepositoriesAbstract implements FileInterface
+class EloquentFile extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'files';
+
+    protected $model = File::class;
 
     /**
      * Get all models.
