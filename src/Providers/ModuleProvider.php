@@ -32,7 +32,7 @@ class ModuleProvider extends ServiceProvider
 
         AliasLoader::getInstance()->alias(
             'Files',
-            'TypiCMS\Modules\Files\Facades\Facade'
+            'TypiCMS\Modules\Slides\Facades\Files'
         );
 
         // Observers
