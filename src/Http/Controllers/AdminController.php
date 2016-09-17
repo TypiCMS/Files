@@ -33,8 +33,7 @@ class AdminController extends BaseAdminController
             app('JavaScript')->put('models', $models);
         } else {
             $perPage = config('typicms.files.per_page');
-            $data = $this->repository->byPageFrom($page, $perPage, $gallery_id, [], true, $type);
-            $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
+            $models = $this->repository->paginate($perPage, ['*'], 'page', $page);
         }
 
         return view('files::admin.'.$view)
