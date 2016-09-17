@@ -2,9 +2,9 @@
 
 namespace TypiCMS\Modules\Files\Repositories;
 
+use stdClass;
 use TypiCMS\Modules\Core\EloquentRepository;
 use TypiCMS\Modules\Files\Models\File;
-use stdClass;
 
 class EloquentFile extends EloquentRepository
 {
