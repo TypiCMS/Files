@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('files', 'AdminController@index')->name('admin::index-files');
                 $router->get('files/create', 'AdminController@create')->name('admin::create-file');
                 $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file');
@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * API routes
              */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
                 $router->get('files', 'ApiController@index')->name('api::index-files');
                 $router->post('files', 'ApiController@store')->name('api::store-file');
                 $router->put('files/{file}', 'ApiController@update')->name('api::update-file');
