@@ -29,7 +29,7 @@ class AdminController extends BaseAdminController
         $view = Request::input('view');
         if ($view != 'filepicker') {
             $view = 'index';
-            $models = $this->repository->all([], true);
+            $models = $this->repository->findAll();
             app('JavaScript')->put('models', $models);
         } else {
             $perPage = config('typicms.files.per_page');

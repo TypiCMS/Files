@@ -32,7 +32,7 @@ class ApiController extends BaseApiController
             $models = $this->repository->byPageFrom($page, $perPage, $gallery_id, [], true, $type);
             $models = $models->items;
         } else {
-            $models = $this->repository->all([], true);
+            $models = $this->repository->findAll();
         }
 
         return response()->json($models, 200);

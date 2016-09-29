@@ -28,21 +28,25 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/files', 'AdminController@index')->name('admin::index-files');
-            $router->get('admin/files/create', 'AdminController@create')->name('admin::create-file');
-            $router->get('admin/files/{file}/edit', 'AdminController@edit')->name('admin::edit-file');
-            $router->post('admin/files', 'AdminController@store')->name('admin::store-file');
-            $router->put('admin/files/{file}', 'AdminController@update')->name('admin::update-file');
-            $router->post('admin/files/sort', 'AdminController@sort')->name('admin::sort-files');
-            $router->post('admin/files/upload', 'AdminController@upload')->name('admin::upload-files');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+                $router->get('files', 'AdminController@index')->name('admin::index-files');
+                $router->get('files/create', 'AdminController@create')->name('admin::create-file');
+                $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file');
+                $router->post('files', 'AdminController@store')->name('admin::store-file');
+                $router->put('files/{file}', 'AdminController@update')->name('admin::update-file');
+                $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files');
+                $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files');
+            });
 
             /*
              * API routes
              */
-            $router->get('api/files', 'ApiController@index')->name('api::index-files');
-            $router->post('api/files', 'ApiController@store')->name('api::store-file');
-            $router->put('api/files/{file}', 'ApiController@update')->name('api::update-file');
-            $router->delete('api/files/{file}', 'ApiController@destroy')->name('api::destroy-file');
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+                $router->get('files', 'ApiController@index')->name('api::index-files');
+                $router->post('files', 'ApiController@store')->name('api::store-file');
+                $router->put('files/{file}', 'ApiController@update')->name('api::update-file');
+                $router->delete('files/{file}', 'ApiController@destroy')->name('api::destroy-file');
+            });
         });
     }
 }
