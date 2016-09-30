@@ -22,7 +22,7 @@ class EloquentFile extends EloquentRepository
      */
     public function all(array $with = [], $all = false)
     {
-        $query = $this->make($with);
+        $query = $this->with($with);
 
         if (!$all) {
             $query->online();
@@ -61,7 +61,7 @@ class EloquentFile extends EloquentRepository
         $result->totalItems = 0;
         $result->items = [];
 
-        $query = $this->make($with);
+        $query = $this->with($with);
 
         if ($type) { // witch type of files to get (a,v,d,i,o) ?
             $query->where('type', $type);
