@@ -66,7 +66,7 @@ class ApiController extends BaseApiController
      */
     public function update(File $file, FormRequest $request)
     {
-        $error = $this->repository->update($request->all()) ? false : true;
+        $error = $this->repository->update(request('id'), $request->all()) ? false : true;
 
         return response()->json([
             'error' => $error,
