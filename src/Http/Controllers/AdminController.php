@@ -89,8 +89,24 @@ class AdminController extends BaseAdminController
      */
     public function update(File $file, FormRequest $request)
     {
-        $this->repository->update(request('id'), $request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $file);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Files\Models\File $file
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(File $file)
+    {
+        $deleted = $this->repository->delete($file);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }
