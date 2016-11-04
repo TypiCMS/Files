@@ -27,9 +27,6 @@ class File extends Base
         'height',
         'filesize',
         'position',
-        // Translatable columns
-        'description',
-        'alt_attribute',
     ];
 
     /**
@@ -107,9 +104,9 @@ class File extends Base
      *
      * @return string
      */
-    public function getAltAttributeAttribute()
+    public function getAltAttributeAttribute($value)
     {
-        return $this->alt_attribute;
+        return $value;
     }
 
     /**
@@ -137,8 +134,8 @@ class File extends Base
      *
      * @return string
      */
-    public function getDescriptionAttribute()
+    public function getDescriptionAttribute($value)
     {
-        return $this->description;
+        return $value;
     }
 }

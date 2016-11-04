@@ -6,6 +6,11 @@ use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class FileTranslation extends BaseTranslation
 {
+    protected $fillable = [
+        'description',
+        'alt_attribute',
+    ];
+
     /**
      * get the parent model.
      */
