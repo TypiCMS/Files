@@ -138,4 +138,14 @@ class File extends Base
     {
         return $value;
     }
+    
+    public function setWidthAttribute($value)
+    {
+        $this->attributes['width'] = ($value == 0) ? null : $value;
+    }
+
+    public function setHeightAttribute($value)
+    {
+        $this->attributes['height'] = ($value == 0) ? null : $value;
+    }
 }
