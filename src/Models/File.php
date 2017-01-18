@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Files\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Galleries\Models\Gallery;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class File extends Base
@@ -74,7 +75,7 @@ class File extends Base
      */
     public function gallery()
     {
-        return $this->belongsTo('TypiCMS\Modules\Galleries\Models\Gallery');
+        return $this->belongsTo(Gallery::class);
     }
 
     /**
