@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'name'                          => 'Files',
-    'files'                         => 'file|files',
-    'New'                           => 'New file',
-    'Edit'                          => 'Edit file',
-    'Back'                          => 'Back to files',
+    'name' => 'Files',
+    'files' => 'file|files',
+    'New' => 'New file',
+    'Edit' => 'Edit file',
+    'Back' => 'Back to files',
     'Click or drop files to upload' => 'Click or drop files to upload.',
-    'Drop files to upload'          => 'Drop files to upload.',
-    'Insert'                        => 'Insert',
+    'Drop files to upload' => 'Drop files to upload.',
+    'Insert' => 'Insert',
 ];
