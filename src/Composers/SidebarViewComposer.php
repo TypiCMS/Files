@@ -11,8 +11,8 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        $view->sidebar->group(trans('global.menus.media'), function (SidebarGroup $group) {
-            $group->addItem(trans('files::global.name'), function (SidebarItem $item) {
+        $view->sidebar->group(__('global.menus.media'), function (SidebarGroup $group) {
+            $group->addItem(__('files::global.name'), function (SidebarItem $item) {
                 $item->id = 'files';
                 $item->icon = config('typicms.files.sidebar.icon', 'icon fa fa-fw fa-file-photo-o');
                 $item->weight = config('typicms.files.sidebar.weight');
