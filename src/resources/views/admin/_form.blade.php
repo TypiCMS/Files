@@ -16,8 +16,8 @@
     {!! BootForm::hidden('redirect_to_gallery')->value(request('redirect_to_gallery')) !!}
 
     <div class="col-sm-6">
-        {!! TranslatableBootForm::text(__('validation.attributes.alt_attribute'), 'alt_attribute') !!}
-        {!! TranslatableBootForm::textarea(__('validation.attributes.description'), 'description') !!}
+        {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
+        {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
     </div>
 
     <div class="col-sm-6">
@@ -26,35 +26,35 @@
 
         <table class="table table-condensed">
             <thead>
-                <th>{{ __('validation.attributes.file information') }}</th>
+                <th>{{ __('File information') }}</th>
                 <th></th>
             </thead>
             <tbody>
                 <tr>
-                    <th>{{ __('validation.attributes.path') }}</th>
+                    <th>{{ __('Path') }}</th>
                     <td>{{ $model->path }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('validation.attributes.filename') }}</th>
+                    <th>{{ __('Filename') }}</th>
                     <td>{{ $model->file }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('validation.attributes.extension') }}</th>
+                    <th>{{ __('Extension') }}</th>
                     <td>{{ $model->extension }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('validation.attributes.mimetype') }}</th>
+                    <th>{{ __('Mimetype') }}</th>
                     <td>{{ $model->mimetype }}</td>
                 </tr>
                 @if ($model->width)
                 <tr>
-                    <th>{{ __('validation.attributes.width') }}</th>
+                    <th>{{ __('Width') }}</th>
                     <td>{{ $model->width }} px</td>
                 </tr>
                 @endif
                 @if ($model->height)
                 <tr>
-                    <th>{{ __('validation.attributes.height') }}</th>
+                    <th>{{ __('Height') }}</th>
                     <td>{{ $model->height }} px</td>
                 </tr>
                 @endif
