@@ -15,7 +15,7 @@ col-xs-12
 @section('titleLeftButton')
 @endsection
 
-@section('main')
+@section('content')
 
 <div class="container-filepicker" ng-app="typicms" ng-cloak ng-controller="ListController">
 
