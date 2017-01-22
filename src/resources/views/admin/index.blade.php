@@ -38,10 +38,10 @@
                 <tr>
                     <td colspan="5"></td>
                     <td>
-                        <input st-search="file" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
+                        <input st-search="file" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td>
-                        <input st-search="alt_attribute" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
+                        <input st-search="alt_attribute" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td></td>
                     <td></td>
