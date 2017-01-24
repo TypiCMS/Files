@@ -27,13 +27,13 @@
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort">@lang('Date')</th>
-                    <th st-sort="type" class="type st-sort">@lang('Type')</th>
-                    <th class="image">@lang('Image')</th>
-                    <th st-sort="file" class="title st-sort">@lang('Filename')</th>
-                    <th st-sort="alt_attribute" class="selected st-sort">@lang('Alt attribute')</th>
-                    <th st-sort="width" class="width st-sort">@lang('Width')</th>
-                    <th st-sort="height" class="width st-sort">@lang('Height')</th>
+                    <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort">{{ __('Date') }}</th>
+                    <th st-sort="type" class="type st-sort">{{ __('Type') }}</th>
+                    <th class="image">{{ __('Image') }}</th>
+                    <th st-sort="file" class="title st-sort">{{ __('Filename') }}</th>
+                    <th st-sort="alt_attribute" class="selected st-sort">{{ __('Alt attribute') }}</th>
+                    <th st-sort="width" class="width st-sort">{{ __('Width') }}</th>
+                    <th st-sort="height" class="width st-sort">{{ __('Height') }}</th>
                 </tr>
                 <tr>
                     <td colspan="5"></td>
