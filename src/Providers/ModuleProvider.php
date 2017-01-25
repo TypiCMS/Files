@@ -5,6 +5,8 @@ namespace TypiCMS\Modules\Files\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Files\Composers\SidebarViewComposer;
+use TypiCMS\Modules\Files\Facades\Files;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
@@ -29,10 +31,7 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../database' => base_path('database'),
         ], 'migrations');
 
-        AliasLoader::getInstance()->alias(
-            'Files',
-            'TypiCMS\Modules\Files\Facades\Files'
-        );
+        AliasLoader::getInstance()->alias('Files', Files::class);
 
         // Observers
         File::observe(new FileObserver());
@@ -45,12 +44,12 @@ class ModuleProvider extends ServiceProvider
         /*
          * Register route service provider
          */
-        $app->register('TypiCMS\Modules\Files\Providers\RouteServiceProvider');
+        $app->register(RouteServiceProvider::class);
 
         /*
          * Sidebar view composer
          */
-        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Files\Composers\SidebarViewComposer');
+        $app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
 
         $app->bind('Files', EloquentFile::class);
     }
