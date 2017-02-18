@@ -17,7 +17,7 @@
     </div>
 
     <div class="btn-toolbar">
-        @include('core::admin._lang-switcher')
+        @include('core::admin._lang-switcher-for-list')
     </div>
 
     <div class="table-responsive">
