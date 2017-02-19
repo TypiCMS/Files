@@ -38,15 +38,6 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files');
                 $router->delete('files/{file}', 'AdminController@destroy')->name('admin::destroy-file');
             });
-
-            /*
-             * API routes
-             */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
-                $router->get('files', 'ApiController@index')->name('api::index-files');
-                $router->post('files', 'ApiController@store')->name('api::store-file');
-                $router->put('files/{file}', 'ApiController@update')->name('api::update-file');
-            });
         });
     }
 }
