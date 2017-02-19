@@ -24,7 +24,7 @@ col-xs-12
         <span>{{ ucfirst(trans_choice('files::global.files', 2)) }}</span>
     </h1>
 
-    <div class="dropzone hidden" drop-zone="" id="dropzone">
+    <div class="dropzone" dropzone id="dropzone">
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
