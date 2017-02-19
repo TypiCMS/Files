@@ -36,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->put('files/{file}', 'AdminController@update')->name('admin::update-file');
                 $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files');
                 $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files');
+                $router->delete('files/{file}', 'AdminController@destroy')->name('admin::destroy-file');
             });
 
             /*
@@ -45,7 +46,6 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('files', 'ApiController@index')->name('api::index-files');
                 $router->post('files', 'ApiController@store')->name('api::store-file');
                 $router->put('files/{file}', 'ApiController@update')->name('api::update-file');
-                $router->delete('files/{file}', 'ApiController@destroy')->name('api::destroy-file');
             });
         });
     }
