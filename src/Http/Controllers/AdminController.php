@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
@@ -22,18 +21,21 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $page = Request::input('page');
-        $type = Request::input('type');
-        $gallery_id = Request::input('gallery_id');
-        $view = Request::input('view');
-        if ($view != 'filepicker') {
-            $view = 'index';
-            $models = $this->repository->findAll();
-            app('JavaScript')->put('models', $models);
-        } else {
-            $perPage = config('typicms.files.per_page');
-            $models = $this->repository->paginate($perPage, ['*'], 'page', $page);
+        $page = request('page');
+        $type = request('type');
+        $gallery_id = request('gallery_id');
+        $view = request('view', 'index');
+        $repository = $this->repository;
+        if ($gallery_id) {
+            $repository->where('gallery_id', $gallery_id);
         }
+        $models = $repository->findAll();
+
+        if (request()->wantsJson()) {
+            return response()->json($models, 200);
+        }
+
+        app('JavaScript')->put('models', $models);
 
         return view('files::admin.'.$view)
             ->with(compact('models'));
@@ -76,6 +78,13 @@ class AdminController extends BaseAdminController
     {
         $data = $request->except(['redirect_to_gallery']);
         $model = $this->repository->create($data);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'error' => $model ? false : true,
+                'model' => $model,
+            ], 200);
+        }
 
         return $this->redirect($request, $model);
     }
