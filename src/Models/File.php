@@ -23,7 +23,7 @@ class File extends Base
         'alt_attribute',
     ];
 
-    protected $appends = ['thumb_src', 'thumb_sm'];
+    protected $appends = ['thumb_src', 'thumb_sm', 'alt_attribute_translated'];
 
     public $attachments = [
         'file',
@@ -66,6 +66,18 @@ class File extends Base
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
         }
+    }
+
+    /**
+     * Append title_translated attribute.
+     *
+     * @return string
+     */
+    public function getAltAttributeTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+
+        return $this->translate('alt_attribute', config('typicms.content_locale', $locale));
     }
 
     /**

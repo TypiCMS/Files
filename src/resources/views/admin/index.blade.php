@@ -31,7 +31,7 @@
                     <th st-sort="type" class="type st-sort">{{ __('Type') }}</th>
                     <th class="image">{{ __('Image') }}</th>
                     <th st-sort="file" class="title st-sort">{{ __('Filename') }}</th>
-                    <th st-sort="alt_attribute" class="selected st-sort">{{ __('Alt attribute') }}</th>
+                    <th st-sort="alt_attribute_translated" class="selected st-sort">{{ __('Alt attribute') }}</th>
                     <th st-sort="width" class="width st-sort">{{ __('Width') }}</th>
                     <th st-sort="height" class="width st-sort">{{ __('Height') }}</th>
                 </tr>
@@ -41,7 +41,7 @@
                         <input st-search="file" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td>
-                        <input st-search="alt_attribute" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="alt_attribute_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td></td>
                     <td></td>
@@ -57,11 +57,11 @@
                     <td>@{{ model.created_at | dateFromMySQL:'short' }}</td>
                     <td>@{{ model.type }}</td>
                     <td ng-switch="model.type">
-                        <img ng-switch-when="i" ng-src="@{{ model.thumb_src }}" alt="@{{ model.alt_attribute }}">
+                        <img ng-switch-when="i" ng-src="@{{ model.thumb_src }}" alt="@{{ model.alt_attribute_translated }}">
                         <span class="fa fa-fw fa-file-text-o" ng-switch-default></span>
                     </td>
                     <td>@{{ model.file }}</td>
-                    <td>@{{ model.alt_attribute }}</td>
+                    <td>@{{ model.alt_attribute_translated }}</td>
                     <td>@{{ model.width }}</td>
                     <td>@{{ model.height }}</td>
                 </tr>

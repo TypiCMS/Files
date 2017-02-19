@@ -74,7 +74,8 @@ class AdminController extends BaseAdminController
      */
     public function store(FormRequest $request)
     {
-        $model = $this->repository->create($request->all());
+        $data = $request->except(['redirect_to_gallery']);
+        $model = $this->repository->create($data);
 
         return $this->redirect($request, $model);
     }
@@ -89,7 +90,8 @@ class AdminController extends BaseAdminController
      */
     public function update(File $file, FormRequest $request)
     {
-        $this->repository->update($request->id, $request->all());
+        $data = $request->except(['redirect_to_gallery']);
+        $this->repository->update($request->id, $data);
 
         return $this->redirect($request, $file);
     }
