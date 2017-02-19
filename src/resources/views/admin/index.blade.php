@@ -6,13 +6,13 @@
 
 <div ng-app="typicms" ng-cloak ng-controller="ListController">
 
-    <a id="uploaderAddButtonContainer" href="#" class="btn-add" title="@lang('files::global.New')">
-        <i id="uploaderAddButton" class="fa fa-plus-circle"></i><span class="sr-only">@lang('files::global.New')</span>
+    <a id="uploaderAddButton" href="#" class="btn-add" title="@lang('files::global.New')">
+        <i class="fa fa-plus-circle"></i><span class="sr-only">@lang('files::global.New')</span>
     </a>
 
     <h1>@lang('files::global.name')</h1>
 
-    <div class="dropzone" drop-zone="" id="dropzone">
+    <div class="dropzone" dropzone id="dropzone">
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
