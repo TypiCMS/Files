@@ -15,8 +15,9 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('folder_id')->unsigned()->nullable();
             $table->integer('gallery_id')->unsigned()->nullable();
-            $table->enum('type', ['a', 'v', 'd', 'i', 'o'])->nullable();
+            $table->enum('type', ['a', 'v', 'd', 'i', 'o', 'f'])->nullable();
             $table->string('name')->nullable();
             $table->string('path')->nullable();
             $table->string('extension', 8)->nullable();
