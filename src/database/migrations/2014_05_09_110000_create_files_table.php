@@ -17,7 +17,7 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->integer('gallery_id')->unsigned()->nullable();
             $table->enum('type', ['a', 'v', 'd', 'i', 'o'])->nullable();
-            $table->string('file')->nullable();
+            $table->string('name')->nullable();
             $table->string('path')->nullable();
             $table->string('extension', 8)->nullable();
             $table->string('mimetype', 100)->nullable();
