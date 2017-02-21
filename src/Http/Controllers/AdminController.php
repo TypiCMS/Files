@@ -21,14 +21,10 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $page = request('page');
-        $type = request('type');
-        $gallery_id = request('gallery_id');
-        $view = request('view', 'index');
+        $folder_id = request('folder_id', 0);
         $repository = $this->repository;
-        if ($gallery_id) {
-            $repository->where('gallery_id', $gallery_id);
-        }
+        $repository->where('folder_id', $folder_id);
+
         $models = $repository->findAll();
 
         if (request()->wantsJson()) {
@@ -37,8 +33,7 @@ class AdminController extends BaseAdminController
 
         app('JavaScript')->put('models', $models);
 
-        return view('files::admin.'.$view)
-            ->with(compact('models'));
+        return view('files::admin.index');
     }
 
     /**

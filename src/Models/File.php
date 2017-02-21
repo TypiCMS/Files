@@ -26,7 +26,7 @@ class File extends Base
     protected $appends = ['thumb_src', 'thumb_sm', 'alt_attribute_translated'];
 
     public $attachments = [
-        'file',
+        'name',
     ];
 
     /**
@@ -97,7 +97,7 @@ class File extends Base
      */
     public function getThumbSrcAttribute()
     {
-        return $this->present()->thumbSrc(null, 22, [], 'file');
+        return $this->present()->thumbSrc(null, 22, [], 'name');
     }
 
     /**
@@ -107,6 +107,6 @@ class File extends Base
      */
     public function getThumbSmAttribute()
     {
-        return $this->present()->thumbSrc(130, 130, [], 'file');
+        return $this->present()->thumbSrc(260, 260, [], 'name');
     }
 }
