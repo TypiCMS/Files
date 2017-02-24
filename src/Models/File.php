@@ -107,6 +107,6 @@ class File extends Base
      */
     public function getThumbSmAttribute()
     {
-        return $this->present()->thumbSrc(260, 260, [], 'name');
+        return $this->present()->thumbSrc(260, 260, ['resize'], 'name');
     }
 }
