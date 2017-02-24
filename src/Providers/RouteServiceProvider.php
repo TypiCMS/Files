@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->put('files/{file}', 'AdminController@update')->name('admin::update-file');
                 $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files');
                 $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files');
-                $router->delete('files/{file}', 'AdminController@destroy')->name('admin::destroy-file');
+                $router->delete('files/{ids}', 'AdminController@destroyMultiple');
             });
         });
     }

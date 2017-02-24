@@ -13,6 +13,18 @@
     <h1>@lang('files::global.name')</h1>
 
     <div class="btn-toolbar">
+        <div class="btn-group dropdown">
+            <button class="btn btn-default dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Actions
+                <span class="caret"></span>
+                <span class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a ng-click="deleteChecked()" href="#">Delete</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="disabled"><a href="#">@{{ checked.models.length }} items selected</a></li>
+            </ul>
+        </div>
         @include('core::admin._lang-switcher-for-list')
     </div>
 
@@ -20,15 +32,17 @@
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
-    <div class="filemanager"
-        dnd-list="models"
-        dnd-horizontal-list="true"
-        >
+    <div class="filemanager">
         <div class="filemanager-item"
             ng-repeat="model in models"
             ng-switch="model.type"
+            ng-click="toggleCheck(model)"
             id="item_@{{ model.id }}"
-            ng-class="model.type == 'f' ? 'filemanager-item-folder' : 'filemanager-item-file'"
+            ng-class="{
+                'filemanager-item-selected': checked.models.indexOf(model) !== -1,
+                'filemanager-item-folder': model.type == 'f',
+                'filemanager-item-file': model.type != 'f',
+            }"
             lvl-draggable
             lvl-droppable
             x-on-drop="dropped(dragEl, dropEl)"
