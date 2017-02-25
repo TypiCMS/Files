@@ -13,7 +13,7 @@
     <h1>{!! implode('/', $path) !!}</h1>
 
     <div class="btn-toolbar">
-        <button class="btn btn-default" ng-click="newFolder({{ request('folder_id', 0) }})"><span class="fa fa-folder-o fa-fw"></span> @lang('New folder')</button>
+        <button class="btn btn-default" ng-click="newFolder({{ request('folder_id') }})"><span class="fa fa-folder-o fa-fw"></span> @lang('New folder')</button>
         <div class="btn-group dropdown">
             <button class="btn btn-default dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Actions
@@ -22,7 +22,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a ng-click="deleteChecked()" href="#">Delete</a></li>
-                <li ng-class="{disabled: 0 == {{ request('folder_id', 0)}} }"><a ng-click="moveToParentFolder()" href="#">Move to parent folder</a></li>
+                <li ng-class="{disabled: {{ request('folder_id') ? 'false' : 'true' }} }"><a ng-click="moveToParentFolder()" href="#">Move to parent folder</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="disabled"><a href="#">@{{ checked.models.length }} items selected</a></li>
             </ul>

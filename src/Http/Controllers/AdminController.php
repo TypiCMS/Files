@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
@@ -22,7 +23,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $folderId = request('folder_id', 0);
+        $folderId = request('folder_id');
         $repository = $this->repository;
         $repository->where('folder_id', $folderId);
         $models = $repository->findAll();
@@ -39,7 +40,7 @@ class AdminController extends BaseAdminController
 
         $firstItem = new stdClass;
         $firstItem->name = 'Fichiers';
-        $firstItem->id = 0;
+        $firstItem->id = null;
 
         $path = $path
             ->push($firstItem)
