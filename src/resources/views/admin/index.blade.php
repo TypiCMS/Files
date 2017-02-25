@@ -22,6 +22,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a ng-click="deleteChecked()" href="#">Delete</a></li>
+                <li><a ng-click="moveToParentFolder()" href="#">Move to parent folder</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="disabled"><a href="#">@{{ checked.models.length }} items selected</a></li>
             </ul>
