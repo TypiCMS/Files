@@ -13,6 +13,7 @@
     <h1>@lang('files::global.name')</h1>
 
     <div class="btn-toolbar">
+        <button class="btn btn-default" ng-click="newFolder()"><span class="fa fa-folder-o fa-fw"></span> @lang('New folder')</button>
         <div class="btn-group dropdown">
             <button class="btn btn-default dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Actions
