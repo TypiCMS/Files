@@ -43,9 +43,8 @@
                 'filemanager-item-folder': model.type == 'f',
                 'filemanager-item-file': model.type != 'f',
             }"
-            lvl-draggable
-            lvl-droppable
-            x-on-drop="dropped(dragEl, dropEl)"
+            dragdrop
+            on-drop="dropped(draggedModel, droppedModel)"
             >
             <div class="filemanager-item-icon" ng-switch-when="i">
                 <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
