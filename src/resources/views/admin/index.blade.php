@@ -45,6 +45,7 @@
             }"
             dragdrop
             on-drop="dropped(draggedModel, droppedModel)"
+            ng-dblclick="open(model)"
             >
             <div class="filemanager-item-icon" ng-switch-when="i">
                 <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
