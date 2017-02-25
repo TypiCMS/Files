@@ -11,17 +11,4 @@ class EloquentFile extends EloquentRepository
     protected $repositoryId = 'files';
 
     protected $model = File::class;
-
-    /**
-     * Delete multiple models.
-     *
-     * @return bool
-     */
-    public function deleteMultiple($ids)
-    {
-        $deleted = $this->createModel()->destroy($ids);
-        $this->forgetCache();
-
-        return $deleted;
-    }
 }

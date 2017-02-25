@@ -115,19 +115,4 @@ class AdminController extends BaseAdminController
             'error' => !$deleted,
         ]);
     }
-
-    /**
-     * Delete multiple resources.
-     *
-     * @param $ids
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroyMultiple($ids)
-    {
-        $ids = explode(',', $ids);
-        $number = $this->repository->deleteMultiple($ids);
-
-        return response()->json(compact('number'));
-    }
 }
