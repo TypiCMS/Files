@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
+use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
@@ -21,19 +22,39 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $folder_id = request('folder_id', 0);
+        $folderId = request('folder_id', 0);
         $repository = $this->repository;
-        $repository->where('folder_id', $folder_id);
-
+        $repository->where('folder_id', $folderId);
         $models = $repository->findAll();
-
         if (request()->wantsJson()) {
             return response()->json($models, 200);
         }
 
+        $folder = $repository->find($folderId);
+        $path = collect();
+        while ($folder) {
+            $path[] = $folder;
+            $folder = $folder->folder;
+        }
+
+        $firstItem = new stdClass;
+        $firstItem->name = 'Fichiers';
+        $firstItem->id = 0;
+
+        $path = $path
+            ->push($firstItem)
+            ->reverse()
+            ->transform(function($folder, $index) {
+                if ($index == 0) {
+                    return $folder->name;
+                }
+                return '<a href="?folder_id='.$folder->id.'">'.$folder->name.'</a>';
+            })->toArray();
+
         app('JavaScript')->put('models', $models);
 
-        return view('files::admin.index');
+        return view('files::admin.index')
+            ->with(compact('path'));
     }
 
     /**

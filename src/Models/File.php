@@ -91,6 +91,16 @@ class File extends Base
     }
 
     /**
+     * One file belongs to one gallery.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function folder()
+    {
+        return $this->belongsTo(File::class, 'folder_id', 'id');
+    }
+
+    /**
      * Append thumb_src attribute from presenter.
      *
      * @return string
