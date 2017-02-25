@@ -136,4 +136,24 @@ class AdminController extends BaseAdminController
             'error' => !$deleted,
         ]);
     }
+
+    /**
+     * Delete multiple resources.
+     *
+     * @param $ids
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroyMultiple($ids)
+    {
+        try {
+            $number = $this->repository->createModel()->destroy(explode(',', $ids));
+        } catch (QueryException $e) {
+            $message = __('A non-empty folder cannot be deleted.');
+            $number = 0;
+        }
+        $this->repository->forgetCache();
+
+        return response()->json(compact('number', 'message'));
+    }
 }
