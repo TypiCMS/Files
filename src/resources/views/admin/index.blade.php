@@ -29,7 +29,7 @@
         @include('core::admin._lang-switcher-for-list')
     </div>
 
-    <div class="dropzone" dropzone id="dropzone">
+    <div class="dropzone" dropzone id="dropzone" folder-id="{{ request('folder_id', 0) }}">
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
