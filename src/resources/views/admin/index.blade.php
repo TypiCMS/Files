@@ -46,7 +46,8 @@
                 'filemanager-item-file': model.type != 'f',
             }"
             dragdrop
-            on-drop="dropped(draggedModel, droppedModel)"
+            checked-models="checked.models"
+            on-drop="dropped(draggedModels, droppedModel)"
             ng-dblclick="open(model)"
             >
             <div class="filemanager-item-icon" ng-switch-when="i">
