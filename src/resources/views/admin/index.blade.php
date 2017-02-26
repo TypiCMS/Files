@@ -38,7 +38,7 @@
         <div class="filemanager-item"
             ng-repeat="model in models"
             ng-switch="model.type"
-            ng-click="toggleCheck(model)"
+            ng-click="check(model, $event)"
             id="item_@{{ model.id }}"
             ng-class="{
                 'filemanager-item-selected': checked.models.indexOf(model) !== -1,
