@@ -24,11 +24,10 @@ class AdminController extends BaseAdminController
     public function index()
     {
         $folderId = request('folder_id');
-        $repository = $this->repository;
-        $repository->where('folder_id', $folderId);
+        $view = request('view', 'index');
 
         $data = [
-            'models' => $repository->findAll(),
+            'models' => $this->repository->where('folder_id', $folderId)->findAll(),
             'path' => $this->getpath($folderId),
         ];
 
@@ -36,7 +35,7 @@ class AdminController extends BaseAdminController
             return response()->json($data, 200);
         }
 
-        return view('files::admin.index');
+        return view('files::admin.'.$view);
     }
 
     /**
