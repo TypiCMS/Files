@@ -50,11 +50,13 @@
             on-drop="dropped(draggedModels, droppedModel)"
             ng-dblclick="open(model)"
             >
-            <div class="filemanager-item-icon" ng-switch-when="i">
-                <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
+            <div class="filemanager-item-wrapper">
+                <div class="filemanager-item-icon" ng-switch-when="i">
+                    <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
+                </div>
+                <div class="filemanager-item-icon filemanager-item-icon-@{{ model.type }}" ng-switch-default></div>
+                <div class="filemanager-item-name">@{{ model.name }}</div>
             </div>
-            <div class="filemanager-item-icon filemanager-item-icon-@{{ model.type }}" ng-switch-default></div>
-            <div class="filemanager-item-name">@{{ model.name }}</div>
         </div>
     </div>
 
