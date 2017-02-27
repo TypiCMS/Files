@@ -34,7 +34,7 @@
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
-    <div class="filemanager">
+    <div class="filemanager" ng-click="unCheckAll()">
         <div class="filemanager-item"
             ng-repeat="model in models"
             ng-switch="model.type"
