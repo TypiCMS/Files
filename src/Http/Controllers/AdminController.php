@@ -26,13 +26,28 @@ class AdminController extends BaseAdminController
         $folderId = request('folder_id');
         $repository = $this->repository;
         $repository->where('folder_id', $folderId);
-        $models = $repository->findAll();
+
+        $data = [
+            'models' => $repository->findAll(),
+            'path' => $this->getpath($folderId),
+        ];
+
         if (request()->wantsJson()) {
-            return response()->json($models, 200);
+            return response()->json($data, 200);
         }
 
-        $folder = $repository->find($folderId);
-        $path = collect();
+        return view('files::admin.index');
+    }
+
+    /**
+     * Get folders path.
+     *
+     * @return array
+     */
+    private function getPath($folderId)
+    {
+        $folder = $this->repository->find($folderId);
+        $path = [];
         while ($folder) {
             $path[] = $folder;
             $folder = $folder->folder;
@@ -40,22 +55,13 @@ class AdminController extends BaseAdminController
 
         $firstItem = new stdClass;
         $firstItem->name = 'Fichiers';
-        $firstItem->id = null;
+        $firstItem->type = 'f';
+        $firstItem->id = '';
 
-        $path = $path
-            ->push($firstItem)
-            ->reverse()
-            ->transform(function($folder, $index) {
-                if ($index == 0) {
-                    return $folder->name;
-                }
-                return '<a href="?folder_id='.$folder->id.'">'.$folder->name.'</a>';
-            })->toArray();
+        $path[] = $firstItem;
+        $path = array_reverse($path);
 
-        app('JavaScript')->put('models', $models);
-
-        return view('files::admin.index')
-            ->with(compact('path'));
+        return $path;
     }
 
     /**

@@ -10,10 +10,16 @@
         <i class="fa fa-plus-circle"></i><span class="sr-only">@lang('files::global.New')</span>
     </a>
 
-    <h1>{!! implode('/', $path) !!}</h1>
+    <h1>
+        <span ng-repeat="folder in path">
+            <a ng-if="!$last" href="#" ng-click="open(folder)">@{{ folder.name }}</a>
+            <span ng-if="$last">@{{ folder.name }}</span>
+            <span ng-if="!$last">/</span>
+        </span>
+    </h1>
 
     <div class="btn-toolbar">
-        <button class="btn btn-default" ng-click="newFolder({{ request('folder_id') }})"><span class="fa fa-folder-o fa-fw"></span> @lang('New folder')</button>
+        <button class="btn btn-default" ng-click="newFolder(folder.id)"><span class="fa fa-folder-o fa-fw"></span> @lang('New folder')</button>
         <div class="btn-group dropdown">
             <button class="btn btn-default dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Actions
@@ -22,7 +28,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a ng-click="deleteChecked()" href="#">Delete</a></li>
-                <li ng-class="{disabled: {{ request('folder_id') ? 'false' : 'true' }} }"><a ng-click="moveToParentFolder()" href="#">Move to parent folder</a></li>
+                <li ng-class="{disabled: !folder.id}"><a ng-click="moveToParentFolder()" href="#">Move to parent folder</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="disabled"><a href="#">@{{ checked.models.length }} items selected</a></li>
             </ul>
@@ -30,7 +36,7 @@
         @include('core::admin._lang-switcher-for-list')
     </div>
 
-    <div class="dropzone" dropzone id="dropzone" folder-id="{{ request('folder_id') }}">
+    <div class="dropzone" dropzone id="dropzone" folder-id="@{{ folder.id }}">
         <div class="dz-message">@lang('files::global.Click or drop files to upload')</div>
     </div>
 
