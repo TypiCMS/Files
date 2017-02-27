@@ -1,7 +1,7 @@
 @extends('core::admin.master')
 
-@section('bodyClass')
-@endsection
+@section('bodyClass', 'body-filepicker')
+
 @section('navbar')
 @endsection
 @section('sidebar')
@@ -17,6 +17,6 @@ col-xs-12
 
 @section('content')
 
-@include('files::admin._filemanager')
+@include('files::admin._filemanager', ['dropzoneOpened' => false])
 
 @endsection

@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="dropzone" dropzone id="dropzone" folder-id="@{{ folder.id }}">
+    <div class="dropzone @if(isset($dropzoneOpened) and $dropzoneOpened == false)hide @endif" dropzone id="dropzone" folder-id="@{{ folder.id }}">
         <div class="dz-message">{{ __('Click or drop files to upload') }}</div>
     </div>
 
@@ -47,7 +47,7 @@
             dragdrop
             checked-models="checked.models"
             on-drop="dropped(draggedModels, droppedModel)"
-            ng-dblclick="model.type == 'f' ? open(model) : selectAndClose({{ request('CKEditorFuncNum') }}, '/' + model.path + '/' + model.name)"
+            ng-dblclick="model.type == 'f' ? open(model) : selectAndClose({{ request('CKEditorFuncNum', 0) }}, '/' + model.path + '/' + model.name)"
             >
             <div class="filemanager-item-wrapper">
                 <div class="filemanager-item-icon" ng-switch-when="i">
