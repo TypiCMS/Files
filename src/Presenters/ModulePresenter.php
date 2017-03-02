@@ -31,7 +31,7 @@ class ModulePresenter extends Presenter
      */
     public function title()
     {
-        return $this->entity->file;
+        return $this->entity->name;
     }
 
     /**

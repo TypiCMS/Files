@@ -16,13 +16,17 @@
     {!! BootForm::hidden('redirect_to_gallery')->value(request('redirect_to_gallery')) !!}
 
     <div class="col-sm-6">
+        @if ($model->type === 'i')
         {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
+        @endif
+        @if ($model->type === 'f')
+        {!! BootForm::text(__('Name'), 'name') !!}
+        @endif
         {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
     </div>
 
+    @if ($model->type !== 'f')
     <div class="col-sm-6">
-
-        @include('core::admin._file-fieldset', ['field' => 'file'])
 
         <table class="table table-condensed">
             <thead>
@@ -36,7 +40,7 @@
                 </tr>
                 <tr>
                     <th>{{ __('Filename') }}</th>
-                    <td>{{ $model->file }}</td>
+                    <td>{{ $model->name }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('Extension') }}</th>
@@ -62,5 +66,6 @@
         </table>
 
     </div>
+    @endif
 
 </div>
