@@ -17,6 +17,6 @@ col-xs-12
 
 @section('content')
 
-@include('files::admin._filemanager', ['dropzoneOpened' => false])
+@include('files::admin._filemanager', ['options' => ['dropzoneHidden']])
 
 @endsection

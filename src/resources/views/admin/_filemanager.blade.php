@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="dropzone @if(isset($dropzoneOpened) and $dropzoneOpened == false)hide @endif" dropzone id="dropzone" folder-id="@{{ folder.id }}">
+    <div class="dropzone @if(in_array('dropzoneHidden', $options))hide @endif" dropzone id="dropzone" folder-id="@{{ folder.id }}">
         <div class="dz-message">{{ __('Click or drop files to upload') }}</div>
     </div>
 
@@ -50,6 +50,9 @@
             ng-dblclick="model.type == 'f' ? open(model) : selectAndClose({{ request('CKEditorFuncNum', 0) }}, '/' + model.path + '/' + model.name)"
             >
             <div class="filemanager-item-wrapper">
+                @if(in_array('editable', $options))
+                <a class="filemanager-item-edit" href="/admin/files/@{{ model.id }}/edit"><span class="fa fa-pencil"></span></a>
+                @endif
                 <div class="filemanager-item-icon" ng-switch-when="i">
                     <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
                 </div>

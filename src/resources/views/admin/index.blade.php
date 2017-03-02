@@ -4,6 +4,6 @@
 
 @section('content')
 
-@include('files::admin._filemanager')
+@include('files::admin._filemanager', ['options' => ['editable']])
 
 @endsection
