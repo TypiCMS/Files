@@ -82,13 +82,13 @@ class File extends Base
     }
 
     /**
-     * One file belongs to one gallery.
+     * One file belongs to many galleries.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function gallery()
+    public function galleries()
     {
-        return $this->belongsTo(Gallery::class);
+        return $this->belongsToMany(Gallery::class);
     }
 
     /**
