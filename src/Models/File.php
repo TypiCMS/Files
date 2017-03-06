@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Files\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Presenters\ModulePresenter;
 use TypiCMS\Modules\Galleries\Models\Gallery;
 use TypiCMS\Modules\History\Traits\Historable;
 
@@ -14,7 +15,7 @@ class File extends Base
     use Historable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Files\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
     protected $guarded = ['id', 'exit'];
 
