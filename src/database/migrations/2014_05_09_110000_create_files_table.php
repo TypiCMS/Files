@@ -16,7 +16,6 @@ class CreateFilesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('folder_id')->unsigned()->nullable();
-            $table->integer('gallery_id')->unsigned()->nullable();
             $table->enum('type', ['a', 'v', 'd', 'i', 'o', 'f'])->nullable();
             $table->string('name')->nullable();
             $table->string('path')->nullable();
