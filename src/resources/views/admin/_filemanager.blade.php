@@ -13,7 +13,7 @@
     </h1>
 
     <div class="btn-toolbar">
-        <button class="btn btn-default" ng-click="newFolder(folder.id)"><span class="fa fa-folder-o fa-fw"></span> {{ __('New folder') }}</button>
+        <button class="btn btn-default" ng-click="newFolder(folder.id)" type="button"><span class="fa fa-folder-o fa-fw"></span> {{ __('New folder') }}</button>
         <div class="btn-group dropdown">
             <button class="btn btn-default dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 {{ __('Actions') }}
@@ -63,7 +63,7 @@
     </div>
 
     @if (in_array('addButton', $options))
-        <button class="btn btn-success btn-block btn-lg btn-add-selected-files" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
+        <button class="btn btn-success btn-block btn-lg btn-add-selected-files" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
     @endif
 
 </div>
