@@ -62,4 +62,8 @@
         </div>
     </div>
 
+    @if (in_array('addButton', $options))
+        <button class="btn btn-success btn-block btn-lg btn-add-selected-files" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
+    @endif
+
 </div>
