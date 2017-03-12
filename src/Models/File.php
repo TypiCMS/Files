@@ -92,13 +92,23 @@ class File extends Base
     }
 
     /**
-     * One file belongs to one gallery.
+     * One file belongs to one folder.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
     public function folder()
     {
         return $this->belongsTo(File::class, 'folder_id', 'id');
+    }
+
+    /**
+     * One file has many children.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function children()
+    {
+        return $this->hasMany(File::class, 'folder_id', 'id');
     }
 
     /**
