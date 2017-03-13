@@ -1,4 +1,4 @@
-<div ng-app="typicms" ng-cloak ng-controller="FilesController">
+<div ng-app="typicms" ng-cloak ng-controller="FilesController" url="/admin/files">
 
     <a id="uploaderAddButton" href="#" class="btn-add" title="{{ __('Add files') }}">
         <i class="fa fa-plus-circle"></i><span class="sr-only">{{ __('Add files') }}</span>
