@@ -26,10 +26,6 @@ class File extends Base
 
     protected $appends = ['thumb_src', 'thumb_sm', 'alt_attribute_translated'];
 
-    public $attachments = [
-        'name',
-    ];
-
     /**
      * Get back office’s edit url of model.
      *
