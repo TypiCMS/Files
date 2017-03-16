@@ -1,4 +1,4 @@
-<div ng-cloak ng-controller="FilesController" url="/admin/files">
+<div ng-cloak ng-controller="FilesController" multiple="@if (in_array('addFilesButton', $options))true @endif" url="/admin/files">
 
     <a id="uploaderAddButton" href="#" class="btn-add" title="{{ __('Add files') }}">
         <i class="fa fa-plus-circle"></i><span class="sr-only">{{ __('Add files') }}</span>
@@ -6,7 +6,7 @@
 
     <h1>
         <span ng-repeat="folder in path">
-            <a ng-if="!$last" href="#" ng-click="open(folder)">@{{ folder.name }}</a>
+            <a ng-if="!$last" href="#" ng-click="handle(folder)">@{{ folder.name }}</a>
             <span ng-if="$last">@{{ folder.name }}</span>
             <span ng-if="!$last">/</span>
         </span>
@@ -47,7 +47,7 @@
             dragdrop
             checked-models="checked.models"
             on-drop="dropped(draggedModels, droppedModel)"
-            ng-dblclick="model.type == 'f' ? open(model) : selectAndClose({{ request('CKEditorFuncNum', 0) }}, '/' + model.path + '/' + model.name)"
+            ng-dblclick="handle(model, {{ request('CKEditorFuncNum', 0) }}, {{ request('CKEditorCleanUpFuncNum', 0) }})"
             >
             <div class="filemanager-item-wrapper">
                 @if(in_array('editable', $options))
@@ -64,12 +64,12 @@
         </div>
     </div>
 
-    @if (in_array('addFilesButton', $options))
-        <button class="btn btn-success btn-block btn-lg btn-add-selected-files" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
+    @if (in_array('multiple', $options))
+        <button class="btn btn-success btn-add-selected-files" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
     @endif
 
-    @if (in_array('addFileButton', $options))
-        <button class="btn btn-success btn-block btn-lg btn-add-selected-files" ng-disabled="checked.models.length !== 1 || checked.models[0].type !== 'i'" type="button" ng-click="addSelectedFile()" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
+    @if (in_array('single', $options))
+        <button class="btn btn-success btn-add-selected-files" ng-disabled="checked.models.length !== 1 || checked.models[0].type !== 'i'" type="button" ng-click="addSelectedFile()" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
     @endif
 
 </div>
