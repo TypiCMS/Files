@@ -1,4 +1,4 @@
-<div ng-cloak ng-controller="FilesController" multiple="@if (in_array('addFilesButton', $options))true @endif" url="/admin/files">
+<div ng-cloak ng-controller="FilesController" multiple="@if (in_array('multiple', $options))true @endif" url="/admin/files">
 
     <a id="uploaderAddButton" href="#" class="btn-add" title="{{ __('Add files') }}">
         <i class="fa fa-plus-circle"></i><span class="sr-only">{{ __('Add files') }}</span>
