@@ -17,6 +17,8 @@ col-xs-12
 
 @section('content')
 
-@include('files::admin._filemanager', ['options' => ['dropzoneHidden']])
+<div ng-app="typicms">
+    @include('files::admin._filemanager', ['options' => ['dropzoneHidden']])
+</div>
 
 @endsection

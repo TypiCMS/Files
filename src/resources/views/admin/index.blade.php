@@ -4,6 +4,8 @@
 
 @section('content')
 
-@include('files::admin._filemanager', ['options' => ['editable']])
+<div ng-app="typicms">
+    @include('files::admin._filemanager', ['options' => ['editable']])
+</div>
 
 @endsection

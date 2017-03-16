@@ -1,4 +1,4 @@
-<div ng-app="typicms" ng-cloak ng-controller="FilesController" url="/admin/files">
+<div ng-cloak ng-controller="FilesController" url="/admin/files">
 
     <a id="uploaderAddButton" href="#" class="btn-add" title="{{ __('Add files') }}">
         <i class="fa fa-plus-circle"></i><span class="sr-only">{{ __('Add files') }}</span>
@@ -62,8 +62,12 @@
         </div>
     </div>
 
-    @if (in_array('addButton', $options))
+    @if (in_array('addFilesButton', $options))
         <button class="btn btn-success btn-block btn-lg btn-add-selected-files" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
+    @endif
+
+    @if (in_array('addFileButton', $options))
+        <button class="btn btn-success btn-block btn-lg btn-add-selected-files" ng-disabled="checked.models.length !== 1 || checked.models[0].type !== 'i'" type="button" ng-click="addSelectedFile()" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
     @endif
 
 </div>
