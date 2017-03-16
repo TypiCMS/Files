@@ -34,7 +34,7 @@
     </div>
 
     <div class="filemanager" ng-click="unCheckAll()">
-        <div class="filemanager-item"
+        <div class="filemanager-item filemanager-item-with-name filemanager-item-editable"
             ng-repeat="model in models"
             ng-switch="model.type"
             ng-click="check(model, $event)"
@@ -51,10 +51,12 @@
             >
             <div class="filemanager-item-wrapper">
                 @if(in_array('editable', $options))
-                <a class="filemanager-item-edit" href="/admin/files/@{{ model.id }}/edit"><span class="fa fa-pencil"></span></a>
+                <a class="filemanager-item-editable-button" href="/admin/files/@{{ model.id }}/edit"><span class="fa fa-pencil"></span></a>
                 @endif
                 <div class="filemanager-item-icon" ng-switch-when="i">
-                    <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
+                    <div class="filemanager-item-image-wrapper">
+                        <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
+                    </div>
                 </div>
                 <div class="filemanager-item-icon filemanager-item-icon-@{{ model.type }}" ng-switch-default></div>
                 <div class="filemanager-item-name">@{{ model.name }}</div>
