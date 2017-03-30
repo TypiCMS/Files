@@ -21,7 +21,7 @@ class ModulePresenter extends Presenter
             return;
         }
 
-        return '/'.$model->path.'/'.$model->$field;
+        return str_replace('public/', '/', $model->path);
     }
 
     /**
