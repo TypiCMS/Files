@@ -28,7 +28,6 @@ class CreateFilesTable extends Migration
             $table->json('description');
             $table->json('alt_attribute');
             $table->timestamps();
-            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
             $table->foreign('folder_id')->references('id')->on('files');
         });
     }
