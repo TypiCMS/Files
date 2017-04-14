@@ -17,6 +17,9 @@ class ModuleProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'typicms.files'
         );
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/permissions.php', 'typicms.permissions'
+        );
 
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['files' => []], $modules));
