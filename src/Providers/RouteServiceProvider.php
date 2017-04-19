@@ -29,15 +29,15 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('files', 'AdminController@index')->name('admin::index-files');
-                $router->get('files/create', 'AdminController@create')->name('admin::create-file');
-                $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file');
-                $router->post('files', 'AdminController@store')->name('admin::store-file');
-                $router->put('files/{file}', 'AdminController@update')->name('admin::update-file');
-                $router->patch('files/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-file-ajax');
-                $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files');
-                $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files');
-                $router->delete('files/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-file');
+                $router->get('files', 'AdminController@index')->name('admin::index-files')->middleware('can:see-all-files');
+                $router->get('files/create', 'AdminController@create')->name('admin::create-file')->middleware('can:create-file');
+                $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file')->middleware('can:update-file');
+                $router->post('files', 'AdminController@store')->name('admin::store-file')->middleware('can:create-file');
+                $router->put('files/{file}', 'AdminController@update')->name('admin::update-file')->middleware('can:update-file');
+                $router->patch('files/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-file-ajax')->middleware('can:update-file');
+                $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files')->middleware('can:update-file');
+                $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files')->middleware('can:create-file');
+                $router->delete('files/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-file')->middleware('can:delete-file');
             });
         });
     }
