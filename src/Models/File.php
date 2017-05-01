@@ -78,16 +78,6 @@ class File extends Base
     }
 
     /**
-     * One file belongs to many galleries.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function galleries()
-    {
-        return $this->belongsToMany(Gallery::class);
-    }
-
-    /**
      * One file belongs to one folder.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
