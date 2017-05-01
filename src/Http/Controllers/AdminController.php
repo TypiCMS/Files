@@ -131,6 +131,16 @@ class AdminController extends BaseAdminController
     }
 
     /**
+     * Sort files.
+     */
+    public function sort()
+    {
+        foreach (request()->all() as $position => $item) {
+            app('db')->table('model_has_files')->where('file_id', $item['id'])->update(['position' => $position + 1]);
+        }
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param \TypiCMS\Modules\Files\Models\File $file
