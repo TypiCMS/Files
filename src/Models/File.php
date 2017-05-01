@@ -80,7 +80,7 @@ class File extends Base
     /**
      * One file belongs to one folder.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function folder()
     {
@@ -88,9 +88,9 @@ class File extends Base
     }
 
     /**
-     * One file has many children.
+     * One folder has many children files.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function children()
     {
