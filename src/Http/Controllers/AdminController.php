@@ -101,7 +101,7 @@ class AdminController extends BaseAdminController
      */
     public function store(FormRequest $request)
     {
-        $data = $request->except(['redirect_to_gallery']);
+        $data = $request->all();
         $model = $this->repository->create($data);
 
         if (request()->wantsJson()) {
@@ -124,7 +124,7 @@ class AdminController extends BaseAdminController
      */
     public function update(File $file, FormRequest $request)
     {
-        $data = $request->except(['redirect_to_gallery']);
+        $data = $request->all();
         $this->repository->update($request->id, $data);
 
         return $this->redirect($request, $file);

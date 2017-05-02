@@ -33,15 +33,8 @@ class File extends Base
      */
     public function editUrl()
     {
-        $parameters = [$this->id];
-        if (request('redirect_to_gallery')) {
-            $parameters['redirect_to_gallery'] = request('redirect_to_gallery');
-        }
         try {
-            return route(
-                'admin::edit-'.str_singular($this->getTable()),
-                $parameters
-            );
+            return route('admin::edit-'.str_singular($this->getTable()), $this->id);
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
         }
@@ -55,10 +48,6 @@ class File extends Base
     public function indexUrl()
     {
         try {
-            if (request('redirect_to_gallery')) {
-                return route('admin::edit-gallery', [$this->gallery_id, 'tab' => 'tab-files']);
-            }
-
             return route('admin::index-'.$this->getTable());
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
