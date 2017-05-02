@@ -22,7 +22,7 @@ class CreateModelHasFilesTable extends Migration
                 ->on('files')
                 ->onDelete('cascade');
 
-            $table->primary(['file_id', 'model_id']);
+            $table->primary(['file_id', 'model_id', 'model_type']);
         });
     }
 
