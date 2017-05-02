@@ -3,11 +3,12 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Database\QueryException;
-use stdClass;
+use Illuminate\Support\Facades\Cache;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
+use stdClass;
 
 class AdminController extends BaseAdminController
 {
@@ -138,6 +139,7 @@ class AdminController extends BaseAdminController
         foreach (request()->all() as $position => $item) {
             app('db')->table('model_has_files')->where('file_id', $item['id'])->update(['position' => $position + 1]);
         }
+        Cache::flush();
     }
 
     /**
