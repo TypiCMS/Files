@@ -1,3 +1,4 @@
+@if ($model->id)
 <div ng-cloak ng-controller="FilesController" url="/admin/{{ $model->getTable() }}/{{ $model->id }}/files">
     <div class="filemanager" ng-sortable="sortableOptions" ng-click="unCheckAll()">
         <div class="filemanager-item filemanager-item-with-name filemanager-item-file filemanager-item-removable"
@@ -18,3 +19,4 @@
         </div>
     </div>
 </div>
+@endif
