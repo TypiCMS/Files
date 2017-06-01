@@ -25,7 +25,6 @@ class ModuleProvider extends ServiceProvider
         $this->app['config']->set('typicms.modules', array_merge(['files' => []], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'files');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'files');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([

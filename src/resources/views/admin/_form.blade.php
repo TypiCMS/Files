@@ -4,7 +4,7 @@
 <div class="row">
 
     {!! BootForm::hidden('id') !!}
-    @if($model->gallery_id)
+    @if ($model->gallery_id)
     {!! BootForm::hidden('gallery_id') !!}
     @endif
     {!! BootForm::hidden('type') !!}

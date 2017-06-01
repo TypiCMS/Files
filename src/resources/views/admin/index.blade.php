@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __('files::global.name'))
+@section('title', __('Files'))
 
 @section('content')
 

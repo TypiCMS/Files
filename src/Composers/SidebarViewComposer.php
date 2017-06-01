@@ -17,7 +17,7 @@ class SidebarViewComposer
         $view->sidebar->group(__('Media'), function (SidebarGroup $group) {
             $group->id = 'media';
             $group->weight = 40;
-            $group->addItem(__('files::global.name'), function (SidebarItem $item) {
+            $group->addItem(__('Files'), function (SidebarItem $item) {
                 $item->id = 'files';
                 $item->icon = config('typicms.files.sidebar.icon', 'icon fa fa-fw fa-file-photo-o');
                 $item->weight = config('typicms.files.sidebar.weight');

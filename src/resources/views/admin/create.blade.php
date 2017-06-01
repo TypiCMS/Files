@@ -1,12 +1,12 @@
 @extends('core::admin.master')
 
-@section('title', __('files::global.New'))
+@section('title', __('New file'))
 
 @section('content')
 
     @include('core::admin._button-back', ['module' => 'files'])
     <h1>
-        @lang('files::global.New')
+        @lang('New file')
     </h1>
 
     {!! BootForm::open()->action(route('admin::index-files'))->multipart()->role('form') !!}

@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="dropzone @if(in_array('dropzoneHidden', $options))hide @endif" dropzone id="dropzone" folder-id="@{{ folder.id }}">
+        <div class="dropzone @if (in_array('dropzoneHidden', $options))hide @endif" dropzone id="dropzone" folder-id="@{{ folder.id }}">
             <div class="dz-message">{{ __('Click or drop files to upload') }}</div>
         </div>
 
@@ -52,7 +52,7 @@
                 ng-dblclick="handle(model)"
                 >
                 <div class="filemanager-item-wrapper">
-                    @if(in_array('editable', $options))
+                    @if (in_array('editable', $options))
                     <a class="filemanager-item-editable-button" href="/admin/files/@{{ model.id }}/edit"><span class="fa fa-pencil"></span></a>
                     @endif
                     <div class="filemanager-item-icon" ng-switch-when="i">

@@ -4,8 +4,8 @@
 
 @section('content')
 
-    <a class="btn-back" href="{{ route('admin::index-files') }}" title="{{ __('files::global.Back') }}"><span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ __('files::global.Back') }}</span></a>
-    <h1 class="@if(!$model->present()->title)text-muted @endif">
+    <a class="btn-back" href="{{ route('admin::index-files') }}" title="{{ __('Back to files list') }}"><span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ __('Back to files list') }}</span></a>
+    <h1 class="@if (!$model->present()->title)text-muted @endif">
         {{ $model->present()->title ?: __('Untitled') }}
     </h1>
 
