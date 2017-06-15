@@ -1,8 +1,9 @@
 <div class="filepicker {{ in_array('modal', $options) ? 'filepicker-modal' : '' }}" id="filepicker" ng-cloak ng-controller="FilesController" url="/admin/files">
-
     <div class="{{ in_array('modal', $options) ? 'filepicker-modal-bg' : '' }}">
 
-        <a id="uploaderAddButton" href="#" class="btn-add" title="{{ __('Add files') }}">
+        <button class="filepicker-btn-close" id="close-filepicker"><span class="fa fa-close"></span></button>
+
+        <a class="btn-add" id="uploaderAddButton" href="#" title="{{ __('Add files') }}">
             <i class="fa fa-plus-circle"></i><span class="sr-only">{{ __('Add files') }}</span>
         </a>
 
