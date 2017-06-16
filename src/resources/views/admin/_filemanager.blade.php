@@ -1,5 +1,6 @@
-<div class="filepicker {{ in_array('modal', $options) ? 'filepicker-modal' : '' }}" id="filepicker" ng-cloak ng-controller="FilesController" url="/admin/files">
-    <div class="{{ in_array('modal', $options) ? 'filepicker-modal-bg' : '' }}">
+<div class="filepicker @foreach($options as $option) {{ 'filepicker-'.$option }} @endforeach" id="filepicker" ng-cloak ng-controller="FilesController" url="/admin/files">
+
+    <div class="wrapper">
 
         <button class="filepicker-btn-close" id="close-filepicker"><span class="fa fa-close"></span></button>
 
@@ -32,7 +33,7 @@
             </div>
         </div>
 
-        <div class="dropzone @if (in_array('dropzoneHidden', $options))hide @endif" dropzone id="dropzone" folder-id="@{{ folder.id }}">
+        <div class="dropzone" dropzone id="dropzone" folder-id="@{{ folder.id }}">
             <div class="dz-message">{{ __('Click or drop files to upload') }}</div>
         </div>
 
@@ -67,13 +68,8 @@
             </div>
         </div>
 
-        @if (in_array('multiple', $options))
-            <button class="btn btn-success btn-add-selected-files" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
-        @endif
-
-        @if (in_array('single', $options))
-            <button class="btn btn-success btn-add-selected-files" ng-disabled="checked.models.length !== 1 || checked.models[0].type !== 'i'" type="button" ng-click="handle(checked.models[0])" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
-        @endif
+        <button class="btn btn-success filepicker-btn-add btn-add-multiple" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
+        <button class="btn btn-success filepicker-btn-add btn-add-single" ng-disabled="checked.models.length !== 1 || checked.models[0].type !== 'i'" type="button" ng-click="handle(checked.models[0])" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
 
     </div>
 
