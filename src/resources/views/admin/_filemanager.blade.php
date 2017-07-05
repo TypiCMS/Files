@@ -31,13 +31,17 @@
                     <li class="disabled"><a href="#">@{{ checked.models.length }} {{ __('items selected') }}</a></li>
                 </ul>
             </div>
+            <div class="btn-group">
+                <button class="btn btn-default" ng-class="{active: view == 'grid'}" ng-click="switchView('grid')"><span class="fa fa-fw fa-th"></span> Grid</button>
+                <button class="btn btn-default" ng-class="{active: view == 'list'}" ng-click="switchView('list')"><span class="fa fa-fw fa-bars"></span> List</button>
+            </div>
         </div>
 
         <div class="dropzone" dropzone id="dropzone" folder-id="@{{ folder.id }}">
             <div class="dz-message">{{ __('Click or drop files to upload') }}</div>
         </div>
 
-        <div class="filemanager" ng-click="unCheckAll()">
+        <div class="filemanager" ng-click="unCheckAll()" ng-class="{'filemanager-list': view == 'list'}">
             <div class="filemanager-item filemanager-item-with-name filemanager-item-editable"
                 ng-repeat="model in models"
                 ng-switch="model.type"
@@ -54,9 +58,6 @@
                 ng-dblclick="handle(model)"
                 >
                 <div class="filemanager-item-wrapper">
-                    @if (in_array('editable', $options))
-                    <a class="filemanager-item-editable-button" href="/admin/files/@{{ model.id }}/edit"><span class="fa fa-pencil"></span></a>
-                    @endif
                     <div class="filemanager-item-icon" ng-switch-when="i">
                         <div class="filemanager-item-image-wrapper">
                             <img class="filemanager-item-image" ng-src="@{{ model.thumb_sm }}" alt="@{{ model.alt_attribute_translated }}">
@@ -64,6 +65,9 @@
                     </div>
                     <div class="filemanager-item-icon filemanager-item-icon-@{{ model.type }}" ng-switch-default></div>
                     <div class="filemanager-item-name">@{{ model.name }}</div>
+                    @if (in_array('editable', $options))
+                    <a class="filemanager-item-editable-button" href="/admin/files/@{{ model.id }}/edit"><span class="fa fa-pencil"></span></a>
+                    @endif
                 </div>
             </div>
         </div>
