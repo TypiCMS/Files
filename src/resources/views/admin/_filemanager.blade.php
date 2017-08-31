@@ -32,8 +32,8 @@
                 </ul>
             </div>
             <div class="btn-group">
-                <button class="btn btn-default" ng-class="{active: view == 'grid'}" ng-click="switchView('grid')"><span class="fa fa-fw fa-th"></span> Grid</button>
-                <button class="btn btn-default" ng-class="{active: view == 'list'}" ng-click="switchView('list')"><span class="fa fa-fw fa-bars"></span> List</button>
+                <button type="button" class="btn btn-default" ng-class="{active: view == 'grid'}" ng-click="switchView('grid')"><span class="fa fa-fw fa-th"></span> Grid</button>
+                <button type="button" class="btn btn-default" ng-class="{active: view == 'list'}" ng-click="switchView('list')"><span class="fa fa-fw fa-bars"></span> List</button>
             </div>
         </div>
 
