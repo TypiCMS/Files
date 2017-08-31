@@ -2,16 +2,17 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Cache;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\FileInterface;
+use TypiCMS\Modules\Files\Repositories\EloquentFile;
+use stdClass;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(FileInterface $file)
+    public function __construct(EloquentFile $file)
     {
         parent::__construct($file);
     }
@@ -23,22 +24,44 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $page = Request::input('page');
-        $type = Request::input('type');
-        $gallery_id = Request::input('gallery_id');
-        $view = Request::input('view');
-        if ($view != 'filepicker') {
-            $view = 'index';
-            $models = $this->repository->all([], true);
-            app('JavaScript')->put('models', $models);
-        } else {
-            $perPage = config('typicms.files.per_page');
-            $data = $this->repository->byPageFrom($page, $perPage, $gallery_id, ['translations'], true, $type);
-            $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
+        $folderId = request('folder_id');
+        $view = request('view', 'index');
+
+        $data = [
+            'models' => $this->repository->where('folder_id', $folderId)->findAll(),
+            'path' => $this->getpath($folderId),
+        ];
+
+        if (request()->wantsJson()) {
+            return response()->json($data, 200);
         }
 
-        return view('files::admin.'.$view)
-            ->with(compact('models'));
+        return view('files::admin.'.$view);
+    }
+
+    /**
+     * Get folders path.
+     *
+     * @return array
+     */
+    private function getPath($folderId)
+    {
+        $folder = $this->repository->find($folderId);
+        $path = [];
+        while ($folder) {
+            $path[] = $folder;
+            $folder = $folder->folder;
+        }
+
+        $firstItem = new stdClass;
+        $firstItem->name = 'Fichiers';
+        $firstItem->type = 'f';
+        $firstItem->id = '';
+
+        $path[] = $firstItem;
+        $path = array_reverse($path);
+
+        return $path;
     }
 
     /**
@@ -48,7 +71,8 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->getModel();
+        $model = $this->repository->createModel();
+        app('JavaScript')->put('model', $model);
 
         return view('files::admin.create')
             ->with(compact('model'));
@@ -63,6 +87,8 @@ class AdminController extends BaseAdminController
      */
     public function edit(File $file)
     {
+        app('JavaScript')->put('model', $file);
+
         return view('files::admin.edit')
             ->with(['model' => $file]);
     }
@@ -76,7 +102,15 @@ class AdminController extends BaseAdminController
      */
     public function store(FormRequest $request)
     {
-        $model = $this->repository->create($request->all());
+        $data = $request->all();
+        $model = $this->repository->create($data);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'error' => $model ? false : true,
+                'model' => $model,
+            ], 200);
+        }
 
         return $this->redirect($request, $model);
     }
@@ -91,8 +125,56 @@ class AdminController extends BaseAdminController
      */
     public function update(File $file, FormRequest $request)
     {
-        $this->repository->update($request->all());
+        $data = $request->all();
+        $this->repository->update($request->id, $data);
 
         return $this->redirect($request, $file);
+    }
+
+    /**
+     * Sort files.
+     */
+    public function sort()
+    {
+        foreach (request()->all() as $position => $item) {
+            app('db')->table('model_has_files')->where('file_id', $item['id'])->update(['position' => $position + 1]);
+        }
+        Cache::flush();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Files\Models\File $file
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(File $file)
+    {
+        $deleted = $this->repository->delete($file);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
+    }
+
+    /**
+     * Delete multiple resources.
+     *
+     * @param $ids
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroyMultiple($ids)
+    {
+        try {
+            $number = $this->repository->createModel()->destroy(explode(',', $ids));
+        } catch (QueryException $e) {
+            $message = __('A non-empty folder cannot be deleted.');
+            $number = 0;
+        }
+        $this->repository->forgetCache();
+
+        return response()->json(compact('number', 'message'));
     }
 }

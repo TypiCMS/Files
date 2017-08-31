@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Files\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -19,31 +20,25 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
+     * @return null
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group(['namespace' => $this->namespace], function (Router $router) {
+        Route::group(['namespace' => $this->namespace], function (Router $router) {
             /*
              * Admin routes
              */
-            $router->get('admin/files', 'AdminController@index')->name('admin::index-files');
-            $router->get('admin/files/create', 'AdminController@create')->name('admin::create-file');
-            $router->get('admin/files/{file}/edit', 'AdminController@edit')->name('admin::edit-file');
-            $router->post('admin/files', 'AdminController@store')->name('admin::store-file');
-            $router->put('admin/files/{file}', 'AdminController@update')->name('admin::update-file');
-            $router->post('admin/files/sort', 'AdminController@sort')->name('admin::sort-files');
-            $router->post('admin/files/upload', 'AdminController@upload')->name('admin::upload-files');
-
-            /*
-             * API routes
-             */
-            $router->get('api/files', 'ApiController@index')->name('api::index-files');
-            $router->post('api/files', 'ApiController@store')->name('api::store-file');
-            $router->put('api/files/{file}', 'ApiController@update')->name('api::update-file');
-            $router->delete('api/files/{file}', 'ApiController@destroy')->name('api::destroy-file');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+                $router->get('files', 'AdminController@index')->name('admin::index-files')->middleware('can:see-all-files');
+                $router->get('files/create', 'AdminController@create')->name('admin::create-file')->middleware('can:create-file');
+                $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file')->middleware('can:update-file');
+                $router->post('files', 'AdminController@store')->name('admin::store-file')->middleware('can:create-file');
+                $router->put('files/{file}', 'AdminController@update')->name('admin::update-file')->middleware('can:update-file');
+                $router->patch('files/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-file-ajax')->middleware('can:update-file');
+                $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files')->middleware('can:update-file');
+                $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files')->middleware('can:create-file');
+                $router->delete('files/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-file')->middleware('can:delete-file');
+            });
         });
     }
 }

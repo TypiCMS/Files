@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Files\Presenters;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use TypiCMS\Modules\Core\Presenters\Presenter;
 
 class ModulePresenter extends Presenter
@@ -20,8 +21,11 @@ class ModulePresenter extends Presenter
         if (!$model || !$field) {
             return;
         }
+        if (!Storage::has($model->path)) {
+            $src = $this->imgNotFound();
+        }
 
-        return '/'.$model->path.'/'.$model->$field;
+        return str_replace('public/', '/', $model->path);
     }
 
     /**
@@ -31,7 +35,7 @@ class ModulePresenter extends Presenter
      */
     public function title()
     {
-        return $this->entity->file;
+        return $this->entity->name;
     }
 
     /**

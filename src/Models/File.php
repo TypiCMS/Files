@@ -2,53 +2,29 @@
 
 namespace TypiCMS\Modules\Files\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Presenters\ModulePresenter;
+use TypiCMS\Modules\Galleries\Models\Gallery;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class File extends Base
 {
+    use HasTranslations;
     use Historable;
-    use Translatable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Files\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
-    protected $fillable = [
-        'gallery_id',
-        'type',
-        'name',
-        'file',
-        'path',
-        'extension',
-        'mimetype',
-        'width',
-        'height',
-        'filesize',
-        'position',
-    ];
+    protected $guarded = ['id', 'exit'];
 
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
+    public $translatable = [
         'description',
         'alt_attribute',
     ];
 
-    protected $appends = ['alt_attribute', 'description', 'thumb_src', 'thumb_sm'];
-
-    /**
-     * Columns that are file.
-     *
-     * @var array
-     */
-    public $attachments = [
-        'file',
-    ];
+    protected $appends = ['thumb_src', 'thumb_sm', 'alt_attribute_translated'];
 
     /**
      * Get back office’s edit url of model.
@@ -57,15 +33,8 @@ class File extends Base
      */
     public function editUrl()
     {
-        $parameters = [$this->id];
-        if (request('redirect_to_gallery')) {
-            $parameters['redirect_to_gallery'] = request('redirect_to_gallery');
-        }
         try {
-            return route(
-                'admin::edit-'.str_singular($this->getTable()),
-                $parameters
-            );
+            return route('admin::edit-'.str_singular($this->getTable()), $this->id);
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
         }
@@ -79,10 +48,6 @@ class File extends Base
     public function indexUrl()
     {
         try {
-            if (request('redirect_to_gallery')) {
-                return route('admin::edit-gallery', [$this->gallery_id, 'tab' => 'tab-files']);
-            }
-
             return route('admin::index-'.$this->getTable());
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
@@ -90,23 +55,35 @@ class File extends Base
     }
 
     /**
-     * One file belongs to one gallery.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
-     */
-    public function gallery()
-    {
-        return $this->belongsTo('TypiCMS\Modules\Galleries\Models\Gallery');
-    }
-
-    /**
-     * Append alt_attribute attribute from translation table.
+     * Append title_translated attribute.
      *
      * @return string
      */
-    public function getAltAttributeAttribute($value)
+    public function getAltAttributeTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('alt_attribute', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * One file belongs to one folder.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function folder()
+    {
+        return $this->belongsTo(File::class, 'folder_id', 'id');
+    }
+
+    /**
+     * One folder has many children files.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(File::class, 'folder_id', 'id');
     }
 
     /**
@@ -116,7 +93,7 @@ class File extends Base
      */
     public function getThumbSrcAttribute()
     {
-        return $this->present()->thumbSrc(null, 22, [], 'file');
+        return $this->present()->thumbSrc(null, 22, [], 'name');
     }
 
     /**
@@ -126,26 +103,6 @@ class File extends Base
      */
     public function getThumbSmAttribute()
     {
-        return $this->present()->thumbSrc(130, 130, [], 'file');
-    }
-
-    /**
-     * Append description attribute from translation table.
-     *
-     * @return string
-     */
-    public function getDescriptionAttribute($value)
-    {
-        return $value;
-    }
-    
-    public function setWidthAttribute($value)
-    {
-        $this->attributes['width'] = ($value == 0) ? null : $value;
-    }
-
-    public function setHeightAttribute($value)
-    {
-        $this->attributes['height'] = ($value == 0) ? null : $value;
+        return $this->present()->thumbSrc(240, 240, ['resize'], 'name');
     }
 }

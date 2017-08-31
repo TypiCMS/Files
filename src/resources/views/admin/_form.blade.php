@@ -1,9 +1,10 @@
-@include('core::admin._buttons-form')
+@component('core::admin._buttons-form', ['model' => $model])
+@endcomponent
 
 <div class="row">
 
     {!! BootForm::hidden('id') !!}
-    @if($model->gallery_id)
+    @if ($model->gallery_id)
     {!! BootForm::hidden('gallery_id') !!}
     @endif
     {!! BootForm::hidden('type') !!}
@@ -13,48 +14,51 @@
     {!! BootForm::hidden('mimetype') !!}
     {!! BootForm::hidden('width') !!}
     {!! BootForm::hidden('height') !!}
-    {!! BootForm::hidden('redirect_to_gallery')->value(request('redirect_to_gallery')) !!}
 
     <div class="col-sm-6">
-        {!! TranslatableBootForm::text(trans('validation.attributes.alt_attribute'), 'alt_attribute') !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.description'), 'description') !!}
+        @if ($model->type === 'i')
+        {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
+        @endif
+        @if ($model->type === 'f')
+        {!! BootForm::text(__('Name'), 'name') !!}
+        @endif
+        {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
     </div>
 
+    @if ($model->type !== 'f')
     <div class="col-sm-6">
-
-        @include('core::admin._file-fieldset', ['field' => 'file'])
 
         <table class="table table-condensed">
             <thead>
-                <th>{{ trans('validation.attributes.file information') }}</th>
+                <th>{{ __('File information') }}</th>
                 <th></th>
             </thead>
             <tbody>
                 <tr>
-                    <th>{{ trans('validation.attributes.path') }}</th>
+                    <th>{{ __('Path') }}</th>
                     <td>{{ $model->path }}</td>
                 </tr>
                 <tr>
-                    <th>{{ trans('validation.attributes.filename') }}</th>
-                    <td>{{ $model->file }}</td>
+                    <th>{{ __('Filename') }}</th>
+                    <td>{{ $model->name }}</td>
                 </tr>
                 <tr>
-                    <th>{{ trans('validation.attributes.extension') }}</th>
+                    <th>{{ __('Extension') }}</th>
                     <td>{{ $model->extension }}</td>
                 </tr>
                 <tr>
-                    <th>{{ trans('validation.attributes.mimetype') }}</th>
+                    <th>{{ __('Mimetype') }}</th>
                     <td>{{ $model->mimetype }}</td>
                 </tr>
                 @if ($model->width)
                 <tr>
-                    <th>{{ trans('validation.attributes.width') }}</th>
+                    <th>{{ __('Width') }}</th>
                     <td>{{ $model->width }} px</td>
                 </tr>
                 @endif
                 @if ($model->height)
                 <tr>
-                    <th>{{ trans('validation.attributes.height') }}</th>
+                    <th>{{ __('Height') }}</th>
                     <td>{{ $model->height }} px</td>
                 </tr>
                 @endif
@@ -62,5 +66,6 @@
         </table>
 
     </div>
+    @endif
 
 </div>

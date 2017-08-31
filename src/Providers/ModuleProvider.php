@@ -3,12 +3,11 @@
 namespace TypiCMS\Modules\Files\Providers;
 
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Observers\FileObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
+use TypiCMS\Modules\Files\Composers\SidebarViewComposer;
+use TypiCMS\Modules\Files\Facades\Files;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\CacheDecorator;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
 class ModuleProvider extends ServiceProvider
@@ -18,27 +17,29 @@ class ModuleProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'typicms.files'
         );
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/permissions.php', 'typicms.permissions'
+        );
 
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['files' => []], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'files');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'files');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/files'),
         ], 'views');
-        $this->publishes([
-            __DIR__.'/../database' => base_path('database'),
-        ], 'migrations');
 
-        AliasLoader::getInstance()->alias(
-            'Files',
-            'TypiCMS\Modules\Files\Facades\Facade'
-        );
+        AliasLoader::getInstance()->alias('Files', Files::class);
 
         // Observers
         File::observe(new FileObserver());
+
+        /*
+         * Sidebar view composer
+         */
+        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
     }
 
     public function register()
@@ -48,21 +49,8 @@ class ModuleProvider extends ServiceProvider
         /*
          * Register route service provider
          */
-        $app->register('TypiCMS\Modules\Files\Providers\RouteServiceProvider');
+        $app->register(RouteServiceProvider::class);
 
-        /*
-         * Sidebar view composer
-         */
-        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Files\Composers\SidebarViewComposer');
-
-        $app->bind('TypiCMS\Modules\Files\Repositories\FileInterface', function (Application $app) {
-            $repository = new EloquentFile(new File());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], ['files', 'galleries'], 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('Files', EloquentFile::class);
     }
 }
