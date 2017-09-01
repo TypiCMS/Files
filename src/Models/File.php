@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Models;
 
+use Exception;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
@@ -35,7 +36,7 @@ class File extends Base
     {
         try {
             return route('admin::edit-'.str_singular($this->getTable()), $this->id);
-        } catch (InvalidArgumentException $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
     }
@@ -49,7 +50,7 @@ class File extends Base
     {
         try {
             return route('admin::index-'.$this->getTable());
-        } catch (InvalidArgumentException $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
     }
