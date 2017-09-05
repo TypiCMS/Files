@@ -22,7 +22,7 @@ class ModulePresenter extends Presenter
             return;
         }
         if (!Storage::has($model->path)) {
-            $src = $this->imgNotFound();
+            return $this->imgNotFound();
         }
 
         return str_replace('public/', '/', $model->path);
