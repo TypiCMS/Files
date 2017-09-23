@@ -18,14 +18,17 @@ class ModulePresenter extends Presenter
      */
     protected function getPath(Model $model = null, $field = null)
     {
-        if (!$model || !$field) {
+        if ($model === null || $field === null) {
             return;
         }
-        if (!Storage::has($model->path)) {
-            return $this->imgNotFound();
+
+        $file = $model->path;
+
+        if (!Storage::exists($file)) {
+            $file = $this->imgNotFound();
         }
 
-        return str_replace('public/', '/', $model->path);
+        return Storage::url($file);
     }
 
     /**
