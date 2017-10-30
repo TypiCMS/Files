@@ -73,7 +73,7 @@
         </div>
 
         <button class="btn btn-success filepicker-btn-add btn-add-multiple" type="button" ng-click="addSelectedFiles()" id="btn-add-selected-files">{{ __('Add selected files') }}</button>
-        <button class="btn btn-success filepicker-btn-add btn-add-single" ng-disabled="checked.models.length !== 1 || checked.models[0].type !== 'i'" type="button" ng-click="handle(checked.models[0])" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
+        <button class="btn btn-success filepicker-btn-add btn-add-single" ng-disabled="checked.models.length !== 1" type="button" ng-click="handle(checked.models[0])" id="btn-add-selected-file">{{ __('Add selected file') }}</button>
 
     </div>
 
