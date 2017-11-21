@@ -36,7 +36,6 @@ class RouteServiceProvider extends ServiceProvider
                 $router->put('files/{file}', 'AdminController@update')->name('admin::update-file')->middleware('can:update-file');
                 $router->patch('files/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-file-ajax')->middleware('can:update-file');
                 $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files')->middleware('can:update-file');
-                $router->post('files/upload', 'AdminController@upload')->name('admin::upload-files')->middleware('can:create-file');
                 $router->delete('files/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-file')->middleware('can:delete-file');
             });
         });
