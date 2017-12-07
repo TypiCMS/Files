@@ -54,7 +54,7 @@ class AdminController extends BaseAdminController
         }
 
         $firstItem = new stdClass;
-        $firstItem->name = 'Fichiers';
+        $firstItem->name = __('Files');
         $firstItem->type = 'f';
         $firstItem->id = '';
 
