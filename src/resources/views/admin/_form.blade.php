@@ -19,9 +19,7 @@
         @if ($model->type === 'i')
         {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
         @endif
-        @if ($model->type === 'f')
         {!! BootForm::text(__('Name'), 'name') !!}
-        @endif
         {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
     </div>
 
@@ -39,7 +37,7 @@
                     <td>{{ $model->path }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('Filename') }}</th>
+                    <th>{{ __('Name') }}</th>
                     <td>{{ $model->name }}</td>
                 </tr>
                 <tr>
