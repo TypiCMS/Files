@@ -17,23 +17,23 @@
         </h1>
 
         <div class="btn-toolbar">
-            <button class="btn btn-default" ng-click="newFolder(folder.id)" type="button"><span class="fa fa-folder-o fa-fw"></span> {{ __('New folder') }}</button>
-            <div class="btn-group dropdown">
-                <button class="btn btn-default dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <button class="btn btn-light mr-2" ng-click="newFolder(folder.id)" type="button"><span class="fa fa-folder-o fa-fw"></span> {{ __('New folder') }}</button>
+            <div class="btn-group dropdown mr-2">
+                <button class="btn btn-light dropdown-toggle" ng-class="{disabled: !checked.models.length}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     {{ __('Actions') }}
                     <span class="caret"></span>
                     <span class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a ng-click="deleteChecked()" href="#">{{ __('Delete') }}</a></li>
-                    <li ng-class="{disabled: !folder.id}"><a ng-click="moveToParentFolder()" href="#">{{ __('Move to parent folder') }}</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="disabled"><a href="#">@{{ checked.models.length }} {{ __('items selected') }}</a></li>
-                </ul>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <a class="dropdown-item" ng-click="deleteChecked()" href="#">{{ __('Delete') }}</a></li>
+                    <a class="dropdown-item" ng-class="{disabled: !folder.id}" ng-click="moveToParentFolder()" href="#">{{ __('Move to parent folder') }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item disabled" href="#">@{{ checked.models.length }} {{ __('items selected') }}</a>
+                </div>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default" ng-class="{active: view == 'grid'}" ng-click="switchView('grid')"><span class="fa fa-fw fa-th"></span> Grid</button>
-                <button type="button" class="btn btn-default" ng-class="{active: view == 'list'}" ng-click="switchView('list')"><span class="fa fa-fw fa-bars"></span> List</button>
+                <button type="button" class="btn btn-light" ng-class="{active: view == 'grid'}" ng-click="switchView('grid')"><span class="fa fa-fw fa-th"></span> Grid</button>
+                <button type="button" class="btn btn-light" ng-class="{active: view == 'list'}" ng-click="switchView('list')"><span class="fa fa-fw fa-bars"></span> List</button>
             </div>
         </div>
 
