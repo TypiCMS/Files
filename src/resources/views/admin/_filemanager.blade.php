@@ -4,8 +4,8 @@
 
         <button class="filepicker-btn-close" id="close-filepicker"><span class="fa fa-close"></span></button>
 
-        <a class="btn-add" id="uploaderAddButton" href="#" title="{{ __('Add files') }}">
-            <i class="fa fa-plus-circle"></i><span class="sr-only">{{ __('Add files') }}</span>
+        <a class="btn btn-primary" id="uploaderAddButton" href="#" title="{{ __('Add files') }}">
+            <i class="fa fa-plus-circle"></i> {{ __('Add files') }}
         </a>
 
         <h1>
