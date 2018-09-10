@@ -5,7 +5,7 @@
 @section('content')
 
 <div>
-    @include('files::admin._filemanager', ['options' => ['editable']])
+    <filepicker class="filepicker filepicker-editable" url-base="/admin/files"></filepicker>
 </div>
 
 @endsection
