@@ -38,6 +38,15 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('files/sort', 'AdminController@sort')->name('admin::sort-files')->middleware('can:update-file');
                 $router->delete('files/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-file')->middleware('can:delete-file');
             });
+
+            /*
+             * API routes
+             */
+            $router->middleware('api')->prefix('api')->group(function (Router $router) {
+                $router->get('files', 'ApiController@index')->name('api::index-files');
+                $router->patch('files/{file}', 'ApiController@update')->name('api::update-file');
+                $router->delete('files/{file}', 'ApiController@destroy')->name('api::destroy-file');
+            });
         });
     }
 }

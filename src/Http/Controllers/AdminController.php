@@ -24,44 +24,9 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $folderId = request('folder_id');
         $view = request('view', 'index');
 
-        $data = [
-            'models' => $this->repository->where('folder_id', $folderId)->findAll(),
-            'path' => $this->getpath($folderId),
-        ];
-
-        if (request()->wantsJson()) {
-            return response()->json($data, 200);
-        }
-
         return view('files::admin.'.$view);
-    }
-
-    /**
-     * Get folders path.
-     *
-     * @return array
-     */
-    private function getPath($folderId)
-    {
-        $folder = $this->repository->find($folderId);
-        $path = [];
-        while ($folder) {
-            $path[] = $folder;
-            $folder = $folder->folder;
-        }
-
-        $firstItem = new stdClass;
-        $firstItem->name = __('Files');
-        $firstItem->type = 'f';
-        $firstItem->id = '';
-
-        $path[] = $firstItem;
-        $path = array_reverse($path);
-
-        return $path;
     }
 
     /**
