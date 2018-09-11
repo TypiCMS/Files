@@ -22,7 +22,7 @@ class ApiController extends BaseApiController
         $view = request('view', 'index');
 
         $data = [
-            'models' => $this->repository->where('folder_id', $folderId)->findAll(),
+            'models' => $this->repository->with('children')->where('folder_id', $folderId)->findAll(),
             'path' => $this->getpath($folderId),
         ];
 
