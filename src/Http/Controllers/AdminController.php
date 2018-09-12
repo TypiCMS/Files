@@ -3,7 +3,6 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Cache;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
@@ -94,17 +93,6 @@ class AdminController extends BaseAdminController
         $this->repository->update($request->id, $data);
 
         return $this->redirect($request, $file);
-    }
-
-    /**
-     * Sort files.
-     */
-    public function sort()
-    {
-        foreach (request()->all() as $position => $item) {
-            app('db')->table('model_has_files')->where('file_id', $item['id'])->update(['position' => $position + 1]);
-        }
-        Cache::flush();
     }
 
     /**

@@ -87,4 +87,18 @@ class ApiController extends BaseApiController
 
         return $path;
     }
+
+    /**
+     * Sort files.
+     */
+    public function sort(Request $request)
+    {
+        foreach ($request->all() as $position => $item) {
+            app('db')
+                ->table('model_has_files')
+                ->where('file_id', $item['id'])
+                ->update(['position' => $position + 1]);
+        }
+        cache()->flush();
+    }
 }
