@@ -4,8 +4,6 @@
 
 @section('content')
 
-<div>
-    <filepicker class="filepicker filepicker-editable" url-base="{{ route('api::index-files') }}"></filepicker>
-</div>
+<filepicker></filepicker>
 
 @endsection
