@@ -4,6 +4,6 @@
 
 @section('content')
 
-<filepicker></filepicker>
+<filepicker :modal="false"></filepicker>
 
 @endsection
