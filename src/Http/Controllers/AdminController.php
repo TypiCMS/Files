@@ -72,7 +72,7 @@ class AdminController extends BaseAdminController
         if (request()->wantsJson()) {
             return response()->json([
                 'error' => $model ? false : true,
-                'model' => $model,
+                'model' => $model->load('children'),
             ], 200);
         }
 
