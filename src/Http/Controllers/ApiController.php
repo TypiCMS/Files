@@ -29,7 +29,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function update(File $file, Request $request)
+    protected function updatePartial(File $file, Request $request)
     {
         $data = [];
         foreach ($request->all() as $column => $content) {

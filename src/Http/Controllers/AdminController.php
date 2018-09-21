@@ -2,12 +2,11 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Illuminate\Database\QueryException;
+use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
-use stdClass;
 
 class AdminController extends BaseAdminController
 {
@@ -93,41 +92,5 @@ class AdminController extends BaseAdminController
         $this->repository->update($request->id, $data);
 
         return $this->redirect($request, $file);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \TypiCMS\Modules\Files\Models\File $file
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(File $file)
-    {
-        $deleted = $this->repository->delete($file);
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
-    }
-
-    /**
-     * Delete multiple resources.
-     *
-     * @param $ids
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroyMultiple($ids)
-    {
-        try {
-            $number = $this->repository->createModel()->destroy(explode(',', $ids));
-        } catch (QueryException $e) {
-            $message = __('A non-empty folder cannot be deleted.');
-            $number = 0;
-        }
-        $this->repository->forgetCache();
-
-        return response()->json(compact('number', 'message'));
     }
 }
