@@ -2,12 +2,12 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use stdClass;
 use Illuminate\Http\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Repositories\EloquentFile;
+use stdClass;
 
 class AdminController extends BaseAdminController
 {
@@ -23,23 +23,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $view = request('view', 'index');
-
-        return view('files::admin.'.$view);
-    }
-
-    /**
-     * Create form for a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        $model = $this->repository->createModel();
-        app('JavaScript')->put('model', $model);
-
-        return view('files::admin.create')
-            ->with(compact('model'));
+        return view('files::admin.index');
     }
 
     /**
