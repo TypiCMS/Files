@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use stdClass;
+use Illuminate\Http\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
@@ -92,5 +93,33 @@ class AdminController extends BaseAdminController
         $this->repository->update($request->id, $data);
 
         return $this->redirect($request, $file);
+    }
+
+    protected function moveFiles($ids, Request $request)
+    {
+        $data = [];
+        foreach ($request->all() as $column => $content) {
+            if (is_array($content)) {
+                foreach ($content as $key => $value) {
+                    $data[$column.'->'.$key] = $value;
+                }
+            } else {
+                $data[$column] = $content;
+            }
+        }
+
+        $number = 0;
+        foreach (explode(',', $ids) as $id) {
+            $model = $this->repository->find($id);
+            foreach ($data as $key => $value) {
+                $model->$key = $value;
+            }
+            $model->save();
+            $number += 1;
+        }
+
+        $this->repository->forgetCache();
+
+        return response()->json(compact('number'));
     }
 }

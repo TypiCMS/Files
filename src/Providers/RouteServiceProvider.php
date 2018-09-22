@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('files', 'AdminController@index')->name('admin::index-files')->middleware('can:see-all-files');
                 $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file')->middleware('can:update-file');
                 $router->post('files', 'AdminController@store')->name('admin::store-file')->middleware('can:create-file');
+                $router->patch('files/{ids}', 'AdminController@moveFiles')->name('admin::update-file-ajax')->middleware('can:update-file');
                 $router->put('files/{file}', 'AdminController@update')->name('admin::update-file')->middleware('can:update-file');
             });
 
