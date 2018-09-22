@@ -30,7 +30,6 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('files', 'AdminController@index')->name('admin::index-files')->middleware('can:see-all-files');
-                $router->get('files/create', 'AdminController@create')->name('admin::create-file')->middleware('can:create-file');
                 $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file')->middleware('can:update-file');
                 $router->post('files', 'AdminController@store')->name('admin::store-file')->middleware('can:create-file');
                 $router->put('files/{file}', 'AdminController@update')->name('admin::update-file')->middleware('can:update-file');
