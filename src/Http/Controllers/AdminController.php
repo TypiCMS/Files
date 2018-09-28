@@ -35,8 +35,6 @@ class AdminController extends BaseAdminController
      */
     public function edit(File $file)
     {
-        app('JavaScript')->put('model', $file);
-
         return view('files::admin.edit')
             ->with(['model' => $file]);
     }
