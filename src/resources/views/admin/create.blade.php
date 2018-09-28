@@ -4,10 +4,10 @@
 
 @section('content')
 
-    @include('core::admin._button-back', ['module' => 'files'])
-    <h1>
-        @lang('New file')
-    </h1>
+    <div class="header">
+        @include('core::admin._button-back', ['module' => 'files'])
+        <h1 class="header-title">@lang('New file')</h1>
+    </div>
 
     {!! BootForm::open()->action(route('admin::index-files'))->multipart()->role('form') !!}
         @include('files::admin._form')
