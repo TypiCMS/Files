@@ -6,7 +6,6 @@ use TypiCMS\Modules\Files\Models\File;
 
 trait HasFiles
 {
-
     public function images()
     {
         return $this->files()->where('type', 'i');

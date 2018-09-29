@@ -7,7 +7,6 @@ use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Files\Presenters\ModulePresenter;
-use TypiCMS\Modules\Galleries\Models\Gallery;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class File extends Base
@@ -74,7 +73,7 @@ class File extends Base
      */
     public function folder()
     {
-        return $this->belongsTo(File::class, 'folder_id', 'id');
+        return $this->belongsTo(self::class, 'folder_id', 'id');
     }
 
     /**
@@ -84,7 +83,7 @@ class File extends Base
      */
     public function children()
     {
-        return $this->hasMany(File::class, 'folder_id', 'id');
+        return $this->hasMany(self::class, 'folder_id', 'id');
     }
 
     /**

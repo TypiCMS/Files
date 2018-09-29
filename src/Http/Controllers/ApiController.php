@@ -3,7 +3,6 @@
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
@@ -77,7 +76,7 @@ class ApiController extends BaseApiController
             $folder = $folder->folder;
         }
 
-        $firstItem = new stdClass;
+        $firstItem = new stdClass();
         $firstItem->name = __('Files');
         $firstItem->type = 'f';
         $firstItem->id = '';
