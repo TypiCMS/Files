@@ -29,7 +29,7 @@ class ModuleProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/files'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/files'),
         ], 'typicms-views');
 
         AliasLoader::getInstance()->alias('Files', Files::class);
