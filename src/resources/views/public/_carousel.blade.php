@@ -7,7 +7,7 @@
             @endforeach
         </div>
     </div>
-    @if ($images->count() > 1)
+    @if ($model->images->count() > 1)
     <div class="swiper-pagination"></div>
     @endif
 </div>
