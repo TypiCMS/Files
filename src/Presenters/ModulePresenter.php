@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Files\Presenters;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use TypiCMS\Modules\Core\Presenters\Presenter;
 
