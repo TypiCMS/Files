@@ -9,26 +9,19 @@ use TypiCMS\Modules\Core\Presenters\Presenter;
 class ModulePresenter extends Presenter
 {
     /**
-     * Get the path of files linked to this model.
-     *
-     * @param Model  $model
-     * @param string $field file’s field name in model
+     * Get the path of the image or the path to the default image.
      *
      * @return string path
      */
-    protected function getPath(Model $model = null, $field = null)
+    protected function getImageUrlOrDefault()
     {
-        if ($model === null || $field === null) {
-            return;
+        $imagePath = $this->entity->path;
+
+        if (!Storage::exists($imagePath)) {
+            $imagePath = $this->imgNotFound();
         }
 
-        $file = $model->path;
-
-        if (!Storage::exists($file)) {
-            $file = $this->imgNotFound();
-        }
-
-        return Storage::url($file);
+        return Storage::url($imagePath);
     }
 
     /**
