@@ -24,7 +24,7 @@ class File extends Base
         'alt_attribute',
     ];
 
-    protected $appends = ['thumb_src', 'thumb_sm', 'alt_attribute_translated'];
+    protected $appends = ['thumb_sm', 'alt_attribute_translated'];
 
     /**
      * Get back office’s edit url of model.
@@ -84,16 +84,6 @@ class File extends Base
     public function children()
     {
         return $this->hasMany(self::class, 'folder_id', 'id');
-    }
-
-    /**
-     * Append thumb_src attribute from presenter.
-     *
-     * @return string
-     */
-    public function getThumbSrcAttribute()
-    {
-        return $this->present()->thumbSrc(null, 22, [], 'name');
     }
 
     /**
