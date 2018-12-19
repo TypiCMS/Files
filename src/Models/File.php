@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Files\Models;
 
-use Exception;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
@@ -25,34 +24,6 @@ class File extends Base
     ];
 
     protected $appends = ['thumb_sm', 'alt_attribute_translated'];
-
-    /**
-     * Get back office’s edit url of model.
-     *
-     * @return string|void
-     */
-    public function editUrl()
-    {
-        try {
-            return route('admin::edit-'.str_singular($this->getTable()), $this->id);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-    }
-
-    /**
-     * Get back office’s index of models url.
-     *
-     * @return string|void
-     */
-    public function indexUrl()
-    {
-        try {
-            return route('admin::index-'.$this->getTable());
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-    }
 
     /**
      * Append title_translated attribute.
