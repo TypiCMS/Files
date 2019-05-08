@@ -20,7 +20,7 @@ class ModulePresenter extends Presenter
             $imagePath = $this->imgNotFound();
         }
 
-        return Storage::url($imagePath);
+        return $imagePath;
     }
 
     /**
