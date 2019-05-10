@@ -12,7 +12,7 @@ class ModulePresenter extends Presenter
      *
      * @return string path
      */
-    protected function getImageUrlOrDefault()
+    protected function getImagePathOrDefault()
     {
         $imagePath = $this->entity->path;
 
