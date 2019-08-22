@@ -77,10 +77,10 @@ class File extends Base
     public function getUrlAttribute()
     {
         $url = '';
+
         try {
             $url = Storage::url($this->path);
         } catch (Exception $e) {
-
         }
 
         return $url;
