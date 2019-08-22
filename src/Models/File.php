@@ -2,6 +2,8 @@
 
 namespace TypiCMS\Modules\Files\Models;
 
+use Exception;
+use Illuminate\Support\Facades\Storage;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
@@ -23,7 +25,7 @@ class File extends Base
         'alt_attribute',
     ];
 
-    protected $appends = ['thumb_sm', 'alt_attribute_translated'];
+    protected $appends = ['thumb_sm', 'alt_attribute_translated', 'url'];
 
     /**
      * Append title_translated attribute.
@@ -65,5 +67,22 @@ class File extends Base
     public function getThumbSmAttribute()
     {
         return $this->present()->image(240, 240, ['resize']);
+    }
+
+    /**
+     * Append url attribute.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        $url = '';
+        try {
+            $url = Storage::url($this->path);
+        } catch (Exception $e) {
+
+        }
+
+        return $url;
     }
 }
