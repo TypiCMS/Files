@@ -18,7 +18,6 @@ class ApiController extends BaseApiController
     public function index(Request $request)
     {
         $folderId = request('folder_id');
-        $view = request('view', 'index');
 
         $data = [
             'models' => $this->repository->with('children')->where('folder_id', $folderId)->findAll(),
