@@ -9,7 +9,6 @@ use TypiCMS\Modules\Core\Services\FileUploader;
 use TypiCMS\Modules\Files\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Files\Facades\Files;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -52,6 +51,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('Files', EloquentFile::class);
+        $app->bind('Files', File::class);
     }
 }

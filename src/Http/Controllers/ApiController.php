@@ -2,25 +2,20 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
+use Croppa;
 use Illuminate\Http\Request;
 use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
 class ApiController extends BaseApiController
 {
-    public function __construct(EloquentFile $file)
-    {
-        parent::__construct($file);
-    }
-
     public function index(Request $request)
     {
         $folderId = request('folder_id');
 
         $data = [
-            'models' => $this->repository->with('children')->where('folder_id', $folderId)->findAll(),
+            'models' => $this->model->with('children')->where('folder_id', $folderId)->findAll(),
             'path' => $this->getPath($folderId),
         ];
 
@@ -45,7 +40,7 @@ class ApiController extends BaseApiController
         }
         $saved = $file->save();
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
 
         return response()->json([
             'error' => !$saved,
@@ -54,7 +49,7 @@ class ApiController extends BaseApiController
 
     public function destroy(File $file)
     {
-        $deleted = $this->repository->delete($file);
+        $deleted = $file->delete();
 
         return response()->json([
             'error' => !$deleted,
@@ -68,7 +63,7 @@ class ApiController extends BaseApiController
      */
     private function getPath($folderId)
     {
-        $folder = $this->repository->find($folderId);
+        $folder = $this->model->find($folderId);
         $path = [];
         while ($folder) {
             $path[] = $folder;
@@ -98,5 +93,16 @@ class ApiController extends BaseApiController
                 ->update(['position' => $position + 1]);
         }
         cache()->flush();
+    }
+
+    public function uploadCroppedImage(Request $request, File $file)
+    {
+        $croppedImage = $request->file('image');
+        Croppa::delete('storage/'.$file->path);
+        $croppedImage->storeAs('files', $file->name);
+        list($width, $height) = getimagesize($croppedImage);
+        $file->width = $width;
+        $file->height = $height;
+        $file->save();
     }
 }

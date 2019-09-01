@@ -43,6 +43,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->middleware('auth:api')->group(function (Router $router) {
                     $router->get('files', 'ApiController@index')->middleware('can:see-all-files');
                     $router->post('files/sort', 'ApiController@sort')->middleware('can:update-file');
+                    $router->post('files/{file}/upload-cropped', 'ApiController@uploadCroppedImage')->middleware('can:update-file');
                     $router->patch('files/{file}', 'ApiController@updatePartial')->middleware('can:update-file');
                     $router->delete('files/{file}', 'ApiController@destroy')->middleware('can:delete-file');
                 });

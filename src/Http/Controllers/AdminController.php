@@ -6,15 +6,9 @@ use Illuminate\Http\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Repositories\EloquentFile;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(EloquentFile $file)
-    {
-        parent::__construct($file);
-    }
-
     /**
      * List files.
      *
@@ -48,7 +42,7 @@ class AdminController extends BaseAdminController
     public function store(FormRequest $request)
     {
         $data = $request->all();
-        $model = $this->repository->create($data);
+        $model = ::create($data);
 
         if (request()->wantsJson()) {
             return response()->json([
@@ -71,7 +65,7 @@ class AdminController extends BaseAdminController
     public function update(File $file, FormRequest $request)
     {
         $data = $request->all();
-        $this->repository->update($request->id, $data);
+        ::update($request->id, $data);
 
         return $this->redirect($request, $file);
     }
@@ -91,7 +85,7 @@ class AdminController extends BaseAdminController
 
         $number = 0;
         foreach (explode(',', $ids) as $id) {
-            $model = $this->repository->find($id);
+            $model = $this->model->find($id);
             foreach ($data as $key => $value) {
                 $model->$key = $value;
             }
@@ -99,7 +93,7 @@ class AdminController extends BaseAdminController
             $number += 1;
         }
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
 
         return response()->json(compact('number'));
     }
