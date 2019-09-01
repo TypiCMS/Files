@@ -94,15 +94,4 @@ class ApiController extends BaseApiController
         }
         cache()->flush();
     }
-
-    public function uploadCroppedImage(Request $request, File $file)
-    {
-        $croppedImage = $request->file('image');
-        Croppa::delete('storage/'.$file->path);
-        $croppedImage->storeAs('files', $file->name);
-        list($width, $height) = getimagesize($croppedImage);
-        $file->width = $width;
-        $file->height = $height;
-        $file->save();
-    }
 }
