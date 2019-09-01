@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
-use Croppa;
 use Illuminate\Http\Request;
 use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
