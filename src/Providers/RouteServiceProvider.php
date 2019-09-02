@@ -31,8 +31,6 @@ class RouteServiceProvider extends ServiceProvider
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('files', 'AdminController@index')->name('admin::index-files')->middleware('can:see-all-files');
                 $router->get('files/{file}/edit', 'AdminController@edit')->name('admin::edit-file')->middleware('can:update-file');
-                $router->post('files', 'AdminController@store')->name('admin::store-file')->middleware('can:create-file');
-                $router->patch('files/{ids}', 'AdminController@moveFiles')->name('admin::update-file-ajax')->middleware('can:update-file');
                 $router->put('files/{file}', 'AdminController@update')->name('admin::update-file')->middleware('can:update-file');
             });
 
@@ -42,8 +40,9 @@ class RouteServiceProvider extends ServiceProvider
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
                     $router->get('files', 'ApiController@index')->middleware('can:see-all-files');
+                    $router->post('files', 'ApiController@store')->middleware('can:create-file');
                     $router->post('files/sort', 'ApiController@sort')->middleware('can:update-file');
-                    $router->patch('files/{file}', 'ApiController@updatePartial')->middleware('can:update-file');
+                    $router->patch('files/{ids}', 'ApiController@move')->middleware('can:update-file');
                     $router->delete('files/{file}', 'ApiController@destroy')->middleware('can:delete-file');
                 });
             });

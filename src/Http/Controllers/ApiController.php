@@ -2,51 +2,55 @@
 
 namespace TypiCMS\Modules\Files\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use stdClass;
+use Illuminate\Support\Facades\DB;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
+use stdClass;
 
 class ApiController extends BaseApiController
 {
-    public function index(Request $request)
+    public function index(Request $request): array
     {
         $folderId = request('folder_id');
 
         $data = [
-            'models' => $this->model->with('children')->where('folder_id', $folderId)->findAll(),
+            'models' => File::with('children')->where('folder_id', $folderId)->get(),
             'path' => $this->getPath($folderId),
         ];
 
         return $data;
     }
 
-    protected function updatePartial(File $file, Request $request)
+    public function store(FormRequest $request): JsonResponse
     {
-        $data = [];
-        foreach ($request->all() as $column => $content) {
-            if (is_array($content)) {
-                foreach ($content as $key => $value) {
-                    $data[$column.'->'.$key] = $value;
-                }
-            } else {
-                $data[$column] = $content;
-            }
-        }
-
-        foreach ($data as $key => $value) {
-            $file->$key = $value;
-        }
-        $saved = $file->save();
-
-        $this->model->forgetCache();
+        $model = File::create($request->all());
 
         return response()->json([
-            'error' => !$saved,
-        ]);
+            'error' => $model ? false : true,
+            'model' => $model->load('children'),
+        ], 200);
     }
 
-    public function destroy(File $file)
+    protected function move($ids, Request $request): JsonResponse
+    {
+        $data = $request->all();
+        $number = 0;
+        foreach (explode(',', $ids) as $id) {
+            $model = File::find($id);
+            foreach ($data as $key => $value) {
+                $model->$key = $value;
+            }
+            $model->save();
+            $number += 1;
+        }
+
+        return response()->json(compact('number'));
+    }
+
+    public function destroy(File $file): JsonResponse
     {
         $deleted = $file->delete();
 
@@ -55,14 +59,9 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    /**
-     * Get folders path.
-     *
-     * @return array
-     */
-    private function getPath($folderId)
+    private function getPath($folderId): array
     {
-        $folder = $this->model->find($folderId);
+        $folder = File::find($folderId);
         $path = [];
         while ($folder) {
             $path[] = $folder;
@@ -80,14 +79,10 @@ class ApiController extends BaseApiController
         return $path;
     }
 
-    /**
-     * Sort files.
-     */
-    public function sort(Request $request)
+    public function sort(Request $request): void
     {
         foreach ($request->all() as $position => $item) {
-            app('db')
-                ->table('model_has_files')
+            DB::table('model_has_files')
                 ->where('file_id', $item['id'])
                 ->update(['position' => $position + 1]);
         }
