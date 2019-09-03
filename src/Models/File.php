@@ -3,6 +3,8 @@
 namespace TypiCMS\Modules\Files\Models;
 
 use Exception;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
@@ -27,54 +29,29 @@ class File extends Base
 
     protected $appends = ['thumb_sm', 'alt_attribute_translated', 'url'];
 
-    /**
-     * Append title_translated attribute.
-     *
-     * @return string
-     */
-    public function getAltAttributeTranslatedAttribute()
+    public function getAltAttributeTranslatedAttribute(): string
     {
         $locale = config('app.locale');
 
         return $this->translate('alt_attribute', config('typicms.content_locale', $locale));
     }
 
-    /**
-     * One file belongs to one folder.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function folder()
+    public function folder(): BelongsTo
     {
         return $this->belongsTo(self::class, 'folder_id', 'id');
     }
 
-    /**
-     * One folder has many children files.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(self::class, 'folder_id', 'id');
     }
 
-    /**
-     * Append thumb_sm attribute from presenter.
-     *
-     * @return string
-     */
-    public function getThumbSmAttribute()
+    public function getThumbSmAttribute(): string
     {
         return $this->present()->image(240, 240, ['resize']);
     }
 
-    /**
-     * Append url attribute.
-     *
-     * @return string
-     */
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         $url = '';
 
