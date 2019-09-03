@@ -5,10 +5,10 @@ namespace TypiCMS\Modules\Files\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
 use TypiCMS\Modules\Files\Models\File;
-use stdClass;
 
 class ApiController extends BaseApiController
 {
