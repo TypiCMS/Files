@@ -29,7 +29,12 @@
             <tbody>
                 <tr>
                     <th class="w-25">{{ __('URL') }}</th>
-                    <td><a href="{{ Storage::url($model->path) }}" target="_blank" rel="noopener noreferrer">{{ Storage::url($model->path) }}</a></td>
+                    <td>
+                        <div class="d-flex align-items-start justify-content-between">
+                            <a href="{{ Storage::url($model->path) }}" target="_blank" rel="noopener noreferrer">{{ Storage::url($model->path) }}</a>
+                            <button class="btn btn-secondary btn-xs text-nowrap" type="button" onclick="copyToClipboard('{{ Storage::url($model->path) }}')"><span class="fa fa-clipboard" aria-hidden="true"></span> @lang('Copy')</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th>{{ __('Path') }}</th>
@@ -72,3 +77,16 @@
     </div>
 
 </div>
+@push('js')
+<script>
+    function copyToClipboard(content) {
+        var textArea = document.createElement('textarea');
+        textArea.value = content;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('Copy');
+        textArea.remove();
+        alertify.success('@lang('Copied to the clipboard')');
+    }
+</script>
+@endpush
