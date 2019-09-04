@@ -15,17 +15,20 @@
     {!! BootForm::hidden('width') !!}
     {!! BootForm::hidden('height') !!}
 
-    <div class="col-sm-6">
+    <div class="col-lg-6">
 
     @if ($model->type === 'i')
-        <img class="img-fluid" src="{{ Storage::url($model->path) }}" alt="">
+    {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
     @endif
 
+    {!! BootForm::text(__('Name'), 'name') !!}
+    {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
+
     @if ($model->type !== 'f')
-        <table class="table table-condensed">
+        <table class="table table-sm table-striped">
             <tbody>
                 <tr>
-                    <th>{{ __('URL') }}</th>
+                    <th class="w-25">{{ __('URL') }}</th>
                     <td><a href="{{ Storage::url($model->path) }}" target="_blank" rel="noopener noreferrer">{{ Storage::url($model->path) }}</a></td>
                 </tr>
                 <tr>
@@ -62,12 +65,10 @@
 
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-lg-6">
         @if ($model->type === 'i')
-        {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
+            <img class="img-fluid" src="{{ Storage::url($model->path) }}" alt="">
         @endif
-        {!! BootForm::text(__('Name'), 'name') !!}
-        {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
     </div>
 
 </div>
