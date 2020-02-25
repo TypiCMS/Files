@@ -44,7 +44,7 @@ class ApiController extends BaseApiController
                 $model->$key = $value;
             }
             $model->save();
-            $number += 1;
+            ++$number;
         }
 
         return response()->json(compact('number'));
