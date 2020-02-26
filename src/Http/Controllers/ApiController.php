@@ -69,7 +69,7 @@ class ApiController extends BaseApiController
         }
 
         $firstItem = new stdClass();
-        $firstItem->name = __('Files');
+        $firstItem->name = __('Files', [], config('typicms.admin_locale'));
         $firstItem->type = 'f';
         $firstItem->id = '';
 
