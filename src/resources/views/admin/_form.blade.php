@@ -22,7 +22,7 @@
     @endif
 
     {!! BootForm::text(__('Name'), 'name') !!}
-    {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
+    {!! TranslatableBootForm::textarea(__('Legend'), 'description') !!}
 
     @if ($model->type !== 'f')
         <table class="table table-sm table-striped">
