@@ -2,10 +2,31 @@
 
 namespace TypiCMS\Modules\Files\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use TypiCMS\Modules\Files\Models\File;
 
 trait HasFiles
 {
+    public static function bootHasFiles()
+    {
+        static::saved(function (Model $model) {
+            if (request()->has('file_ids')) {
+                $model->syncIds(request()->input('file_ids'));
+            }
+        });
+    }
+
+    public function syncIds(?string $ids): void
+    {
+        $idsArray = $ids !== null ? explode(',', $ids) : [];
+        $data = [];
+        $position = 1;
+        foreach ($idsArray as $id) {
+            $data[$id] = ['position' => $position++];
+        }
+        $this->files()->sync($data);
+    }
+
     public function images()
     {
         return $this->files()->where('type', 'i');
