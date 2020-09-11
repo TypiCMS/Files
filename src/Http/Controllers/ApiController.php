@@ -50,13 +50,9 @@ class ApiController extends BaseApiController
         return response()->json(compact('number'));
     }
 
-    public function destroy(File $file): JsonResponse
+    public function destroy(File $file)
     {
-        $deleted = $file->delete();
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
+        $file->delete();
     }
 
     private function getPath($folderId): array
