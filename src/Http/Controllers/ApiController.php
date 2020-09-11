@@ -28,10 +28,7 @@ class ApiController extends BaseApiController
     {
         $model = File::create($request->all());
 
-        return response()->json([
-            'error' => $model ? false : true,
-            'model' => $model->load('children'),
-        ], 200);
+        return response()->json(compact('model'));
     }
 
     protected function move($ids, Request $request): JsonResponse
