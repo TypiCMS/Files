@@ -41,10 +41,10 @@ class ApiController extends BaseApiController
         foreach (explode(',', $ids) as $id) {
             $model = File::find($id);
             foreach ($data as $key => $value) {
-                $model->$key = $value;
+                $model->{$key} = $value;
             }
             $model->save();
-            $number += 1;
+            ++$number;
         }
 
         return response()->json(compact('number'));
