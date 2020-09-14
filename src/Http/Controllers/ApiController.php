@@ -72,6 +72,9 @@ class ApiController extends BaseApiController
         return $path;
     }
 
+    /**
+     * @deprecated
+     */
     public function sort(Request $request): void
     {
         foreach ($request->all() as $position => $item) {
