@@ -14,7 +14,7 @@ class ApiController extends BaseApiController
 {
     public function index(Request $request): array
     {
-        $folderId = request('folder_id');
+        $folderId = $request->folder_id;
 
         $data = [
             'models' => File::with('children')->where('folder_id', $folderId)->get(),
