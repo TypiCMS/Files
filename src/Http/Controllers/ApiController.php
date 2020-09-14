@@ -33,18 +33,12 @@ class ApiController extends BaseApiController
 
     protected function move($ids, Request $request): JsonResponse
     {
-        $data = $request->all();
-        $number = 0;
-        foreach (explode(',', $ids) as $id) {
-            $model = File::find($id);
-            foreach ($data as $key => $value) {
-                $model->{$key} = $value;
-            }
-            $model->save();
-            ++$number;
+        $idsArray = explode(',', $ids);
+        foreach ($idsArray as $id) {
+            File::where('id', $id)->update(['folder_id' => $request->folder_id]);
         }
 
-        return response()->json(compact('number'));
+        return response()->json(['number' => count($idsArray)]);
     }
 
     public function destroy(File $file)
