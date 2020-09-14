@@ -22,7 +22,7 @@ class AdminController extends BaseAdminController
 
     public function update(File $file, FormRequest $request): RedirectResponse
     {
-        $data = $request->all();
+        $data = $request->validated();
         $file->update($data);
 
         return $this->redirect($request, $file);
