@@ -74,6 +74,8 @@ class ApiController extends BaseApiController
         foreach ($request->all() as $position => $item) {
             DB::table('model_has_files')
                 ->where('file_id', $item['id'])
+                ->where('model_id', $item['pivot']['model_id'])
+                ->where('model_type', $item['pivot']['model_type'])
                 ->update(['position' => $position + 1]);
         }
         cache()->flush();
