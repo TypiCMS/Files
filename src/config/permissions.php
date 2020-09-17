@@ -2,9 +2,9 @@
 
 return [
     'files' => [
-        'see-all-files' => 'View list',
-        'create-file' => 'Create',
-        'update-file' => 'Edit',
-        'delete-file' => 'Delete',
+        'read files' => 'Read',
+        'create files' => 'Create',
+        'update files' => 'Edit',
+        'delete files' => 'Delete',
     ],
 ];

@@ -11,7 +11,7 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        if (Gate::denies('see-all-files')) {
+        if (Gate::denies('read files')) {
             return;
         }
         $view->sidebar->group(__('Media'), function (SidebarGroup $group) {
