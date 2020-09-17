@@ -4,7 +4,6 @@ namespace TypiCMS\Modules\Files\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use stdClass;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Http\Requests\FormRequest;
@@ -64,18 +63,5 @@ class ApiController extends BaseApiController
         $path = array_reverse($path);
 
         return $path;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function sort(Request $request): void
-    {
-        foreach ($request->all() as $position => $item) {
-            DB::table('model_has_files')
-                ->where('file_id', $item['id'])
-                ->update(['position' => $position + 1]);
-        }
-        cache()->flush();
     }
 }
