@@ -10,7 +10,7 @@ use TypiCMS\Modules\Files\Facades\Files;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Observers\FileObserver;
 
-class ModuleProvider extends ServiceProvider
+class ModuleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
