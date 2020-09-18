@@ -36,6 +36,8 @@ class ModulePresenter extends Presenter
     /**
      * Format file size.
      *
+     * @param mixed $precision
+     *
      * @return string
      */
     public function filesize($precision = 0)
