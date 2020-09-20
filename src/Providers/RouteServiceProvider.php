@@ -15,27 +15,23 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::group(['namespace' => $this->namespace], function (Router $router) {
-            /*
-             * Admin routes
-             */
-            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('files', [AdminController::class, 'index'])->name('admin::index-files')->middleware('can:read files');
-                $router->get('files/{file}/edit', [AdminController::class, 'edit'])->name('admin::edit-file')->middleware('can:read files');
-                $router->put('files/{file}', [AdminController::class, 'update'])->name('admin::update-file')->middleware('can:update files');
-            });
+        /*
+         * Admin routes
+         */
+        Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
+            $router->get('files', [AdminController::class, 'index'])->name('index-files')->middleware('can:read files');
+            $router->get('files/{file}/edit', [AdminController::class, 'edit'])->name('edit-file')->middleware('can:read files');
+            $router->put('files/{file}', [AdminController::class, 'update'])->name('update-file')->middleware('can:update files');
+        });
 
-            /*
-             * API routes
-             */
-            $router->middleware('api')->prefix('api')->group(function (Router $router) {
-                $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('files', [ApiController::class, 'index'])->middleware('can:read files');
-                    $router->post('files', [ApiController::class, 'store'])->middleware('can:create files');
-                    $router->patch('files/{ids}', [ApiController::class, 'move'])->middleware('can:update files');
-                    $router->delete('files/{file}', [ApiController::class, 'destroy'])->middleware('can:delete files');
-                });
-            });
+        /*
+         * API routes
+         */
+        Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
+            $router->get('files', [ApiController::class, 'index'])->middleware('can:read files');
+            $router->post('files', [ApiController::class, 'store'])->middleware('can:create files');
+            $router->patch('files/{ids}', [ApiController::class, 'move'])->middleware('can:update files');
+            $router->delete('files/{file}', [ApiController::class, 'destroy'])->middleware('can:delete files');
         });
     }
 }
