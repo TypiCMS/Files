@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('files', [AdminController::class, 'index'])->name('admin::index-files')->middleware('can:read files');
-                $router->get('files/{file}/edit', [AdminController::class, 'edit'])->name('admin::edit-file')->middleware('can:update files');
+                $router->get('files/{file}/edit', [AdminController::class, 'edit'])->name('admin::edit-file')->middleware('can:read files');
                 $router->put('files/{file}', [AdminController::class, 'update'])->name('admin::update-file')->middleware('can:update files');
             });
 
