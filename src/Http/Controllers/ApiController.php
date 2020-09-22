@@ -26,6 +26,7 @@ class ApiController extends BaseApiController
     public function store(FormRequest $request): JsonResponse
     {
         $model = File::create($request->validated());
+        $model->load('children');
 
         return response()->json(compact('model'));
     }
