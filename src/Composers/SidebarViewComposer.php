@@ -19,7 +19,7 @@ class SidebarViewComposer
             $group->weight = 40;
             $group->addItem(__('Files'), function (SidebarItem $item) {
                 $item->id = 'files';
-                $item->icon = config('typicms.files.sidebar.icon', 'icon fa fa-fw fa-file-photo-o');
+                $item->icon = config('typicms.files.sidebar.icon');
                 $item->weight = config('typicms.files.sidebar.weight');
                 $item->route('admin::index-files');
             });
