@@ -10,8 +10,9 @@ class FormRequest extends AbstractFormRequest
     {
         $rules = [
             'folder_id' => 'nullable|integer',
-            'alt_attribute.*' => 'max:255',
-            'description.*' => 'max:255',
+            'alt_attribute.*' => 'nullable|max:255',
+            'type' => 'nullable|max:1',
+            'description.*' => 'nullable|max:255',
             'name' => 'nullable|max:255',
         ];
 
