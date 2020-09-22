@@ -29,7 +29,9 @@
                         <td>
                             <div class="d-flex align-items-start justify-content-between">
                                 <a href="{{ Storage::url($model->path) }}" target="_blank" rel="noopener noreferrer">{{ Storage::url($model->path) }}</a>
-                                <button class="btn btn-secondary btn-xs text-nowrap" type="button" onclick="copyToClipboard('{{ Storage::url($model->path) }}')"><span class="fa fa-clipboard" aria-hidden="true"></span> @lang('Copy')</button>
+                                <button class="btn btn-secondary btn-xs text-nowrap" type="button" onclick="copyToClipboard('{{ Storage::url($model->path) }}')">
+                                    @lang('Copy')
+                                </button>
                             </div>
                         </td>
                     </tr>
