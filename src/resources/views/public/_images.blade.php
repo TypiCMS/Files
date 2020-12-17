@@ -8,7 +8,7 @@
                 data-fancybox="{{ $model->slug ? : 'group' }}"
                 data-options='{ "buttons": ["close"], "infobar": false }'
             >
-                <img class="image-list-item-image" src="{!! $image->present()->image(370, 370) !!}" alt="{{ $image->alt_attribute }}">
+                <img class="image-list-item-image" src="{!! $image->present()->image(370, 370) !!}" width="{{ $image->width }}" height="{{ $image->height }}" alt="{{ $image->alt_attribute }}">
             </a>
         </li>
     @endforeach
