@@ -10,7 +10,7 @@
 {!! BootForm::hidden('width') !!}
 {!! BootForm::hidden('height') !!}
 
-<div class="form-row">
+<div class="row gx-3">
 
     <div class="col-lg-6">
 
