@@ -9,8 +9,6 @@ class ModulePresenter extends Presenter
 {
     /**
      * Get the path of the image or the path to the default image.
-     *
-     * @return string path
      */
     protected function getImagePathOrDefault(): string
     {
