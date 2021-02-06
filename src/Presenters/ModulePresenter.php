@@ -12,7 +12,7 @@ class ModulePresenter extends Presenter
      *
      * @return string path
      */
-    protected function getImagePathOrDefault()
+    protected function getImagePathOrDefault(): string
     {
         $imagePath = $this->entity->path;
 
@@ -25,22 +25,16 @@ class ModulePresenter extends Presenter
 
     /**
      * Get title.
-     *
-     * @return string
      */
-    public function title()
+    public function title(): string
     {
         return $this->entity->name;
     }
 
     /**
      * Format file size.
-     *
-     * @param mixed $precision
-     *
-     * @return string
      */
-    public function filesize($precision = 0)
+    public function filesize(int $precision = 0): string
     {
         $base = log($this->entity->filesize, 1024);
         $suffixes = ['', __('KB'), __('MB'), __('GB'), __('TB')];
