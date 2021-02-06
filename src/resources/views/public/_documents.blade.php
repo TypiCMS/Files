@@ -1,6 +1,6 @@
-@if ($model->documents->count() > 0)
+@if ($documents = $model->documentsFromCollection($collection ?? 'default') and $documents->count() > 0)
     <ul class="document-list-list">
-    @foreach ($model->documents as $document)
+    @foreach ($documents as $document)
         <li class="document-list-item">
             <a class="document-list-item-link" href="{{ Storage::url($document->path) }}" download>
                 <svg class="document-list-item-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
