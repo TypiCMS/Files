@@ -20,15 +20,15 @@ class ModuleServiceProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['files' => []], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'files');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'files');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_files_table.php.stub' => getMigrationFileName('create_files_table'),
-            __DIR__.'/../database/migrations/create_model_has_files_table.php.stub' => getMigrationFileName('create_model_has_files_table'),
+            __DIR__.'/../../database/migrations/create_files_table.php.stub' => getMigrationFileName('create_files_table'),
+            __DIR__.'/../../database/migrations/create_model_has_files_table.php.stub' => getMigrationFileName('create_model_has_files_table'),
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/files'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/files'),
         ], 'views');
 
         AliasLoader::getInstance()->alias('Files', Files::class);
