@@ -14,13 +14,20 @@
 
     <div class="col-lg-6">
 
+        {!! TranslatableBootForm::textarea(__('Description'), 'description') !!}
+
         @if ($model->type === 'i')
         {!! TranslatableBootForm::text(__('Alt attribute'), 'alt_attribute') !!}
         @endif
 
-        {!! BootForm::text(__('Name'), 'name') !!}
-        {!! TranslatableBootForm::textarea(__('Legend'), 'description') !!}
+        {!! BootForm::text(__('Display name'), 'name') !!}
 
+    </div>
+
+    <div class="col-lg-6">
+        @if ($model->type === 'i')
+            <img class="img-fluid mb-4" src="{{ Storage::url($model->path) }}" alt="">
+        @endif
         @if ($model->type !== 'f')
             <table class="table table-sm table-striped">
                 <tbody>
@@ -40,7 +47,7 @@
                         <td>{{ $model->path }}</td>
                     </tr>
                     <tr>
-                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Display name') }}</th>
                         <td>{{ $model->name }}</td>
                     </tr>
                     <tr>
@@ -65,13 +72,6 @@
                     @endif
                 </tbody>
             </table>
-        @endif
-
-    </div>
-
-    <div class="col-lg-6">
-        @if ($model->type === 'i')
-            <img class="img-fluid" src="{{ Storage::url($model->path) }}" alt="">
         @endif
     </div>
 
