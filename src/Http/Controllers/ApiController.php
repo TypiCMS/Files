@@ -43,6 +43,9 @@ class ApiController extends BaseApiController
 
     public function destroy(File $file)
     {
+        if ($file->children->count() > 0) {
+            return response()->json(['message' => __('A non-empty folder cannot be deleted.')], 403);
+        }
         $file->delete();
     }
 
