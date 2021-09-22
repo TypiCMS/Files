@@ -44,7 +44,6 @@ class FileObserver
     public function creating(Model $model)
     {
         if (request()->hasFile('name')) {
-            // delete prev image
             $file = $this->fileUploader->handle(request()->file('name'));
             $model->name = $file['filename'];
             $model->fill(Arr::except($file, 'filename'));
