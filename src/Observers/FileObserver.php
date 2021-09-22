@@ -2,7 +2,7 @@
 
 namespace TypiCMS\Modules\Files\Observers;
 
-use Croppa;
+use Bkwld\Croppa\Facade as Croppa;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
