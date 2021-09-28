@@ -6,8 +6,10 @@
             <img class="carousel-image swiper-slide" src="{!! $image->present()->image(2880, 1920) !!}" alt="">
             @endforeach
         </div>
+        @if ($model->images->count() > 1)
         <div class="carousel-button carousel-button-prev swiper-button-prev swiper-button-white"></div>
         <div class="carousel-button carousel-button-next swiper-button-next swiper-button-white"></div>
+        @endif
     </div>
     @if ($model->images->count() > 1)
     <div class="carousel-pagination swiper-pagination"></div>
@@ -17,7 +19,7 @@
 
 @push('js')
 <script>
-    new Swiper('.carousel', {
+    new Swiper('.carousel-swiper', {
         loop: true,
         grabCursor: true,
         speed: 800,
