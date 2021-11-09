@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Files\Providers;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Services\FileUploader;
 use TypiCMS\Modules\Files\Composers\SidebarViewComposer;
@@ -12,13 +13,10 @@ use TypiCMS\Modules\Files\Observers\FileObserver;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.files');
         $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
-
-        $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['files' => []], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'files');
 
@@ -36,21 +34,13 @@ class ModuleServiceProvider extends ServiceProvider
         // Observers
         File::observe(new FileObserver(new FileUploader()));
 
-        /*
-         * Sidebar view composer
-         */
-        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+        View::composer('core::admin._sidebar', SidebarViewComposer::class);
     }
 
-    public function register()
+    public function register(): void
     {
-        $app = $this->app;
+        $this->app->register(RouteServiceProvider::class);
 
-        /*
-         * Register route service provider
-         */
-        $app->register(RouteServiceProvider::class);
-
-        $app->bind('Files', File::class);
+        $this->app->bind('Files', File::class);
     }
 }
